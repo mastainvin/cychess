@@ -5,4 +5,3 @@ router.post("/register", authController.signUp);
 
 module.export = router;
 
-caca;
