@@ -10,19 +10,37 @@ const createToken = function (id) {
 };
 
 module.exports.signUp = async (req, res) => {
-    const {pseudonyme, prenom, nom, dateDeNaissance, sexe, residence, email, password} = req.body
+    const {
+        pseudonyme,
+        prenom,
+        nom,
+        dateDeNaissance,
+        sexe,
+        residence,
+        email,
+        password,
+    } = req.body;
 
     try {
-        const user = await UserModel.create({pseudonyme, prenom, nom, dateDeNaissance, sexe, residence, email, password});
-        res.status(201).json({user: user._id})
+        const user = await UserModel.create({
+            pseudonyme,
+            prenom,
+            nom,
+            dateDeNaissance,
+            sexe,
+            residence,
+            email,
+            password,
+        });
+        res.status(201).json({ user: user._id });
     } catch (err) {
         const errors = signUpErrors(err);
         res.status(200).send({ errors });
     }
 };
 
-module.exports.signIn = async (req, rest) => {
-    const { email, password } = res.body;
+module.exports.signIn = async (req, res) => {
+    const { email, password } = req.body;
 
     try {
         const user = await UserModel.login(email, password);
@@ -35,7 +53,7 @@ module.exports.signIn = async (req, rest) => {
     }
 };
 
-module.exports.logout = async (req, rest) => {
+module.exports.logOut = async (req, res) => {
     res.cookie("jwt", "", { maxAge: 1 });
     res.redirect("/");
 };
