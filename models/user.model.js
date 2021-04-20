@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
         prénom: {
             type: String,
             required: true,
-            minLength: 2,
+            minlength: 2,
             maxlength: 50,
             unique: false,
             trim: true,
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
         nom: {
             type: String,
             required: true,
-            minLength: 2,
+            minlength: 2,
             maxlength: 50,
             unique: false,
             trim: true,
@@ -26,14 +26,15 @@ const userSchema = new mongoose.Schema(
             required: true,
             validate: [isEmail],
             lowercase: true,
+            unique: true,
             trim: true,
         },
 
         password: {
             type: String,
             required: true,
-            minLength: 6,
-            max: 1024,
+            minlength: 6,
+            maxlength: 1024,
         },
     },
     {
@@ -51,5 +52,6 @@ userSchema.statics.login = async function (email, password) {
         throw Error("incorrect email");
     }
 };
+
 const UserModel = mongoose.model("user", userSchema);
 module.exports = UserModel;
