@@ -5,17 +5,17 @@ const userRoutes = require("./routes/user.routes");
 require("dotenv").config({ path: "./config/.env" });
 require("./config/db");
 
-const { checkUser } = require("./middleware/auth.middleware");
+const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
 const app = express();
 
-app.user(cookieParser());
+app.use(cookieParser());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // jwt
 app.get("*", checkUser);
-app.get("/jwtid", requireAuth, (reg, res) => {
+app.get("/jwtid", requireAuth, (req, res) => {
     res.status(200).send(res.Locals.user._id);
 });
 //routes

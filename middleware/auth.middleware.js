@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user.model");
 
-modules.exports.checkUser = (req, res, next) => {
-    const token = req.cookie.jwt;
+module.exports.checkUser = (req, res, next) => {
+    const token = req.cookies.jwt;
     if (token) {
         jwt.verify(
             token,
@@ -25,7 +25,7 @@ modules.exports.checkUser = (req, res, next) => {
     }
 };
 
-modules.exports.requireAuth = (req, res, next) => {
+module.exports.requireAuth = (req, res, next) => {
     const token = req.cookie.jwt;
     if (token) {
         jwt.verify(
