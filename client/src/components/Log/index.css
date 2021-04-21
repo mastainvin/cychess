@@ -1,0 +1,43 @@
+#register {
+    width: 10%;
+    padding: 10px;
+    background-size: 30%;
+    margin-top: 3%;
+    background-color: #65dc48; 
+    border-radius: 5px;
+    text-align : left;
+    color: red;
+}
+#login {
+    width: 10%;
+    margin-top: 0.5%;
+    padding: 10px;
+    background-color: #65dc48;
+    border-radius: 5px;
+    text-align : left;
+    color: red;
+}
+
+#form_register {
+    margin-left: 36%;
+    width: 30%;
+    background-color: gray;
+    border-radius: 5px;
+    color: red;
+}
+
+#form_login {
+    margin-left: 36%;
+    width: 30%;
+    background-color: gray;
+    border-radius: 5px;
+    color: red;
+}
+
+.form-container{
+    background-color: grey;
+}
+
+ul {
+    list-style-type: none;
+    }
