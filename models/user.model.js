@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
             required: true,
             minlength: 2,
             maxlength: 50,
-            unique: false,
+            unique: true,
             trim: true,
         },
 
@@ -45,20 +45,24 @@ const userSchema = new mongoose.Schema(
             required: true,
             minlength: 6,
             maxlenght: 1024,
+            trim: true,
         },
 
         dateDeNaissance: {
             type: String,
-            required: true,
+            required: false,
             lastActiveAt: Date,
         },
 
         sexe: {
+            required: false,
             type: String,
         },
 
         residence: {
+            required: false,
             type: String,
+            trim: true
         },
 
         roleEventuel: {

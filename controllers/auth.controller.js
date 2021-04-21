@@ -14,9 +14,6 @@ module.exports.signUp = async (req, res) => {
         pseudonyme,
         prenom,
         nom,
-        dateDeNaissance,
-        sexe,
-        residence,
         email,
         password,
     } = req.body;
@@ -26,9 +23,6 @@ module.exports.signUp = async (req, res) => {
             pseudonyme,
             prenom,
             nom,
-            dateDeNaissance,
-            sexe,
-            residence,
             email,
             password,
         });
