@@ -78,6 +78,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             maxlenght: 1024,
         },
+        userProfil:{
+            type: String,
+            required: false
+        }
     },
     {
         timestamps: true,
