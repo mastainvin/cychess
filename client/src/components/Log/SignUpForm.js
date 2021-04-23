@@ -3,7 +3,7 @@ import "./index.css";
 
 const SignUpForm = () => {
     return (
-        <div id="form_register" className="insc">
+        <div id="form_register">
             inscrire
         </div>
     );

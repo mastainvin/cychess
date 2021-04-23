@@ -1,0 +1,14 @@
+h4 {
+    margin-left: 20%;
+    width: 20%;
+}
+
+p {
+    margin-left: 20%;
+    width: 30%;
+    background-color: rgba(81, 218, 47, 0.836);
+}
+
+img {
+    display: inline-block;
+}

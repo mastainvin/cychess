@@ -1,6 +1,5 @@
 import React from 'react';
 import Log from '../components/Log';
-import NavBar from '../components/NavBar/NavBar';
 
 const Profil = () => {
     return (

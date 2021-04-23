@@ -33,7 +33,7 @@ const NavBar = () => {
                             <NavLink href="">Boutique</NavLink>
                         </NavItem>
                         <NavItem >
-                            <NavLink href="">Topic</NavLink>
+                            <NavLink href="">Forum</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
