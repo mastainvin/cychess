@@ -37,20 +37,31 @@ const SignInForm = () => {
     return (
         <div id="form_login">
             <p>Connexion :</p>
-            <form action="" onSubmit={handleLogin} id="sign-up-form"></form> 
+            <form action="" onSubmit={handleLogin} id="sign-up-form">
             <label htmlFor="email">Email :</label>
             <br />
-            <input type="text" name="email" id="email" onChange={(e) => setEmail(e.target.value)} value={email}></input>
+            <input 
+                type="text" 
+                name="email" 
+                id="email" onChange={(e) => setEmail(e.target.value)} 
+                value={email}>
+            </input>
             <br />
             <div className="email error"></div>
             <br />
             <label htmlFor="password">Mot de passe :</label>
             <br />
-            <input type="password" name="pasword" id="password" onChange={(e) => setPassword(e.target.value)} value={password}></input>
+            <input 
+                type="password" 
+                name="pasword" 
+                id="password" onChange={(e) => setPassword(e.target.value)} 
+                value={password}>
+            </input>
             <br />
             <div className="password error"></div>
             <br />
             <input type="submit" value="Se connecter" />
+            </form> 
         </div>
     );
 };

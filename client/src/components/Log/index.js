@@ -21,7 +21,6 @@ const Log = (props) => {
     return (
         <div className="connection-form">
             <div className="form-container">
-            <NavBar></NavBar>
                 <ul>
                     <li onClick={handleModals} id="register">S'inscrire</li>
                     <li onClick={handleModals} id="login">Se connecter</li>

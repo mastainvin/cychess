@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UidContext } from "../Routes/AppContext";
 import {
   Collapse,
   Navbar,
@@ -7,14 +8,12 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
 } from 'reactstrap';
+import Logout from '../Log/Logout';
 
 const NavBar = () => {
+    const uid = useContext(UidContext);
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
@@ -35,6 +34,25 @@ const NavBar = () => {
                         <NavItem >
                             <NavLink href="">Forum</NavLink>
                         </NavItem>
+                        {uid ? (
+                            <ul>
+                                <li></li>
+                                <li className="welcome">
+                                    <NavLink href="/Profil">
+                                        <h5>Bienvue 'valeur'</h5>
+                                    </NavLink>
+                                </li>
+                                <Logout />
+                            </ul>
+                        ) : (
+                            <ul>
+                                <li></li>
+                                <li>
+                                    <NavLink href="/Profil"> 
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        )}
                     </Nav>
                 </Collapse>
             </Navbar>
