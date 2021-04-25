@@ -22,15 +22,6 @@ const productSchema = new mongoose.Schema(
         nb_restant: {
             type: String,
             required: true
-        },
-        acheteur: {
-            type:
-            [
-                {
-                    acheteurId: String,
-                    timestamp: Number
-                }
-            ]
         }
     }
 );

@@ -3,7 +3,7 @@ const ObjectID = require('mongoose').Types.ObjectId;
 
 module.exports.getAllUsers = async (req , res) => {
     const users = await UserModel.find().select('-password');
-    res.status(200).json(users); 
+    res.status(200).json(users);
 }
 
 module.exports.userInfo = (req, res) => {
@@ -33,6 +33,7 @@ module.exports.updateUser = async(req, res) => {
                 if (err) return res.status(500).send({ message: err}); 
             } 
         )
+        console.log('_id : ' + req.params.id)
         } catch (err) { 
             return res.status(500).json({ message: err}); 
     }

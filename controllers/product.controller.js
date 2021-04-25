@@ -51,28 +51,29 @@ module.exports.deleteProduct = async(req, res) => {
     }
 };
 
-module.exports.nb_acheteur = (req, res) => {
+module.exports.updateProduct = async(req, res) => {
     if (!ObjectID.isValid(req.params.id))
-        return res.status(400).send('product ID unknown : ' + req.params.id);
-    
-    try {
-        return ProductModel.findByIdAndUpdate(
-            req.params.id,
+        return res.status(400).send('ID unknown : ' + req.params.id)
+    try{
+        await ProductModel.findOneAndUpdate(
+            {_id: req.params.id},
             {
-                $push: {
-                    acheteur: {
-                        acheteurId: req.body.acheteurId,
-                        timestamp: new Date().getTime(),
-                    },
-                },
+                $set: {
+                    nom: req.body.nom,
+                    description: req.body.description,
+                    prix: req.body.prix,
+                    photo: req.body.photo,
+                    nb_restant: req.body.nb_restant
+                }
             },
-            {new: true},
-            (err, docs) => {
+            {new: true, upsert: true, setDefaultsOnInsert: true},
+            (err, docs) => { 
                 if (!err) return res.send(docs); 
-                else return res.status(400).send(err);  
-            }
-        );
-    } catch (err) {
-        return res.status(400).send(err + "ici");
+                if (err) return res.status(500).send({ message: err}); 
+            } 
+        )
+        console.log('_id : ' + req.params.id)
+        } catch (err) { 
+            return res.status(500).json({ message: err}); 
     }
 };
