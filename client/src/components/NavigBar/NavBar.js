@@ -10,9 +10,11 @@ import {
   NavLink,
 } from 'reactstrap';
 import Logout from '../Log/Logout';
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
     const uid = useContext(UidContext);
+    const userData = useSelector((state) => state.useRecuder);
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -39,7 +41,7 @@ const NavBar = () => {
                                 <li></li>
                                 <li className="welcome">
                                     <NavLink href="/Profil">
-                                        <h5>Bienvue 'valeur'</h5>
+                                        <h5>Bienvenue {userData.pseudo}</h5>
                                     </NavLink>
                                 </li>
                                 <Logout />
