@@ -19,5 +19,4 @@ router.delete('/:id', userController.deleteUser);
 //upload img profil
 router.post('/upload', upload.single('file'), uploadController.uploadImgProfil);
 
-
 module.exports = router;

@@ -9,8 +9,7 @@ router.post('/post', productController.insertProduct);
 router.get('/', productController.getAllProducts);
 router.get('/:id', productController.productInfo);
 router.delete('/:id', productController.deleteProduct);
-//product acheteur
-router.patch('/:id', productController.nb_acheteur)
+router.put('/:id', productController.updateProduct);
 
 //upload img product
 router.post('/upload', upload.single('file'), uploadController.uploadImgProduct);
