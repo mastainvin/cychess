@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 import { UidContext } from "../Routes/AppContext";
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-} from 'reactstrap';
-import Logout from '../Log/Logout';
-import { useSelector } from 'react-redux';
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+} from "reactstrap";
+import Logout from "../Log/Logout";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
     const uid = useContext(UidContext);
@@ -30,10 +30,10 @@ const NavBar = () => {
                         <NavItem>
                             <NavLink href="/Profil">Profil</NavLink>
                         </NavItem>
-                        <NavItem >
+                        <NavItem>
                             <NavLink href="">Boutique</NavLink>
                         </NavItem>
-                        <NavItem >
+                        <NavItem>
                             <NavLink href="">Forum</NavLink>
                         </NavItem>
                         {uid ? (
@@ -50,8 +50,7 @@ const NavBar = () => {
                             <ul>
                                 <li></li>
                                 <li>
-                                    <NavLink href="/Profil"> 
-                                    </NavLink>
+                                    <NavLink href="/Profil"></NavLink>
                                 </li>
                             </ul>
                         )}
@@ -60,6 +59,6 @@ const NavBar = () => {
             </Navbar>
         </div>
     );
-}
+};
 
 export default NavBar;

@@ -2,7 +2,7 @@ import "./App.css";
 import Routes from "./components/Routes";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
-import { UidContext } from "./components/Routes/AppContext";
+// import { UidContext } from "./components/Routes/AppContext";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
@@ -30,9 +30,10 @@ function App() {
     }, [uid]);
 
     return (
-        <UidContext.Provider value={uid}>
-            <Routes />
-        </UidContext.Provider>
+        // <UidContext.Provider value={uid}>
+
+        <div>Bonjour</div>
+        // </UidContext.Provider>
     );
 }
 
