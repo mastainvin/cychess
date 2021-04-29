@@ -5,7 +5,7 @@ import {
     Route,
     Switch,
 } from "react-router-dom";
-// import Home from "../../pages/Home";
+import Home from "../../pages/Home";
 // import Profil from "../../pages/Profil";
 import NavBar from "../NavigBar/NavBar";
 
@@ -14,8 +14,8 @@ const index = () => {
         <Router>
             <NavBar></NavBar>
             <Switch>
-                {/* <Route path="/" exact component={Home} />
-                <Route path="/Profil" exact component={Profil} /> */}
+                <Route path="/" exact component={Home} />
+                {/* <Route path="/Profil" exact component={Profil} /> */}
                 <Redirect to="/" />
             </Switch>
         </Router>
