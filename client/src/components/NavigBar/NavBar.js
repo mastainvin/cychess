@@ -36,6 +36,9 @@ const NavBar = () => {
                         <NavItem>
                             <NavLink href="">Forum</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink href="/events">Evénements</NavLink>
+                        </NavItem>
                         {uid ? (
                             <ul>
                                 <li></li>
