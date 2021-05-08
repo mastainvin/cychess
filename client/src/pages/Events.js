@@ -17,6 +17,16 @@ const Events = () => {
     }, [loadEvent, dispatch]);
     return (
         <div className="events">
+            <div className="container">
+                <h1>Nos Evénements</h1>
+                <hr
+                    style={{
+                        color: "grey",
+                        backgroundColor: "grey",
+                        height: 0.25,
+                    }}
+                />
+            </div>
             {!isEmpty(events[0]) &&
                 events.map((event) => {
                     return <Eventcard event={event} key={event._id} />;
