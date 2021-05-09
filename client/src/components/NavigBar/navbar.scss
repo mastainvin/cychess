@@ -1,0 +1,23 @@
+* {
+    text-decoration: none;
+}
+
+.navbar {
+    background-color: white;
+}
+
+.icon {
+    height: 50px;
+    width: 50px;
+}
+
+.navlink {
+    color: rgb(37, 42, 45);
+}
+
+.active {
+    background-color: rgb(109, 157, 64);
+    color: white !important;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
