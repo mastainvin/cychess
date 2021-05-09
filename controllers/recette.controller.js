@@ -1,18 +1,16 @@
-const RecetteModel = require('../models/recette.model');
+const RecetteModel = require("../models/recette.model");
 
 module.exports.adherent = async (req, res) => {
-    const {
-        type,
-        montant,
-        userId
-    } = req.body;
+    const { type, montant, userId } = req.body;
 
     try {
         const adherent = await RecetteModel.create({
             type,
             montant,
-            userId
-        });   
+            userId,
+        });
+        res.header("Access-Control-Allow-Origin", "*");
+
         res.status(201).json({ adherent: adherent._id });
     } catch (err) {
         res.status(200).send({ err });
@@ -20,20 +18,17 @@ module.exports.adherent = async (req, res) => {
 };
 
 module.exports.achatBoutique = async (req, res) => {
-    const {
-        type,
-        montant,
-        userId,
-        productId
-    } = req.body;
+    const { type, montant, userId, productId } = req.body;
 
     try {
         const achat = await RecetteModel.create({
             type,
             montant,
             userId,
-            productId
-        });   
+            productId,
+        });
+        res.header("Access-Control-Allow-Origin", "*");
+
         res.status(201).json({ achat: achat._id });
     } catch (err) {
         res.status(200).send({ err });
@@ -41,18 +36,16 @@ module.exports.achatBoutique = async (req, res) => {
 };
 
 module.exports.donation = async (req, res) => {
-    const {
-        type,
-        montant,
-        userId
-    } = req.body;
+    const { type, montant, userId } = req.body;
 
     try {
         const donation = await RecetteModel.create({
             type,
             montant,
-            userId
-        });   
+            userId,
+        });
+        res.header("Access-Control-Allow-Origin", "*");
+
         res.status(201).json({ donation: donation._id });
     } catch (err) {
         res.status(200).send({ err });
@@ -60,20 +53,17 @@ module.exports.donation = async (req, res) => {
 };
 
 module.exports.depense = async (req, res) => {
-    const {
-        type,
-        montant,
-        userId,
-        description
-    } = req.body;
+    const { type, montant, userId, description } = req.body;
 
     try {
         const depense = await RecetteModel.create({
             type,
             montant,
             userId,
-            description
-        });   
+            description,
+        });
+        res.header("Access-Control-Allow-Origin", "*");
+
         res.status(201).json({ depense: depense._id });
     } catch (err) {
         res.status(200).send({ err });

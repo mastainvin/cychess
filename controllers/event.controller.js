@@ -5,6 +5,7 @@ const ObjectID = require("mongoose").Types.ObjectId;
 module.exports.readEvent = (req, res) => {
     EventModel.find((err, docs) => {
         if (!err) {
+            res.header("Access-Control-Allow-Origin", "*");
             res.send(docs);
         } else {
             console.log("Error to get events data : " + err);
@@ -22,6 +23,7 @@ module.exports.createEvent = async (req, res) => {
     });
     try {
         const event = await newEvent.save();
+        res.header("Access-Control-Allow-Origin", "*");
         return res.status(201).json(event);
     } catch (err) {
         return res.status(400).send(err);
@@ -44,6 +46,7 @@ module.exports.updateEvent = (req, res) => {
         { new: true },
         (err, docs) => {
             if (!err) {
+                res.header("Access-Control-Allow-Origin", "*");
                 res.send(docs);
             } else {
                 console.log("Update error : " + err);
@@ -58,6 +61,7 @@ module.exports.deleteEvent = (req, res) => {
 
     EventModel.findByIdAndRemove(req.params.id, (err, docs) => {
         if (!err) {
+            res.header("Access-Control-Allow-Origin", "*");
             res.send(docs);
         } else {
             console.log("Delete error : " + err);
@@ -87,6 +91,7 @@ module.exports.participateEvent = async (req, res) => {
             },
             { new: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
                 if (!err) return res.status(200).send(docs);
             }
         );
@@ -117,6 +122,7 @@ module.exports.unparticipateEvent = async (req, res) => {
             },
             { new: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
                 if (!err) return res.status(200).send(docs);
                 else return res.status(400).send(err);
             }

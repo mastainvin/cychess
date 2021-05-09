@@ -16,8 +16,8 @@ const Events = () => {
         }
     }, [loadEvent, dispatch]);
     return (
-        <div className="events">
-            <div className="container">
+        <div className="events container">
+            <div style={{ width: "100%" }}>
                 <h1>Nos Evénements</h1>
                 <hr
                     style={{

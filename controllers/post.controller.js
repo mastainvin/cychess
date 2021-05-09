@@ -5,6 +5,8 @@ const ObjectID = require("mongoose").Types.ObjectId;
 module.exports.readPost = (req, res) => {
     PostModel.find((err, docs) => {
         if (!err) {
+            res.header("Access-Control-Allow-Origin", "*");
+
             res.send(docs);
         } else {
             console.log("Error to get posts data : " + err);
@@ -21,6 +23,8 @@ module.exports.createPost = async (req, res) => {
     });
     try {
         const post = await newPost.save();
+        res.header("Access-Control-Allow-Origin", "*");
+
         return res.status(201).json(post);
     } catch (err) {
         return res.status(400).send(err);
@@ -41,6 +45,8 @@ module.exports.updatePost = (req, res) => {
         { new: true },
         (err, docs) => {
             if (!err) {
+                res.header("Access-Control-Allow-Origin", "*");
+
                 res.send(docs);
             } else {
                 console.log("Update error : " + err);
@@ -55,6 +61,8 @@ module.exports.deletePost = (req, res) => {
 
     PostModel.findByIdAndRemove(req.params.id, (err, docs) => {
         if (!err) {
+            res.header("Access-Control-Allow-Origin", "*");
+
             res.send(docs);
         } else {
             console.log("Delete error : " + err);
@@ -81,6 +89,8 @@ module.exports.commentPost = (req, res) => {
             },
             { new: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
                 if (!err) return res.send(docs);
                 else return res.status(400).send(err);
             }
@@ -104,6 +114,8 @@ module.exports.editCommentPost = (req, res) => {
             }
             theComment.text = req.body.text;
             return docs.save((err) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
                 if (!err) return res.status(200).send(docs);
                 else return res.status(400).send(err);
             });
@@ -129,6 +141,7 @@ module.exports.deleteCommentPost = (req, res) => {
             },
             { new: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
                 if (!err) return res.status(200).send(docs);
                 else return res.status(400).send(err);
             }

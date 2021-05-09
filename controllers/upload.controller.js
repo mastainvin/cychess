@@ -36,6 +36,8 @@ module.exports.uploadImgProfil = async (req, res) => {
             { $set: { userProfil: "./uploads/profil/" + fileName } },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
                 if (!err) return res.send(docs);
                 else return res.status(500).send({ message: err });
             }
@@ -75,6 +77,8 @@ module.exports.uploadImgProduct = async (req, res) => {
             { $set: { productProfil: "./uploads/product/" + fileName } },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
                 if (!err) return res.send(docs);
                 else return res.status(500).send({ message: err });
             }
@@ -114,6 +118,8 @@ module.exports.uploadImgEvent = async (req, res) => {
             { $set: { image: "./uploads/event/" + fileName } },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
                 if (!err) return res.send(docs);
                 else return res.status(500).send({ message: err });
             }
