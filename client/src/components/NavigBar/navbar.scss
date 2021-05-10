@@ -13,6 +13,7 @@
 
 .navlink {
     color: rgb(37, 42, 45);
+    padding-left: 10px !important;
 }
 
 .active {
@@ -20,4 +21,13 @@
     color: white !important;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.active:hover {
+    background-color: rgb(81, 118, 46);
+    transition: all 0.5s;
+}
+
+.log_icon:hover {
+    cursor: pointer;
 }

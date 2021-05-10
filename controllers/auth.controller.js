@@ -11,7 +11,7 @@ const createToken = function (id) {
 
 module.exports.signUp = async (req, res) => {
     const { pseudonyme, prenom, nom, email, password } = req.body;
-
+    res.header("Access-Control-Allow-Origin", "*");
     try {
         const user = await UserModel.create({
             pseudonyme,
@@ -20,7 +20,7 @@ module.exports.signUp = async (req, res) => {
             email,
             password,
         });
-        res.header("Access-Control-Allow-Origin", "*");
+
         res.status(201).json({ user: user._id });
     } catch (err) {
         const errors = signUpErrors(err);
@@ -30,11 +30,9 @@ module.exports.signUp = async (req, res) => {
 
 module.exports.signIn = async (req, res) => {
     const { email, password } = req.body;
-
     try {
         const user = await UserModel.login(email, password);
         const token = createToken(user._id);
-        res.header("Access-Control-Allow-Origin", "*");
 
         res.cookie("jwt", token, { httpOnly: true, maxAge });
         res.status(200).json({ user: user._id });

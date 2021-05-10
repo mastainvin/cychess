@@ -1,7 +1,7 @@
 import "./App.css";
 import Routes from "./components/Routes";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UidContext } from "./components/Routes/AppContext";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -22,11 +22,12 @@ function App() {
                     console.log(res);
                     setUid(res.data);
                 })
-                .catch((err) => console.log("No token"));
+                .catch((err) => console.log(err));
         };
         fetchToken();
-
-        if (uid) dispatch(getUser(uid));
+        if (uid) {
+            dispatch(getUser(uid));
+        }
     }, [uid]);
 
     return (

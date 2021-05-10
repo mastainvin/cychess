@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema(
         residence: {
             required: false,
             type: String,
-            trim: true
+            trim: true,
         },
 
         roleEventuel: {
@@ -78,10 +78,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             maxlenght: 1024,
         },
-        userProfil:{
+        userProfil: {
             type: String,
-            required: false
-        }
+            required: false,
+        },
     },
     {
         timestamps: true,
@@ -95,9 +95,9 @@ userSchema.statics.login = async function (email, password) {
         if (auth) {
             return user;
         }
-        throw Error("Email incorrecte");
+        throw Error("incorrect password");
     }
-    throw Error("Email incorrecte");
+    throw Error("incorrect email");
 };
 
 //play fonction before save into display: 'block'

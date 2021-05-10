@@ -12,14 +12,13 @@ import {
 } from "reactstrap";
 import Logout from "../Log/Logout";
 import { useSelector } from "react-redux";
-import { navbar } from "./navbar.scss";
+import "./navbar.scss";
 import icon from "./../../images/icon.png";
+import login_icon from "./../../images/login.png";
 const NavBar = () => {
     const uid = useContext(UidContext);
-    const userData = useSelector((state) => state.useRecuder);
-
+    const userData = useSelector((state) => state.userReducer);
     const [isOpen, setIsOpen] = useState(false);
-
     const toggle = () => setIsOpen(!isOpen);
 
     return (
@@ -32,6 +31,19 @@ const NavBar = () => {
                     <NavbarToggler onClick={toggle}></NavbarToggler>
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
+                            {uid ? (
+                                <div className="welcome">
+                                    <NavLink href="/profil">
+                                        <h5>
+                                            Bienvenue {userData.pseudonyme} !
+                                        </h5>
+                                    </NavLink>
+                                </div>
+                            ) : (
+                                <NavLink href="/profil">
+                                    <h5>Cliquez ici pour vous connecter !</h5>
+                                </NavLink>
+                            )}
                             <NavItem>
                                 <NavLink
                                     href="/profil"
@@ -76,24 +88,25 @@ const NavBar = () => {
                                     Evénements
                                 </NavLink>
                             </NavItem>
-                            {uid ? (
-                                <ul>
-                                    <li></li>
-                                    <li className="welcome">
-                                        <NavLink href="/profil">
-                                            <h5>Bienvenue {userData.pseudo}</h5>
-                                        </NavLink>
-                                    </li>
+                            <NavItem>
+                                {uid ? (
                                     <Logout />
-                                </ul>
-                            ) : (
-                                <ul>
-                                    <li></li>
-                                    <li>
-                                        <NavLink href="/Profil"></NavLink>
-                                    </li>
-                                </ul>
-                            )}
+                                ) : (
+                                    <div className="log_icon">
+                                        <a href="/profil">
+                                            <img
+                                                src={login_icon}
+                                                alt="login_icon"
+                                                style={{
+                                                    width: "30px",
+                                                    height: "30px",
+                                                    margin: "5px 20px ",
+                                                }}
+                                            />
+                                        </a>
+                                    </div>
+                                )}
+                            </NavItem>
                         </Nav>
                     </Collapse>
                 </div>

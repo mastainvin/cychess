@@ -27,7 +27,7 @@ module.exports.checkUser = (req, res, next) => {
 };
 
 module.exports.requireAuth = (req, res, next) => {
-    const token = req.cookie.jwt;
+    const token = req.cookies.jwt;
     if (token) {
         jwt.verify(
             token,
@@ -37,6 +37,7 @@ module.exports.requireAuth = (req, res, next) => {
                     console.log(err);
                 } else {
                     console.log(decodedToken.id);
+                    next();
                 }
             }
         );
