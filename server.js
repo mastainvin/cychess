@@ -5,6 +5,7 @@ const productRoutes = require("./routes/product.routes");
 const postRoutes = require("./routes/post.routes");
 const recetteRoutes = require("./routes/recette.routes");
 const eventRoutes = require("./routes/event.routes");
+const cors = require("cors");
 
 require("dotenv").config({ path: "./config/.env" });
 require("./config/db");
@@ -13,6 +14,18 @@ const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
 const app = express();
 
+let whitelist = ["http://localhost:3000", "http://localhost:80"];
+let corsOptions = {
+    origin: (origin, callback) => {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 // jwt
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
-    res.status(200).send(res.Locals.user._id);
+    res.status(200).send(res.locals.user._id);
 });
 
 //routes

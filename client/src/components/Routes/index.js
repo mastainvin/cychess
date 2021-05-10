@@ -6,7 +6,7 @@ import {
     Switch,
 } from "react-router-dom";
 import Home from "../../pages/Home";
-// import Profil from "../../pages/Profil";
+import Profil from "../../pages/Profil";
 import NavBar from "../NavigBar/NavBar";
 import Events from "../../pages/Events";
 
@@ -16,7 +16,7 @@ const index = () => {
             <NavBar></NavBar>
             <Switch>
                 <Route path="/" exact component={Home} />
-                {/* <Route path="/Profil" exact component={Profil} /> */}
+                <Route path="/profil" exact component={Profil} />
                 <Route path="/events" exact component={Events} />
                 <Redirect to="/" />
             </Switch>
