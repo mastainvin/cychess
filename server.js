@@ -14,7 +14,7 @@ const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
 const app = express();
 
-let whitelist = ["http://localhost:3000", "http://localhost:80"];
+let whitelist = ["http://localhost:3000", "http://localhost:5000"];
 let corsOptions = {
     origin: (origin, callback) => {
         if (whitelist.indexOf(origin) !== -1) {
@@ -25,7 +25,12 @@ let corsOptions = {
     },
     credentials: true,
 };
-app.use(cors(corsOptions));
+app.use(
+    cors({
+        origin: (origin, callback) => callback(null, true),
+        credentials: true,
+    })
+);
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
