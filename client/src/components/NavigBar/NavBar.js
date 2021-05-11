@@ -9,17 +9,27 @@ import {
     Nav,
     NavItem,
     NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
 } from "reactstrap";
 import Logout from "../Log/Logout";
 import { useSelector } from "react-redux";
 import "./navbar.scss";
 import icon from "./../../images/icon.png";
 import login_icon from "./../../images/login.png";
+import { isAdmin } from "./../Utils";
+
 const NavBar = () => {
     const uid = useContext(UidContext);
     const userData = useSelector((state) => state.userReducer);
+    const userAdmin = isAdmin(userData);
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+
+    const [adminDropdownOpen, setDropdownOpen] = useState(false);
+    const droptownAdminToggle = () => setDropdownOpen(!adminDropdownOpen);
 
     return (
         <div>
@@ -88,6 +98,55 @@ const NavBar = () => {
                                     Evénements
                                 </NavLink>
                             </NavItem>
+                            {userAdmin ? (
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle caret color="white">
+                                        Admin
+                                    </DropdownToggle>
+                                    <DropdownMenu>
+                                        <DropdownItem header>
+                                            Gestion de l'administration
+                                        </DropdownItem>
+                                        <DropdownItem divider />
+
+                                        <DropdownItem
+                                            href="/treasury-admin"
+                                            tag={RRNavLink}
+                                            to="/treasury-admin"
+                                            className="admin-link"
+                                        >
+                                            Trésorerie
+                                        </DropdownItem>
+
+                                        <DropdownItem
+                                            href="/shop-admin"
+                                            tag={RRNavLink}
+                                            to="/shop-admin"
+                                            className="admin-link"
+                                        >
+                                            Boutique
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            href="/events-admin"
+                                            tag={RRNavLink}
+                                            to="/events-admin"
+                                            className="admin-link"
+                                        >
+                                            Evénements
+                                        </DropdownItem>
+                                        <DropdownItem
+                                            href="/users-admin"
+                                            tag={RRNavLink}
+                                            to="/users-admin"
+                                            className="admin-link"
+                                        >
+                                            Utilisateurs
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            ) : (
+                                <NavItem></NavItem>
+                            )}
                             <NavItem>
                                 {uid ? (
                                     <Logout />
