@@ -55,13 +55,26 @@ const NavBar = () => {
                                     Profil
                                 </NavLink>
                             </NavItem>
+
                             <NavItem>
                                 <NavLink
-                                    href=""
+                                    href="/order"
                                     className="navlink"
                                     activeClassName="active"
                                     tag={RRNavLink}
-                                    to="/boutique"
+                                    to="/order"
+                                >
+                                    Test
+                                </NavLink>
+                            </NavItem>
+
+                            <NavItem>
+                                <NavLink
+                                    href="/shop"
+                                    className="navlink"
+                                    activeClassName="active"
+                                    tag={RRNavLink}
+                                    to="/shop"
                                 >
                                     Boutique
                                 </NavLink>
