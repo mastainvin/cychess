@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
+import { UidContext } from "../Routes/AppContext";
+
 import {
     Card,
     CardBody,
@@ -12,10 +14,14 @@ import {
 import userReducer from "../../reducers/user.reducer";
 import { isEmpty } from "../Utils";
 import card from "./card.scss";
+import ParticipateHandler from "./ParticipateHandler";
 
 const Eventcard = ({ event }) => {
+    const uid = useContext(UidContext);
+
     const [isLoading, setIsLoading] = useState(false); // TODO Mettre à true lorsqu'il y aura le usersData de créé
     const userData = useSelector((state) => state.userReducer);
+    const notConnected = !uid;
 
     return (
         <div className="eventCard">
@@ -37,9 +43,10 @@ const Eventcard = ({ event }) => {
                         <CardText className="eventCardText">
                             {event.description}
                         </CardText>
-                        <Button color="success" className="eventButton">
-                            S'inscrire
-                        </Button>
+                        <ParticipateHandler
+                            idToParticipate={event._id}
+                            notConnected={notConnected}
+                        />
                     </CardBody>
                 </Card>
             )}

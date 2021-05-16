@@ -5,7 +5,7 @@ const multer = require("multer");
 const upload = multer();
 
 router.get("/", eventController.readEvent);
-router.post("/", eventController.createEvent);
+router.post("/", upload.single("file"), eventController.createEvent);
 router.put("/:id", eventController.updateEvent);
 router.delete("/:id", eventController.deleteEvent);
 router.patch("/participate/:id", eventController.participateEvent);
