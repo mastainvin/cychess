@@ -1,33 +1,38 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBio, updateDateDeNaissance, updateGenre } from "../../actions/user.actions";
+import {
+    updateBio,
+    updateDateDeNaissance,
+    updateGenre,
+} from "../../actions/user.actions";
 import UploadImg from "./UploadImg";
 
 const Updateprofil = () => {
+    const userData = useSelector((state) => state.userReducer);
     const [bio, setBio] = useState(userData.bio);
-    const [dateDeNaissance, setDateDeNaissance] = useState(userData.bio);
-    const [genre, setGenre] = useState('');
+    const [dateDeNaissance, setDateDeNaissance] = useState(
+        userData.dateDeNaissance
+    );
+    const [genre, setGenre] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
     const [updateBorn, setUpdateBorn] = useState(false);
     const [updateSex, setUpdateSex] = useState(false);
-    const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
 
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false);
-        
-    }
+    };
 
     const handleUpdateBorn = () => {
         dispatch(updateDateDeNaissance(userData._id, dateDeNaissance));
         setUpdateBorn(false);
-    }
+    };
 
     const handleUpdateSex = () => {
         dispatch(updateGenre._id, genre);
         setUpdateSex(false);
-    }
+    };
 
     return (
         <div className="profil-container">
@@ -42,36 +47,51 @@ const Updateprofil = () => {
                     <h3>Bio</h3>
                     {updateForm === false && (
                         <>
-                            <p onClick={() => setUpdateForm(!updateForm)}>{userData.bio}</p>
-                            <button onClick={() => setUpdateForm(!updateForm)}>Modifier bio</button>
+                            <p onClick={() => setUpdateForm(!updateForm)}>
+                                {userData.bio}
+                            </p>
+                            <button onClick={() => setUpdateForm(!updateForm)}>
+                                Modifier bio
+                            </button>
                         </>
                     )}
                     {updateForm && (
                         <>
                             <textarea
                                 type="text"
-                                defaultValue={userData.bio} 
+                                defaultValue={userData.bio}
                                 onChange={(e) => setBio(e.target.value)}
                             ></textarea>
-                            <button onClick={handleUpdate}>Valider modifications</button>
+                            <button onClick={handleUpdate}>
+                                Valider modifications
+                            </button>
                         </>
                     )}
                     <h3>Informations supplémentaires</h3>
                     {updateBorn === false && (
                         <>
-                            <p onClick={() => setUpdateBorn(!updateBorn)}> Date de naissance :{userData.dateDeNaissance}</p>
-                            <button onClick={() => setUpdateBorn(!updateBorn)}>Modifier date de naissance</button>
+                            <p onClick={() => setUpdateBorn(!updateBorn)}>
+                                {" "}
+                                Date de naissance :{userData.dateDeNaissance}
+                            </p>
+                            <button onClick={() => setUpdateBorn(!updateBorn)}>
+                                Modifier date de naissance
+                            </button>
                         </>
                     )}
                     {updateBorn && (
                         <>
                             <input
-                                type="date" 
+                                type="date"
                                 name="born-date"
                                 defaultValue={userData.dateDeNaissance}
-                                onChange={(e) => setDateDeNaissance(e.target.value)}
+                                onChange={(e) =>
+                                    setDateDeNaissance(e.target.value)
+                                }
                             />
-                            <button onClick={handleUpdateBorn}>Valider modifications</button>
+                            <button onClick={handleUpdateBorn}>
+                                Valider modifications
+                            </button>
                         </>
                     )}
                     {/* <p>Genre </p>
