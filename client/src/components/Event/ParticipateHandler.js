@@ -6,7 +6,7 @@ import { unparticipate, participate } from "./../../actions/user.actions";
 
 import "./card.scss";
 
-const ParticipateHandler = ({ idToParticipate, notConnected }) => {
+const ParticipateHandler = ({ idToParticipate, canParticipate }) => {
     const userData = useSelector((state) => state.userReducer);
     const [participated, setParticipated] = useState(false);
     const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const ParticipateHandler = ({ idToParticipate, notConnected }) => {
             color="secondary"
             onClick={handleUnPartipation}
             className="eventButton"
-            disabled={notConnected}
+            disabled={!canParticipate}
         >
             Se désinscrire
         </Button>
@@ -43,7 +43,7 @@ const ParticipateHandler = ({ idToParticipate, notConnected }) => {
             color="success"
             onClick={handlePartipation}
             className="eventButton"
-            disabled={notConnected}
+            disabled={!canParticipate}
         >
             S'inscrire
         </Button>

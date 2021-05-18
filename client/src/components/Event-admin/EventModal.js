@@ -8,6 +8,7 @@ const EventModal = ({ modal, toggle }) => {
     const [nom, setNom] = useState("");
     const [desc, setDesc] = useState("");
     const [date, setDate] = useState("");
+    const [lieu, setLieu] = useState("");
     const [prix, setPrix] = useState(0);
     const [maxParticipants, setmaxParticipants] = useState(40);
     const [image, setImage] = useState(null);
@@ -20,6 +21,7 @@ const EventModal = ({ modal, toggle }) => {
         data.append("nom", nom);
         data.append("description", desc);
         data.append("date", date);
+        data.append("lieu", lieu);
         data.append("prix", prix);
         data.append("maxParticipants", maxParticipants);
         data.append("file", image);
@@ -39,6 +41,7 @@ const EventModal = ({ modal, toggle }) => {
         setDesc("");
         setDate("null");
         setPrix(0);
+        setLieu("");
         setmaxParticipants(40);
         setImage(null);
     };
@@ -88,6 +91,16 @@ const EventModal = ({ modal, toggle }) => {
                             id="date"
                             onChange={(e) => setDate(e.target.value)}
                             value={date}
+                            required
+                        ></input>
+                        <br />
+                        <label htmlFor="lieu">Lieu</label>
+                        <input
+                            type="text"
+                            name="lieu"
+                            id="lieu"
+                            onChange={(e) => setLieu(e.target.value)}
+                            value={lieu}
                             required
                         ></input>
                         <br />

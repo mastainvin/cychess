@@ -7,6 +7,11 @@ const EventSchema = new mongoose.Schema(
             maxlength: 100,
             unique: true,
         },
+        lieu: {
+            type: String,
+            trim: true,
+            maxlength: 100,
+        },
         description: {
             type: String,
             trim: true,

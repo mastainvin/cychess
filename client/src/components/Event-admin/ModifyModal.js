@@ -9,6 +9,8 @@ const ModifyModal = ({ modal, toggle, event }) => {
     const [desc, setDesc] = useState(event.description);
     const [date, setDate] = useState(event.date.substr(0, 10));
     const [prix, setPrix] = useState(event.prix);
+    const [lieu, setLieu] = useState(event.lieu);
+
     const [maxParticipants, setmaxParticipants] = useState(
         event.maxParticipants
     );
@@ -19,6 +21,7 @@ const ModifyModal = ({ modal, toggle, event }) => {
             description: desc,
             date: date,
             prix: prix,
+            lieu: lieu,
             maxParticipants: maxParticipants,
         };
 
@@ -69,6 +72,15 @@ const ModifyModal = ({ modal, toggle, event }) => {
                             id="date"
                             onChange={(e) => setDate(e.target.value)}
                             defaultValue={event.date.substr(0, 10)}
+                        ></input>
+                        <br />
+                        <label htmlFor="lieu">Lieu</label>
+                        <input
+                            type="text"
+                            name="lieu"
+                            id="lieu"
+                            onChange={(e) => setLieu(e.target.value)}
+                            defaultValue={event.lieu}
                         ></input>
                         <br />
                         <label htmlFor="prix">Prix</label>

@@ -45,6 +45,7 @@ module.exports.createEvent = async (req, res) => {
         nom: req.body.nom,
         description: req.body.description,
         date: req.body.date,
+        lieu: req.body.lieu,
         prix: req.body.prix,
         maxParticipants: req.body.maxParticipants,
         image: "./uploads/event/" + fileName,
@@ -67,6 +68,7 @@ module.exports.updateEvent = (req, res) => {
         description: req.body.description,
         prix: req.body.prix,
         date: req.body.date,
+        lieu: req.body.lieu,
         maxParticipants: req.body.maxParticipants,
     };
     EventModel.findByIdAndUpdate(

@@ -26,3 +26,9 @@ export const dateParser = (num) => {
 
     return date.toString();
 };
+
+export const toDate = (num) => {
+    let date = new Date(num);
+
+    return date;
+};
