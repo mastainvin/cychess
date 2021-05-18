@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./style.scss";
 import axios from "axios";
+import loginImg from "../../images/login.svg";
+
 
 const SignInForm = () => {
     const [email, setEmail] = useState("");
@@ -35,9 +37,13 @@ const SignInForm = () => {
     };
 
     return (
-        <div id="form_login">
-            <p>Connexion :</p>
-            <form action="" onSubmit={handleLogin} id="sign-up-form">
+        <div className="form-login">
+            <div className="content">
+            <div className="image">
+                <img src={loginImg} />
+            </div>
+            <form action="" onSubmit={handleLogin} className="sign-up-form">
+                <div className="form-group">
                 <label htmlFor="email">Email :</label>
                 <br />
                 <input
@@ -47,9 +53,11 @@ const SignInForm = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                 ></input>
+                </div>
                 <br />
                 <div className="email error"></div>
                 <br />
+                <div className="form-group">
                 <label htmlFor="password">Mot de passe :</label>
                 <br />
                 <input
@@ -59,11 +67,15 @@ const SignInForm = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
                 ></input>
+                </div>
                 <br />
                 <div className="password error"></div>
                 <br />
-                <input type="submit" value="Se connecter" />
+                <div className="footer">
+                <input className="btn" type="submit" value="Se connecter" />
+                </div>
             </form>
+            </div>
         </div>
     );
 };
