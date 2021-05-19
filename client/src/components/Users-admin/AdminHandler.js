@@ -5,17 +5,20 @@ import { Button } from "reactstrap";
 const AdminHandler = ({ user }) => {
     const userIsAdmin = isAdmin(user);
 
-    const putAdminHandler = () => {};
+    const putAdminHandler = () => {
+        const data = new FormData();
+        data.append("pseudonyme", user.pseudonyme);
+    };
 
-    const putNotAdminHandler = () => {};
+    const putMemberHandler = () => {};
 
     return userIsAdmin ? (
-        <Button color="warning" onClick={putNotAdminHandler}>
-            Administrateur
+        <Button color="warning" onClick={putMemberHandler}>
+            Admin
         </Button>
     ) : (
         <Button color="secondary" onClick={putAdminHandler}>
-            Utilisateur
+            Membre
         </Button>
     );
 };

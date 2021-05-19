@@ -65,8 +65,9 @@ const userSchema = new mongoose.Schema(
             trim: true,
         },
 
-        roleEventuel: {
+        role: {
             type: String,
+            default: "Membre",
         },
 
         admin: {
