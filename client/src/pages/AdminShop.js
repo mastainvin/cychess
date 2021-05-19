@@ -3,18 +3,18 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { isAdmin, isEmpty } from "../components/Utils";
 import { Redirect } from "react-router";
 import Header from "../components/header";
-import { getEvents } from "../actions/event.actions";
+import { getProducts } from "../actions/product.actions";
 import { Button, ListGroup, ListGroupItem } from "reactstrap";
-import "./event-admin.scss";
+import "./product-admin.scss";
 
-import EventModal from "../components/Event-admin/EventModal";
-import ListElement from "../components/Event-admin/ListElement";
+import ProductModal from "../components/Product-admin/ProductModal";
+import ListElement from "../components/Product-admin/ListElement";
 
 const AdminShop = () => {
     const userData = useSelector((state) => state.userReducer);
     const notAdmin = !isAdmin(userData);
-    const products = useSelector((state) => state.Reducer);
-    const [loadEvent, setLoadEvent] = useState(true);
+    const products = useSelector((state) => state.productReducer);
+    const [loadProduct, setLoadProduct] = useState(true);
     const dispatch = useDispatch();
 
     const [modal, setModal] = useState(false);
@@ -24,16 +24,15 @@ const AdminShop = () => {
     };
 
     useEffect(() => {
-        if (loadEvent) {
-            dispatch(getEvents());
-            setLoadEvent(false);
+        if (loadProduct) {
+            dispatch(getProducts());
+            setLoadProduct(false);
         }
-    }, [loadEvent, dispatch, events]);
-
+    }, [loadProduct, dispatch, products]);
     return (
         <div className="container">
-            <EventModal toggle={toggle} modal={modal} />
-            <Header title="Administration - Evénements" />
+            <ProductModal toggle={toggle} modal={modal} />
+            <Header title="Administration - Boutique" />
             {notAdmin ? (
                 <Redirect to="/" />
             ) : (
@@ -42,13 +41,16 @@ const AdminShop = () => {
                         <ListGroupItem>
                             <div className="list-row">
                                 <Button color="success" onClick={toggle}>
-                                    Ajouter un événement !
+                                    Ajouter un produit !
                                 </Button>
                             </div>
                         </ListGroupItem>
-                        {!isEmpty(events) &&
-                            events.map((event) => (
-                                <ListElement event={event} key={event._id} />
+                        {!isEmpty(products) &&
+                            products.map((product) => (
+                                <ListElement
+                                    product={product}
+                                    key={product._id}
+                                />
                             ))}
                     </ListGroup>
                 </div>
@@ -57,4 +59,4 @@ const AdminShop = () => {
     );
 };
 
-export default AdminEvent;
+export default AdminShop;
