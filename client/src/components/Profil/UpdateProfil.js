@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { Button } from 'reactstrap';
 import { useDispatch, useSelector } from "react-redux";
 import {
     updateBio,
     updateDateDeNaissance,
-    updateGenre,
+    updateSexe,
+    updatePrenom,
+    updateNom,
+    updateResidence
 } from "../../actions/user.actions";
 import UploadImg from "./UploadImg";
 
@@ -13,10 +17,16 @@ const Updateprofil = () => {
     const [dateDeNaissance, setDateDeNaissance] = useState(
         userData.dateDeNaissance
     );
-    const [genre, setGenre] = useState("");
+    const [sexe, setSexe] = useState(userData.sexe);
+    const [prenom, setPrenom] = useState(userData.prenom);
+    const [nom, setNom] = useState(userData.nom);
+    const [residence, setResidence] = useState(userData.residence);
     const [updateForm, setUpdateForm] = useState(false);
     const [updateBorn, setUpdateBorn] = useState(false);
-    const [updateSex, setUpdateSex] = useState(false);
+    const [updateGenre, setUpdateGenre] = useState(false);
+    const [updateFirstName, setUpdateFirstName] = useState(false);
+    const [updateName, setUpdateName] = useState(false);
+    const [updateAdresse, setUpdateAdresse] = useState(false);
     const dispatch = useDispatch();
 
     const handleUpdate = () => {
@@ -29,9 +39,24 @@ const Updateprofil = () => {
         setUpdateBorn(false);
     };
 
-    const handleUpdateSex = () => {
-        dispatch(updateGenre._id, genre);
-        setUpdateSex(false);
+    const handleUpdateGenre = () => {
+        dispatch(updateSexe(userData._id, sexe));
+        setUpdateGenre(false);
+    };
+
+    const handleUpdateFirstName = () => {
+        dispatch(updatePrenom(userData._id, prenom));
+        setUpdateFirstName(false);
+    };
+
+    const handleUpdateName = () => {
+        dispatch(updateNom(userData._id, nom));
+        setUpdateName(false);
+    };
+
+    const handleUpdateAdresse = () => {
+        dispatch(updateResidence(userData._id, residence));
+        setUpdateAdresse(false);
     };
 
     return (
@@ -50,9 +75,9 @@ const Updateprofil = () => {
                             <p onClick={() => setUpdateForm(!updateForm)}>
                                 {userData.bio}
                             </p>
-                            <button onClick={() => setUpdateForm(!updateForm)}>
+                            <Button onClick={() => setUpdateForm(!updateForm)}>
                                 Modifier bio
-                            </button>
+                            </Button>
                         </>
                     )}
                     {updateForm && (
@@ -62,9 +87,9 @@ const Updateprofil = () => {
                                 defaultValue={userData.bio}
                                 onChange={(e) => setBio(e.target.value)}
                             ></textarea>
-                            <button onClick={handleUpdate}>
+                            <Button onClick={handleUpdate}>
                                 Valider modifications
-                            </button>
+                            </Button>
                         </>
                     )}
                     <h3>Informations supplémentaires</h3>
@@ -74,9 +99,9 @@ const Updateprofil = () => {
                                 {" "}
                                 Date de naissance :{userData.dateDeNaissance}
                             </p>
-                            <button onClick={() => setUpdateBorn(!updateBorn)}>
+                            <Button onClick={() => setUpdateBorn(!updateBorn)}>
                                 Modifier date de naissance
-                            </button>
+                            </Button>
                         </>
                     )}
                     {updateBorn && (
@@ -89,28 +114,75 @@ const Updateprofil = () => {
                                     setDateDeNaissance(e.target.value)
                                 }
                             />
-                            <button onClick={handleUpdateBorn}>
+                            <Button onClick={handleUpdateBorn}>
                                 Valider modifications
-                            </button>
+                            </Button>
                         </>
                     )}
-                    {/* <p>Genre </p>
-                    {updateSex === false && (
+                    {updateGenre === false && (
                         <>
-                            <p onClick={() => setUpdateSex(!updateSex)}>{userData.born}</p>
-                            <button onClick={() => setUpdateSex(!updateSex)}>Modifier Genre</button>
+                            <p onClick={() => setUpdateGenre(!updateGenre)}>Genre: {userData.sexe}</p>
+                            <Button onClick={() => setUpdateGenre(!updateGenre)}>Modifier Genre</Button>
                         </>
                     )}
-                    {updateSex && (
+                    {updateGenre && (
                         <>
                             <input
                                 type="text"
-                                defaultValue={userData.genre} 
-                                onChange={(e) => setGenre(e.target.value)}
+                                defaultValue={userData.sexe} 
+                                onChange={(e) => setSexe(e.target.value)}
                             ></input>
-                            <button onClick={handleUpdate}>Valider modifications</button>
+                            <Button onClick={handleUpdateGenre}>Valider modifications</Button>
                         </>
-                    )} */}
+                    )}
+                    {updateFirstName === false && (
+                        <>
+                            <p onClick={() => setUpdateFirstName(!updateFirstName)}>Prénom: {userData.prenom}</p>
+                            <Button onClick={() => setUpdateFirstName(!updateFirstName)}>Modifier prénom</Button>
+                        </>
+                    )}
+                    {updateFirstName && (
+                        <>
+                            <input
+                                type="text"
+                                defaultValue={userData.prenom} 
+                                onChange={(e) => setPrenom(e.target.value)}
+                            ></input>
+                            <Button onClick={handleUpdateFirstName}>Valider modifications</Button>
+                        </>
+                    )}
+                    {updateName === false && (
+                        <>
+                            <p onClick={() => setUpdateName(!updateName)}>Nom: {userData.nom}</p>
+                            <Button onClick={() => setUpdateName(!updateName)}>Modifier nom</Button>
+                        </>
+                    )}
+                    {updateName && (
+                        <>
+                            <input
+                                type="text"
+                                defaultValue={userData.nom}
+                                onChange={(e) => setNom(e.target.value)}
+                            ></input>
+                            <Button onClick={handleUpdateName}>Valider modifications</Button>
+                        </>
+                    )}
+                    {updateAdresse === false && (
+                        <>
+                            <p onClick={() => setUpdateAdresse(!updateAdresse)}>Adresse: {userData.residence}</p>
+                            <Button onClick={() => setUpdateAdresse(!updateAdresse)}>Modifier adresse</Button>
+                        </>
+                    )}
+                    {updateAdresse && (
+                        <>
+                            <input
+                                type="text"
+                                defaultValue={userData.residence} 
+                                onChange={(e) => setResidence(e.target.value)}
+                            ></input>
+                            <Button onClick={handleUpdateAdresse}>Valider modifications</Button>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
