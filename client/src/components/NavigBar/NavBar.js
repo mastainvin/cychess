@@ -142,6 +142,7 @@ const NavBar = () => {
                                         >
                                             Utilisateurs
                                         </DropdownItem>
+                                        
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             ) : (

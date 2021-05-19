@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import { createStore, applyMiddleware } from "redux";
 
+
 //Dev tools
 import { composeWithDevTools } from "redux-devtools-extension";
 import logger from "redux-logger";
