@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_BIO, UPDATE_GENRE, UPDATE_DATEDENAISSANCE, UPLOAD_PICTURE } from "../actions/user.actions";
+import { GET_USER, UPDATE_BIO, UPDATE_SEXE, UPDATE_DATEDENAISSANCE, UPLOAD_PICTURE, UPDATE_PRENOM, UPDATE_NOM, UPDATE_RESIDENCE } from "../actions/user.actions";
 
 
 const initialState = {};
@@ -22,12 +22,26 @@ export default function userReducer(state = initialState, action){
                 ...state,
                 dateDeNaissance: action.payload
             };
-        case UPDATE_GENRE:
+        case UPDATE_SEXE:
             return {
                 ...state,
-                genre: action.payload
+                sexe: action.payload
             };
-
+        case UPDATE_PRENOM:
+            return {
+                ...state,
+                prenom: action.payload
+            };
+        case UPDATE_NOM:
+            return {
+                ...state,
+                nom: action.payload
+            };
+        case UPDATE_RESIDENCE:
+            return {
+                ...state,
+                residence: action.payload
+            };
         default: return state;
     }
 }
