@@ -3,7 +3,6 @@ import "./style.scss";
 import axios from "axios";
 import loginImg from "../../images/login.svg";
 
-
 const SignInForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -39,42 +38,50 @@ const SignInForm = () => {
     return (
         <div className="form-login">
             <div className="content">
-            <div className="image">
-                <img src={loginImg} />
-            </div>
-            <form action="" onSubmit={handleLogin} className="sign-up-form">
-                <div className="form-group">
-                <label htmlFor="email">Email :</label>
-                <br />
-                <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    value={email}
-                ></input>
+                <div className="image">
+                    <img src={loginImg} />
                 </div>
-                <br />
-                <div className="email error"></div>
-                <br />
-                <div className="form-group">
-                <label htmlFor="password">Mot de passe :</label>
-                <br />
-                <input
-                    type="password"
-                    name="pasword"
-                    id="password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}
-                ></input>
-                </div>
-                <br />
-                <div className="password error"></div>
-                <br />
-                <div className="footer">
-                <input className="btn" type="submit" value="Se connecter" />
-                </div>
-            </form>
+                <form action="" onSubmit={handleLogin} className="sign-up-form">
+                    <div className="form-group">
+                        {/* <label htmlFor="email">
+                            <span>Email</span>
+                        </label>
+                        <br /> */}
+                        <input
+                            type="text"
+                            name="email"
+                            id="email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            placeholder="Email"
+                        ></input>
+                    </div>
+                    {/* <br /> */}
+                    <div className="email error"></div>
+                    {/* <br /> */}
+                    <div className="form-group">
+                        {/* <label htmlFor="password">Mot de passe :</label> */}
+                        {/* <br /> */}
+                        <input
+                            type="password"
+                            name="pasword"
+                            id="password"
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
+                            placeholder="Mot de passe"
+                        ></input>
+                    </div>
+                    {/* <br /> */}
+                    <div className="password error"></div>
+                    {/* <br /> */}
+                    <div className="footer">
+                        <input
+                            className="btn"
+                            type="submit"
+                            value="Se connecter"
+                        />
+                    </div>
+                </form>
             </div>
         </div>
     );
