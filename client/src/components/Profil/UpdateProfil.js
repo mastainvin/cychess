@@ -22,41 +22,23 @@ const Updateprofil = () => {
     const [nom, setNom] = useState(userData.nom);
     const [residence, setResidence] = useState(userData.residence);
     const [updateForm, setUpdateForm] = useState(false);
-    const [updateBorn, setUpdateBorn] = useState(false);
-    const [updateGenre, setUpdateGenre] = useState(false);
-    const [updateFirstName, setUpdateFirstName] = useState(false);
-    const [updateName, setUpdateName] = useState(false);
-    const [updateAdresse, setUpdateAdresse] = useState(false);
     const dispatch = useDispatch();
 
+    const [bioChange, setBioChange] = useState(false);
+    const [sexeChange, setSexeChange] = useState(false);
+
     const handleUpdate = () => {
-        dispatch(updateBio(userData._id, bio));
+            {bioChange === true && (
+                dispatch(updateBio(userData._id, bio))
+            )}
+        // dispatch(updateDateDeNaissance(userData._id, dateDeNaissance));
+        {sexeChange === true && (
+            dispatch(updateSexe(userData._id, sexe))
+        )}
+        // dispatch(updatePrenom(userData._id, prenom));
+        // dispatch(updateNom(userData._id, nom));
+        // dispatch(updateResidence(userData._id, residence));
         setUpdateForm(false);
-    };
-
-    const handleUpdateBorn = () => {
-        dispatch(updateDateDeNaissance(userData._id, dateDeNaissance));
-        setUpdateBorn(false);
-    };
-
-    const handleUpdateGenre = () => {
-        dispatch(updateSexe(userData._id, sexe));
-        setUpdateGenre(false);
-    };
-
-    const handleUpdateFirstName = () => {
-        dispatch(updatePrenom(userData._id, prenom));
-        setUpdateFirstName(false);
-    };
-
-    const handleUpdateName = () => {
-        dispatch(updateNom(userData._id, nom));
-        setUpdateName(false);
-    };
-
-    const handleUpdateAdresse = () => {
-        dispatch(updateResidence(userData._id, residence));
-        setUpdateAdresse(false);
     };
 
     return (
@@ -75,8 +57,29 @@ const Updateprofil = () => {
                             <p onClick={() => setUpdateForm(!updateForm)}>
                                 {userData.bio}
                             </p>
-                            <Button onClick={() => setUpdateForm(!updateForm)}>
-                                Modifier bio
+                            <Button onClick={() => setUpdateForm(!updateForm)}
+                            >
+                                Modifier
+                            </Button>
+                            <p onClick={() => setUpdateForm(!updateForm)}>
+                                {userData.dateDeNaissance}
+                            </p>
+                            <p onClick={() => setUpdateForm(!updateForm)}>
+                                {userData.sexe}
+                            </p>
+                            <p onClick={() => setUpdateForm(!updateForm)}>
+                                {userData.prenom}
+                            </p>
+                            <p onClick={() => setUpdateForm(!updateForm)}>
+                                {userData.nom}
+                            </p>
+                            <p onClick={() => setUpdateForm(!updateForm)}>
+                                {userData.residence}
+                            </p>
+                            <Button onClick={() => setUpdateForm(!updateForm),
+                                                   setSexeChange === !sexeChange}
+                            >
+                                Modifier
                             </Button>
                         </>
                     )}
@@ -90,9 +93,43 @@ const Updateprofil = () => {
                             <Button onClick={handleUpdate}>
                                 Valider modifications
                             </Button>
+                            {/* <input
+                                type="date"
+                                name="born-date"
+                                defaultValue={userData.dateDeNaissance}
+                                onChange={(e) =>
+                                    setDateDeNaissance(e.target.value)
+                                }
+                            /> */}
+                            <textarea
+                                type="text"
+                                defaultValue={userData.sexe} 
+                                onChange={(e) => setSexe(e.target.value)}
+                            ></textarea>
+                            <Button onClick={handleUpdate, setSexeChange === !sexeChange}>
+                                Valider modifications
+                            </Button>
+                            {/* <input
+                                type="text"
+                                defaultValue={userData.prenom} 
+                                onChange={(e) => setPrenom(e.target.value)}
+                            ></input>
+                            <input
+                                type="text"
+                                defaultValue={userData.nom}
+                                onChange={(e) => setNom(e.target.value)}
+                            ></input>
+                            <input
+                                type="text"
+                                defaultValue={userData.residence} 
+                                onChange={(e) => setResidence(e.target.value)}
+                            ></input>
+                            <Button onClick={handleUpdate}>
+                                Valider modifications
+                            </Button> */}
                         </>
                     )}
-                    <h3>Informations supplémentaires</h3>
+                    {/* <h3>Informations supplémentaires</h3>
                     {updateBorn === false && (
                         <>
                             <p onClick={() => setUpdateBorn(!updateBorn)}>
@@ -103,8 +140,8 @@ const Updateprofil = () => {
                                 Modifier date de naissance
                             </Button>
                         </>
-                    )}
-                    {updateBorn && (
+                    )} */}
+                    {/* {updateBorn && (
                         <>
                             <input
                                 type="date"
@@ -114,7 +151,7 @@ const Updateprofil = () => {
                                     setDateDeNaissance(e.target.value)
                                 }
                             />
-                            <Button onClick={handleUpdateBorn}>
+                            <Button onClick={handleUpdate}>
                                 Valider modifications
                             </Button>
                         </>
@@ -132,7 +169,7 @@ const Updateprofil = () => {
                                 defaultValue={userData.sexe} 
                                 onChange={(e) => setSexe(e.target.value)}
                             ></input>
-                            <Button onClick={handleUpdateGenre}>Valider modifications</Button>
+                            <Button onClick={handleUpdate}>Valider modifications</Button>
                         </>
                     )}
                     {updateFirstName === false && (
@@ -148,7 +185,7 @@ const Updateprofil = () => {
                                 defaultValue={userData.prenom} 
                                 onChange={(e) => setPrenom(e.target.value)}
                             ></input>
-                            <Button onClick={handleUpdateFirstName}>Valider modifications</Button>
+                            <Button onClick={handleUpdate}>Valider modifications</Button>
                         </>
                     )}
                     {updateName === false && (
@@ -164,7 +201,7 @@ const Updateprofil = () => {
                                 defaultValue={userData.nom}
                                 onChange={(e) => setNom(e.target.value)}
                             ></input>
-                            <Button onClick={handleUpdateName}>Valider modifications</Button>
+                            <Button onClick={handleUpdate}>Valider modifications</Button>
                         </>
                     )}
                     {updateAdresse === false && (
@@ -180,9 +217,9 @@ const Updateprofil = () => {
                                 defaultValue={userData.residence} 
                                 onChange={(e) => setResidence(e.target.value)}
                             ></input>
-                            <Button onClick={handleUpdateAdresse}>Valider modifications</Button>
+                            <Button onClick={handleUpdate}>Valider modifications</Button>
                         </>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
