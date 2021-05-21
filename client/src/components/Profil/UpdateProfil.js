@@ -3,9 +3,9 @@ import { Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, updateUser } from "../../actions/user.actions";
 import UploadImg from "./UploadImg";
+import { isEmpty } from "../Utils";
 
-const Updateprofil = () => {
-    const userData = useSelector((state) => state.userReducer);
+const Updateprofil = ({ userData }) => {
     const [bio, setBio] = useState(userData.bio);
     const [dateDeNaissance, setDateDeNaissance] = useState(
         userData.dateDeNaissance

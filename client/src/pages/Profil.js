@@ -10,6 +10,7 @@ const Profil = () => {
     const uid = useContext(UidContext);
     const [userInLoad, setUserInLoad] = useState(true);
     const dispatch = useDispatch();
+    const userData = useSelector((state) => state.userReducer);
     useEffect(async () => {
         if (userInLoad) {
             await dispatch(getUser(uid));
@@ -21,7 +22,7 @@ const Profil = () => {
             {uid ? (
                 <>
                     {!userInLoad ? (
-                        <Updateprofil>
+                        <Updateprofil userData={userData}>
                             <Header title="Votre profil" />
                         </Updateprofil>
                     ) : (
