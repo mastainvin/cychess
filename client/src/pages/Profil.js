@@ -6,14 +6,14 @@ import Header from "../components/header";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../actions/user.actions";
 import { Spinner } from "reactstrap";
+import { isEmpty } from "../components/Utils";
 const Profil = () => {
     const uid = useContext(UidContext);
     const [userInLoad, setUserInLoad] = useState(true);
     const dispatch = useDispatch();
     const userData = useSelector((state) => state.userReducer);
     useEffect(async () => {
-        if (userInLoad) {
-            await dispatch(getUser(uid));
+        if (userInLoad && !isEmpty(userData)) {
             setUserInLoad(false);
         }
     });

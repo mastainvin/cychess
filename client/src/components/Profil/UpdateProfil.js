@@ -17,6 +17,8 @@ const Updateprofil = ({ userData }) => {
     const [roleEventuel, setRoleEventuel] = useState(userData.roleEventuel);
 
     const [updateForm, setUpdateForm] = useState(false);
+    const [bioChange, setBioChange] = useState(false);
+    const [sexeChange, setSexeChange] = useState(false);
     const dispatch = useDispatch();
 
     const handleUpdate = async () => {
@@ -51,9 +53,9 @@ const Updateprofil = ({ userData }) => {
                             <p onClick={() => setUpdateForm(!updateForm)}>
                                 {userData.bio}
                             </p>
-                            {/* <Button onClick={() => setUpdateForm(!updateForm)}>
+                            <Button onClick={() => setUpdateForm(!updateForm)}>
                                 Modifier
-                            </Button> */}
+                            </Button>
                             <p onClick={() => setUpdateForm(!updateForm)}>
                                 {userData.dateDeNaissance}
                             </p>
@@ -69,7 +71,12 @@ const Updateprofil = ({ userData }) => {
                             <p onClick={() => setUpdateForm(!updateForm)}>
                                 {userData.residence}
                             </p>
-                            <Button onClick={() => setUpdateForm(!updateForm)}>
+                            <Button
+                                onClick={
+                                    (() => setUpdateForm(!updateForm),
+                                    setSexeChange === !sexeChange)
+                                }
+                            >
                                 Modifier
                             </Button>
                         </>
@@ -81,22 +88,33 @@ const Updateprofil = ({ userData }) => {
                                 defaultValue={userData.bio}
                                 onChange={(e) => setBio(e.target.value)}
                             ></textarea>
-                            <input
+                            <Button onClick={handleUpdate}>
+                                Valider modifications
+                            </Button>
+                            {/* <input
                                 type="date"
                                 name="born-date"
                                 defaultValue={userData.dateDeNaissance}
                                 onChange={(e) =>
                                     setDateDeNaissance(e.target.value)
                                 }
-                            />
-                            <input
+                            /> */}
+                            <textarea
                                 type="text"
                                 defaultValue={userData.sexe}
                                 onChange={(e) => setSexe(e.target.value)}
-                            ></input>
-                            <input
+                            ></textarea>
+                            <Button
+                                onClick={
+                                    (handleUpdate,
+                                    setSexeChange === !sexeChange)
+                                }
+                            >
+                                Valider modifications
+                            </Button>
+                            {/* <input
                                 type="text"
-                                defaultValue={userData.prenom}
+                                defaultValue={userData.prenom} 
                                 onChange={(e) => setPrenom(e.target.value)}
                             ></input>
                             <input
@@ -106,12 +124,12 @@ const Updateprofil = ({ userData }) => {
                             ></input>
                             <input
                                 type="text"
-                                defaultValue={userData.residence}
+                                defaultValue={userData.residence} 
                                 onChange={(e) => setResidence(e.target.value)}
                             ></input>
                             <Button onClick={handleUpdate}>
                                 Valider modifications
-                            </Button>
+                            </Button> */}
                         </>
                     )}
                     {/* <h3>Informations supplémentaires</h3>
