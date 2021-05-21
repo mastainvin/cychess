@@ -33,7 +33,8 @@ module.exports.updateUser = async (req, res) => {
                     sexe: req.body.sexe,
                     prenom: req.body.prenom,
                     nom: req.body.nom,
-                    residence: req.body.residence
+                    residence: req.body.residence,
+                    roleEventuel: req.body.roleEventuel,
                 },
             },
             { new: true, upsert: true, setDefaultsOnInsert: true },
