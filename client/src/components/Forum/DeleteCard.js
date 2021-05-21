@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../actions/post.actions";
-import poubelle from "../../images/poubelle.svg";
+import poubelle from "../../images/poubelle.png";
 import "./card.scss";
 
 const DeleteCard = (props) => {

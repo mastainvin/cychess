@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment, editComment } from "../../actions/post.actions";
 import editIcon from "../../images/edit.svg";
-import poubelle from "../../images/poubelle.svg";
+import poubelle from "../../images/poubelle.png";
 
 const EditDeleteComment = ({ comment, postId }) => {
     const [isAuthor, setIsAuthor] = useState(false);
@@ -42,7 +42,7 @@ const EditDeleteComment = ({ comment, postId }) => {
       )}
       {isAuthor && edit && (
         <form action="" onSubmit={handleEdit} className="edit-comment-form">
-          <label htmlFor="text" onClick={() => setEdit(!edit)}>
+          <label htmlFor="text" onClick={() => (setEdit(!edit),setText(''))}>
             Annuler
           </label>
           <br />

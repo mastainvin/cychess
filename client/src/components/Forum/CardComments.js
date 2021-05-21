@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { addComment, getPosts } from "../../actions/post.actions";
 import { isEmpty, timestampParser } from "../Utils";
 import EditDeleteComment from "./EditDeleteComment";
+import {Badge} from "reactstrap"
+
 
 const CardComments = ({post}) => {
 
@@ -15,12 +17,12 @@ const CardComments = ({post}) => {
         e.preventDefault();
     
         if (text) {
-          dispatch(addComment(post._id, userData._id, text, userData.pseudo))
+          dispatch(addComment(post._id, userData._id, text, userData.pseudonyme))
             .then(() => dispatch(getPosts()))
             .then(() => setText(''));
         }
       };
-
+      
     return (
         <div className="comments-container">
             {post.comments.map((comment) => {
@@ -52,6 +54,16 @@ const CardComments = ({post}) => {
                             <div className="comment-header">
                                 <div className="pseudo">
                                     <h3>{comment.commenterPseudo}</h3>
+                                    <Badge className="role" color="secondary">
+                                        {!isEmpty(usersData[0]) &&
+                                            usersData
+                                                .map((user) => {
+                                                    if (user._id === comment.commenterId) return user.roleEventuel;
+                                                    else return null;
+                                                })
+                                                .join("")
+                                        }
+                                    </Badge>
                                 </div>
                                     <span>{timestampParser(comment.timestamp)}</span>
                                 </div>

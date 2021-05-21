@@ -6,7 +6,7 @@ import messageImg from "../../images/message1.svg";
 import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
 import { updatePost } from "../../actions/post.actions";
-import "./card.scss";
+import { Collapse, Badge } from 'reactstrap';
 
 const Card = ( {post} ) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +16,8 @@ const Card = ( {post} ) => {
     const [isUpdated, setIsUpdated] = useState(false);
     const [textUpdate, setTextUpdate] = useState(null);
     const dispatch = useDispatch();
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
 
     const updateItem = () => {
         if (textUpdate) {
@@ -59,7 +61,17 @@ const Card = ( {post} ) => {
                                     })
                                     .join("")}
                         </h2>
+                        <Badge className="role" color="secondary">
+                                {!isEmpty(usersData[0]) &&
+                                    usersData
+                                        .map((user) => {
+                                            if (user._id === post.posterId) return user.roleEventuel;
+                                            else return null;
+                                        })
+                                        .join("")}
+                        </Badge>
                     </div>
+                    
                     <span>{dateParser(post.createdAt)}</span>
                 </div>
 
@@ -94,14 +106,18 @@ const Card = ( {post} ) => {
                 <div className="card-footer">
                     <div className="comment-icon">
                         <img
-                            onClick={() => setShowComments(!showComments)}
+                            onClick={(() => setShowComments(!showComments)), toggle}
                             src={messageImg}
                             alt="comment"
                         />
                         <span>{post.comments.length}</span>
                     </div>
                 </div>
-                {showComments && <CardComments post={post} />}
+                <Collapse isOpen={isOpen}>
+
+                            <CardComments post={post} />
+
+                </Collapse>
             </div>
         </li>
     );

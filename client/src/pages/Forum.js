@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import Header from "../components/header";
-import { UidContext } from "../components/AppContext";
+import { UidContext } from "../components/Routes/AppContext";
 import NewPostForm from "../components/Forum/NewPostForm";
 import Thread from "../components/Forum/Thread";
-import Log from "../components/Log";
+import { Alert } from "reactstrap";
 
 const Forum = () => {
     const uid = useContext(UidContext);
@@ -11,11 +11,13 @@ const Forum = () => {
     return (
         <div className="home">
             <div className="main">
-                <div className="home-header">
-                    {uid ? <NewPostForm /> : <Log signin={true} signup={false} />}
-                </div>
                 <div className="container thread">
                     <Header title="Forum"/>
+                    {uid ? <NewPostForm /> : 
+                        <Alert color="warning" style={{ width: "100%" }}>
+                            Attention ! Vous ne pouvez pas poster de message si vous n'êtes pas connecté.
+                        </Alert>
+                    }
                     <Thread/>
                 </div>
             </div>
