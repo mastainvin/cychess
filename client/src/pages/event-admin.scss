@@ -1,0 +1,63 @@
+.event-list {
+    margin: 50px 0;
+}
+
+.list-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.event-name:hover {
+    cursor: pointer;
+    color: rgb(4, 102, 214);
+    text-decoration: underline;
+}
+
+.event-list-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+// .event-name {
+//     font-size: 2vw !important;
+// }
+// label {
+//     font-size: 1.5vw !important;
+// }
+// .event-list-item h5 {
+//     font-size: 2vw !important;
+// }
+// .event-list-item p {
+//     font-size: 1.5vw !important;
+// }
+// td {
+//     font-size: 1vw !important;
+// }
+
+.event-left-infos {
+    width: 75%;
+}
+
+.event-infos {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.tableau-participants {
+    margin-top: 10px;
+    width: 100%;
+    margin-right: 20px;
+}
+
+.btn-footer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 10px;
+}

@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
 
         prenom: {
             type: String,
-            required: true,
+            required: false,
             minlength: 2,
             maxlength: 50,
             unique: false,
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
 
         nom: {
             type: String,
-            required: true,
+            required: false,
             minlength: 2,
             maxlength: 50,
             unique: false,
@@ -83,6 +83,14 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
+        events: {
+            type: [String],
+            required: true,
+        },
+        panier: {
+            type: [String],
+            required: true
+        }
     },
     {
         timestamps: true,

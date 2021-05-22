@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import SignUpForm, { signUpForm } from "./SignUpForm";
 import SignInForm, { signInForm } from "./SignInForm";
-import NavBar from "../NavigBar/NavBar";
-import "./index.css";
+import "./index.scss";
 
 const Log = (props) => {
     const [signUpModal, setSignUpModal] = useState(props.signup);
@@ -21,16 +20,18 @@ const Log = (props) => {
     return (
         <div className="connection-form">
             <div className="form-container">
-                <ul>
-                    <li onClick={handleModals} id="register">
-                        S'inscrire
-                    </li>
-                    <li onClick={handleModals} id="login">
-                        Se connecter
-                    </li>
-                </ul>
-                {signUpModal && <SignUpForm />}
-                {signInModal && <SignInForm />}
+                <div className="container">
+                    <ul className="log-reg-btn">
+                        <li onClick={handleModals} id="register">
+                            Inscription
+                        </li>
+                        <li onClick={handleModals} id="login">
+                            Connexion
+                        </li>
+                    </ul>
+                    {signUpModal && <SignUpForm />}
+                    {signInModal && <SignInForm />}
+                </div>
             </div>
         </div>
     );

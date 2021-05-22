@@ -2,6 +2,8 @@ import {
     DELETE_USER,
     UPDATE_USER,
     GET_USER,
+    PARTICIPATE,
+    UNPARTICIPATE,
     UPLOAD_PICTURE,
 } from "../actions/user.actions";
 
@@ -16,10 +18,25 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 picture: action.payload,
             };
+
         case DELETE_USER:
             return state;
         case UPDATE_USER:
             return state;
+
+        case PARTICIPATE:
+            return {
+                ...state,
+                events: [action.payload.eventId, ...state.events],
+            };
+        case UNPARTICIPATE:
+            return {
+                ...state,
+                events: state.events.filter(
+                    (id) => id !== action.payload.eventId
+                ),
+            };
+
         default:
             return state;
     }
