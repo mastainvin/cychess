@@ -15,7 +15,8 @@ const Updateprofil = ({ userData }) => {
     const [prenom, setPrenom] = useState(userData.prenom);
     const [nom, setNom] = useState(userData.nom);
     const [residence, setResidence] = useState(userData.residence);
-    const [roleEventuel, setRoleEventuel] = useState(userData.roleEventuel);
+    const [roleEventuel, setRoleEventuel] = useState(userData.role);
+
     const [updateForm, setUpdateForm] = useState(false);
     const dispatch = useDispatch();
 
@@ -27,7 +28,8 @@ const Updateprofil = ({ userData }) => {
             prenom: prenom,
             nom: nom,
             residence: residence,
-            roleEventuel: roleEventuel,
+            role: userData.role,
+            admin: userData.admin,
         };
 
         await dispatch(updateUser(userData._id, data));
@@ -55,27 +57,27 @@ const Updateprofil = ({ userData }) => {
                     {updateForm === false && (
                         <>
                             <p onClick={() => setUpdateForm(!updateForm)}>
-                                Bio : 
+                                Bio :
                                 <br />
                                 {userData.bio}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
-                                Date de naissance : 
+                                Date de naissance :
                                 <br />
                                 {userData.dateDeNaissance}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
-                                Genre : 
+                                Genre :
                                 <br />
                                 {userData.sexe}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
-                                Prénom : 
+                                Prénom :
                                 <br />
                                 {userData.prenom}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
-                                Nom : 
+                                Nom :
                                 <br />
                                 {userData.nom}
                             </p>
@@ -84,7 +86,10 @@ const Updateprofil = ({ userData }) => {
                                 <br />
                                 {userData.residence}
                             </p>
-                            <Button className="custom-btn" onClick={() => setUpdateForm(!updateForm)}>
+                            <Button
+                                className="custom-btn"
+                                onClick={() => setUpdateForm(!updateForm)}
+                            >
                                 Modifier
                             </Button>
                         </>
@@ -111,7 +116,7 @@ const Updateprofil = ({ userData }) => {
                             ></textarea>
                             <textarea
                                 type="text"
-                                defaultValue={userData.prenom} 
+                                defaultValue={userData.prenom}
                                 onChange={(e) => setPrenom(e.target.value)}
                             ></textarea>
                             <textarea
@@ -121,10 +126,13 @@ const Updateprofil = ({ userData }) => {
                             ></textarea>
                             <textarea
                                 type="text"
-                                defaultValue={userData.residence} 
+                                defaultValue={userData.residence}
                                 onChange={(e) => setResidence(e.target.value)}
                             ></textarea>
-                            <Button className="custom-btn" onClick={handleUpdate}>
+                            <Button
+                                className="custom-btn"
+                                onClick={handleUpdate}
+                            >
                                 Valider modifications
                             </Button>
                         </>
