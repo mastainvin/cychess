@@ -1,4 +1,10 @@
-import { GET_USER, UPDATE_USER, UPLOAD_PICTURE } from "../actions/user.actions";
+import {
+    GET_USER,
+    UPDATE_USER,
+    PARTICIPATE,
+    UNPARTICIPATE,
+    UPLOAD_PICTURE,
+} from "../actions/user.actions";
 
 const initialState = {};
 
@@ -13,17 +19,19 @@ export default function userReducer(state = initialState, action) {
             };
         case UPDATE_USER:
             return state;
-        // return {
-        //     ...state,
-        //     bio: action.payload.bio,
-        //     dateDeNaissance: action.payload.dateDeNaissance,
-        //     sexe: action.payload.sexe,
-        //     prenom: action.payload.prenom,
-        //     nom: action.payload.nom,
-        //     residence: action.payload.residence,
-        //     roleEventuel: action.payload.roleEventuel,
-        // };
 
+        case PARTICIPATE:
+            return {
+                ...state,
+                events: [action.payload.eventId, ...state.events],
+            };
+        case UNPARTICIPATE:
+            return {
+                ...state,
+                events: state.events.filter(
+                    (id) => id !== action.payload.eventId
+                ),
+            };
         default:
             return state;
     }
