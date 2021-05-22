@@ -1,6 +1,9 @@
 const ProductModel = require("../models/product.model");
 const ObjectID = require("mongoose").Types.ObjectId;
-
+const fs = require("fs");
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline);
+const { uploadErrors } = require("../utils/errors.utils");
 module.exports.getAllProducts = async (req, res) => {
     const products = await ProductModel.find();
     res.header("Access-Control-Allow-Origin", "*");
@@ -21,21 +24,41 @@ module.exports.productInfo = (req, res) => {
 };
 
 module.exports.insertProduct = async (req, res) => {
-    const { nom, description, prix, photo, nb_restant } = req.body;
-
     try {
-        const product = await ProductModel.create({
-            nom,
-            description,
-            prix,
-            photo,
-            nb_restant,
-        });
-        res.header("Access-Control-Allow-Origin", "*");
+        if (
+            req.file.detectedMimeType !== "image/jpg" &&
+            req.file.detectedMimeType !== "image/png" &&
+            req.file.detectedMimeType !== "image/jpeg"
+        )
+            throw Error("invalid file");
 
-        res.status(201).json({ product: product._id });
+        if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
-        res.status(200).send({
+        const errors = uploadErrors(err);
+        console.log(err);
+        return res.status(400).json(errors);
+    }
+
+    const fileName = req.body.nom + ".jpg";
+    await pipeline(
+        req.file.stream,
+        fs.createWriteStream(
+            `${__dirname}/../client/public/uploads/product/${fileName}`
+        )
+    );
+    const newProduct = new ProductModel({
+        nom: req.body.nom,
+        description: req.body.description,
+        prix: req.body.prix,
+        nb_restant: req.body.nb_restant,
+        productProfil: "./uploads/product/" + fileName,
+    });
+    try {
+        const product = await newProduct.save();
+        return res.status(201).json(product);
+    } catch (err) {
+        console.log(err);
+        return res.status(200).send({
             err: "insertProduct failed : nom doit être unique",
         });
     }
@@ -65,14 +88,11 @@ module.exports.updateProduct = async (req, res) => {
                     nom: req.body.nom,
                     description: req.body.description,
                     prix: req.body.prix,
-                    photo: req.body.photo,
                     nb_restant: req.body.nb_restant,
                 },
             },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
-                res.header("Access-Control-Allow-Origin", "*");
-
                 if (!err) return res.send(docs);
                 if (err) return res.status(500).send({ message: err });
             }
