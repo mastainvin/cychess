@@ -2,6 +2,9 @@ import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
+export const UPDATE_USER = "UPDATE_USER";
+export const PARTICIPATE = "PARTICIPATE";
+export const UNPARTICIPATE = "UNPARTICIPATE";
 
 export const getUser = (uid) => {
     return (dispatch) => {
@@ -30,6 +33,51 @@ export const uploadPicture = (data, id) => {
                             payload: res.data.picture,
                         });
                     });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
+export const updateUser = (userId, data) => {
+    return (dispatch) => {
+        return axios({
+            method: "put",
+            url: `${process.env.REACT_APP_API_URL}api/user/` + userId,
+            data: data,
+        })
+            .then((res) => {
+                dispatch({
+                    type: UPDATE_USER,
+                    payload: data,
+                });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
+export const participate = (userId, eventId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/event/participate/${eventId}`,
+            data: { id: userId },
+        })
+            .then((res) => {
+                dispatch({ type: PARTICIPATE, payload: { eventId } });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
+export const unparticipate = (userId, eventId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/event/unparticipate/${eventId}`,
+            data: { id: userId },
+        })
+            .then((res) => {
+                dispatch({ type: UNPARTICIPATE, payload: { eventId } });
             })
             .catch((err) => console.log(err));
     };
