@@ -28,7 +28,13 @@ module.exports.updateUser = async (req, res) => {
             { _id: req.params.id },
             {
                 $set: {
-                    bio: req.body.bio, 
+                    bio: req.body.bio,
+                    dateDeNaissance: req.body.dateDeNaissance,
+                    sexe: req.body.sexe,
+                    prenom: req.body.prenom,
+                    nom: req.body.nom,
+                    residence: req.body.residence,
+                    roleEventuel: req.body.roleEventuel,
                 },
             },
             { new: true, upsert: true, setDefaultsOnInsert: true },
@@ -64,9 +70,9 @@ module.exports.addProductPanier = async (req, res) => {
     try {
         await UserModel.findByIdAndUpdate(
             req.params.id,
-                {
-                    $addToSet: { panier: req.body.panier },
-                },
+            {
+                $addToSet: { panier: req.body.panier },
+            },
 
             { new: true },
             (err, docs) => {

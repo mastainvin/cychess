@@ -1,5 +1,6 @@
 import {
     GET_USER,
+    UPDATE_USER,
     PARTICIPATE,
     UNPARTICIPATE,
     UPLOAD_PICTURE,
@@ -16,6 +17,9 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 picture: action.payload,
             };
+        case UPDATE_USER:
+            return state;
+
         case PARTICIPATE:
             return {
                 ...state,
