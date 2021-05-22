@@ -6,6 +6,7 @@ import productReducer from "./product.reducer";
 import postReducer from './post.reducer';
 
 
+
 export default combineReducers({
     userReducer,
     usersReducer,

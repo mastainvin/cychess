@@ -2,9 +2,11 @@ import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
+export const DELETE_USER = "DELETE_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const PARTICIPATE = "PARTICIPATE";
 export const UNPARTICIPATE = "UNPARTICIPATE";
+
 
 export const getUser = (uid) => {
     return (dispatch) => {
@@ -37,6 +39,19 @@ export const uploadPicture = (data, id) => {
             .catch((err) => console.log(err));
     };
 };
+
+
+export const deleteUser = (id) => {
+    return (dispatch) => {
+        return axios
+            .delete(`${process.env.REACT_APP_API_URL}api/user/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_USER, payload: res.data });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
 
 export const updateUser = (userId, data) => {
     return (dispatch) => {
@@ -82,3 +97,4 @@ export const unparticipate = (userId, eventId) => {
             .catch((err) => console.log(err));
     };
 };
+

@@ -1,0 +1,31 @@
+.user-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.user-infos {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 60%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.user-infos > * {
+    flex: 1 1 0;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.users-btn {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
