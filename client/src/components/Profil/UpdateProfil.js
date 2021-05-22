@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, updateUser } from "../../actions/user.actions";
 import UploadImg from "./UploadImg";
 import { isEmpty } from "../Utils";
+import "./profil.scss";
 
 const Updateprofil = ({ userData }) => {
     const [bio, setBio] = useState(userData.bio);
@@ -15,10 +16,7 @@ const Updateprofil = ({ userData }) => {
     const [nom, setNom] = useState(userData.nom);
     const [residence, setResidence] = useState(userData.residence);
     const [roleEventuel, setRoleEventuel] = useState(userData.roleEventuel);
-
     const [updateForm, setUpdateForm] = useState(false);
-    const [bioChange, setBioChange] = useState(false);
-    const [sexeChange, setSexeChange] = useState(false);
     const dispatch = useDispatch();
 
     const handleUpdate = async () => {
@@ -40,6 +38,12 @@ const Updateprofil = ({ userData }) => {
     return (
         <div className="profil-container">
             <h2> Profil de {userData.pseudonyme}</h2>
+            {userData.roleEventuel !== null && (
+                <div className="role">Role : {userData.roleEventuel}</div>
+            )}
+            {userData.roleEventuel === null && (
+                <div className="role">Role : admin</div>
+            )}
             <div className="update-container">
                 <div className="left-part">
                     <h4>Photo de profil</h4>
@@ -47,36 +51,40 @@ const Updateprofil = ({ userData }) => {
                     <UploadImg />
                 </div>
                 <div className="right-part">
-                    <h3>Bio</h3>
+                    <h3>Informations complémentaires :</h3>
                     {updateForm === false && (
                         <>
                             <p onClick={() => setUpdateForm(!updateForm)}>
+                                Bio : 
+                                <br />
                                 {userData.bio}
                             </p>
-                            <Button onClick={() => setUpdateForm(!updateForm)}>
-                                Modifier
-                            </Button>
                             <p onClick={() => setUpdateForm(!updateForm)}>
+                                Date de naissance : 
+                                <br />
                                 {userData.dateDeNaissance}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
+                                Genre : 
+                                <br />
                                 {userData.sexe}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
+                                Prénom : 
+                                <br />
                                 {userData.prenom}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
+                                Nom : 
+                                <br />
                                 {userData.nom}
                             </p>
                             <p onClick={() => setUpdateForm(!updateForm)}>
+                                Adresse :
+                                <br />
                                 {userData.residence}
                             </p>
-                            <Button
-                                onClick={
-                                    (() => setUpdateForm(!updateForm),
-                                    setSexeChange === !sexeChange)
-                                }
-                            >
+                            <Button className="custom-btn" onClick={() => setUpdateForm(!updateForm)}>
                                 Modifier
                             </Button>
                         </>
@@ -88,64 +96,6 @@ const Updateprofil = ({ userData }) => {
                                 defaultValue={userData.bio}
                                 onChange={(e) => setBio(e.target.value)}
                             ></textarea>
-                            <Button onClick={handleUpdate}>
-                                Valider modifications
-                            </Button>
-                            {/* <input
-                                type="date"
-                                name="born-date"
-                                defaultValue={userData.dateDeNaissance}
-                                onChange={(e) =>
-                                    setDateDeNaissance(e.target.value)
-                                }
-                            /> */}
-                            <textarea
-                                type="text"
-                                defaultValue={userData.sexe}
-                                onChange={(e) => setSexe(e.target.value)}
-                            ></textarea>
-                            <Button
-                                onClick={
-                                    (handleUpdate,
-                                    setSexeChange === !sexeChange)
-                                }
-                            >
-                                Valider modifications
-                            </Button>
-                            {/* <input
-                                type="text"
-                                defaultValue={userData.prenom} 
-                                onChange={(e) => setPrenom(e.target.value)}
-                            ></input>
-                            <input
-                                type="text"
-                                defaultValue={userData.nom}
-                                onChange={(e) => setNom(e.target.value)}
-                            ></input>
-                            <input
-                                type="text"
-                                defaultValue={userData.residence} 
-                                onChange={(e) => setResidence(e.target.value)}
-                            ></input>
-                            <Button onClick={handleUpdate}>
-                                Valider modifications
-                            </Button> */}
-                        </>
-                    )}
-                    {/* <h3>Informations supplémentaires</h3>
-                    {updateBorn === false && (
-                        <>
-                            <p onClick={() => setUpdateBorn(!updateBorn)}>
-                                {" "}
-                                Date de naissance :{userData.dateDeNaissance}
-                            </p>
-                            <Button onClick={() => setUpdateBorn(!updateBorn)}>
-                                Modifier date de naissance
-                            </Button>
-                        </>
-                    )} */}
-                    {/* {updateBorn && (
-                        <>
                             <input
                                 type="date"
                                 name="born-date"
@@ -154,75 +104,31 @@ const Updateprofil = ({ userData }) => {
                                     setDateDeNaissance(e.target.value)
                                 }
                             />
-                            <Button onClick={handleUpdate}>
+                            <textarea
+                                type="text"
+                                defaultValue={userData.sexe}
+                                onChange={(e) => setSexe(e.target.value)}
+                            ></textarea>
+                            <textarea
+                                type="text"
+                                defaultValue={userData.prenom} 
+                                onChange={(e) => setPrenom(e.target.value)}
+                            ></textarea>
+                            <textarea
+                                type="text"
+                                defaultValue={userData.nom}
+                                onChange={(e) => setNom(e.target.value)}
+                            ></textarea>
+                            <textarea
+                                type="text"
+                                defaultValue={userData.residence} 
+                                onChange={(e) => setResidence(e.target.value)}
+                            ></textarea>
+                            <Button className="custom-btn" onClick={handleUpdate}>
                                 Valider modifications
                             </Button>
                         </>
                     )}
-                    {updateGenre === false && (
-                        <>
-                            <p onClick={() => setUpdateGenre(!updateGenre)}>Genre: {userData.sexe}</p>
-                            <Button onClick={() => setUpdateGenre(!updateGenre)}>Modifier Genre</Button>
-                        </>
-                    )}
-                    {updateGenre && (
-                        <>
-                            <input
-                                type="text"
-                                defaultValue={userData.sexe} 
-                                onChange={(e) => setSexe(e.target.value)}
-                            ></input>
-                            <Button onClick={handleUpdate}>Valider modifications</Button>
-                        </>
-                    )}
-                    {updateFirstName === false && (
-                        <>
-                            <p onClick={() => setUpdateFirstName(!updateFirstName)}>Prénom: {userData.prenom}</p>
-                            <Button onClick={() => setUpdateFirstName(!updateFirstName)}>Modifier prénom</Button>
-                        </>
-                    )}
-                    {updateFirstName && (
-                        <>
-                            <input
-                                type="text"
-                                defaultValue={userData.prenom} 
-                                onChange={(e) => setPrenom(e.target.value)}
-                            ></input>
-                            <Button onClick={handleUpdate}>Valider modifications</Button>
-                        </>
-                    )}
-                    {updateName === false && (
-                        <>
-                            <p onClick={() => setUpdateName(!updateName)}>Nom: {userData.nom}</p>
-                            <Button onClick={() => setUpdateName(!updateName)}>Modifier nom</Button>
-                        </>
-                    )}
-                    {updateName && (
-                        <>
-                            <input
-                                type="text"
-                                defaultValue={userData.nom}
-                                onChange={(e) => setNom(e.target.value)}
-                            ></input>
-                            <Button onClick={handleUpdate}>Valider modifications</Button>
-                        </>
-                    )}
-                    {updateAdresse === false && (
-                        <>
-                            <p onClick={() => setUpdateAdresse(!updateAdresse)}>Adresse: {userData.residence}</p>
-                            <Button onClick={() => setUpdateAdresse(!updateAdresse)}>Modifier adresse</Button>
-                        </>
-                    )}
-                    {updateAdresse && (
-                        <>
-                            <input
-                                type="text"
-                                defaultValue={userData.residence} 
-                                onChange={(e) => setResidence(e.target.value)}
-                            ></input>
-                            <Button onClick={handleUpdate}>Valider modifications</Button>
-                        </>
-                    )} */}
                 </div>
             </div>
         </div>
