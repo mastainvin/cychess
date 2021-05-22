@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { deleteUser } from "../../actions/user.actions";
 import { getUsers } from "../../actions/users.actions";
 import DeleteModal from "./DeleteModal";
+import RoleHandler from "./RoleHandler";
 
 const ListElement = ({ user }) => {
     const [modal, setModal] = useState(false);
@@ -14,21 +15,28 @@ const ListElement = ({ user }) => {
         <ListGroupItem>
             <div className="user-row">
                 <div className="user-infos">
-                    <div className="user-info" style={{ width: "20%" }}>
+                    <div className="user-info">
                         <label>Nom</label>
                         <h4>{user.nom}</h4>
                     </div>
-                    <div className="user-info" style={{ width: "20%" }}>
+                    <div className="user-info">
                         <label>Prénom</label>
                         <h4>{user.prenom}</h4>
                     </div>
-                    <div className="user-info" style={{ width: "25%" }}>
+                    <div className="user-info">
                         <label>Email</label>
                         <h4>{user.email}</h4>
                     </div>
                 </div>
-                <div className="users-btn">
+                <div className="user-info">
+                    <label>Rôle</label>
+                    <RoleHandler user={user} />
+                </div>
+                <div className="user-info">
+                    <label>Statut</label>
                     <AdminHandler user={user} />
+                </div>
+                <div className="users-btn">
                     <Button
                         color="danger"
                         onClick={toggle}

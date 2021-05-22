@@ -27,12 +27,17 @@ module.exports.updateUser = async (req, res) => {
             {
                 $set: {
                     bio: req.body.bio,
+                    dateDeNaissance: req.body.dateDeNaissance,
+                    sexe: req.body.sexe,
+                    prenom: req.body.prenom,
+                    nom: req.body.nom,
+                    residence: req.body.residence,
+                    role: req.body.role,
+                    admin: req.body.admin,
                 },
             },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
-                res.header("Access-Control-Allow-Origin", "*");
-
                 if (!err) return res.send(docs);
                 if (err) return res.status(500).send({ message: err });
             }

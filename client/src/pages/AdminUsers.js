@@ -36,7 +36,12 @@ const AdminUsers = () => {
                             <ListGroup>
                                 {!isEmpty(usersData) &&
                                     usersData.map((user) => {
-                                        return <ListElement user={user} />;
+                                        return (
+                                            <ListElement
+                                                user={user}
+                                                key={user._id}
+                                            />
+                                        );
                                     })}
                             </ListGroup>
                         </div>
