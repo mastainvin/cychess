@@ -10,19 +10,18 @@ const createToken = function (id) {
 };
 
 module.exports.signUp = async (req, res) => {
-    const { pseudonyme, prenom, nom, email, password } = req.body;
+    const { pseudonyme, email, password } = req.body;
     res.header("Access-Control-Allow-Origin", "*");
     try {
         const user = await UserModel.create({
             pseudonyme,
-            prenom,
-            nom,
             email,
             password,
         });
 
         res.status(201).json({ user: user._id });
     } catch (err) {
+        console.log(err);
         const errors = signUpErrors(err);
         res.status(200).send({ errors });
     }

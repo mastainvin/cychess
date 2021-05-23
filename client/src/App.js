@@ -11,7 +11,7 @@ import { getUser } from "./actions/user.actions";
 function App() {
     
     const [uid, setUid] = useState(null);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch("");
 
     useEffect(() => {
         const fetchToken = async () => {

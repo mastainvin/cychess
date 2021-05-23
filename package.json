@@ -20,8 +20,10 @@
     "concurrently": "^6.0.2",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "dispatch": "^1.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "file-url": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "mdb": "^0.1.0",
     "mdb-ui-kit": "^3.6.0",
@@ -31,6 +33,7 @@
     "react-alert": "^7.0.3",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
+    "react-select": "^4.3.1",
     "validator": "^13.5.2"
   },
   "devDependencies": {
