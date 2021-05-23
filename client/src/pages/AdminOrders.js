@@ -3,19 +3,19 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { isAdmin, isEmpty } from "../components/Utils";
 import { Redirect } from "react-router";
 import Header from "../components/header";
-import { getProducts } from "../actions/product.actions";
+import { getOrders } from "../actions/order.actions";
 import { Button, ListGroup, ListGroupItem } from "reactstrap";
-import "./product-admin.scss";
+import "./order-admin.scss";
 
-import ProductModal from "../components/Product-admin/ProductModal";
-import ListElement from "../components/Product-admin/ListElement";
+import OrderModal from "../components/Order-admin/OrderModal";
+import ListElement from "../components/Order-admin/ListElement";
 
-const AdminShop = () => {
+const AdminOrders = () => {
     const userData = useSelector((state) => state.userReducer);
     const notAdmin = !isAdmin(userData);
-    const products = useSelector((state) => state.productReducer);
+    const orders = useSelector((state) => state.orderReducer);
     
-    const [loadProduct, setLoadProduct] = useState(true);
+    const [loadOrder, setLoadOrder] = useState(true);
     const dispatch = useDispatch();
 
     const [modal, setModal] = useState(false);
@@ -25,15 +25,15 @@ const AdminShop = () => {
     };
 
     useEffect(() => {
-        if (loadProduct) {
-            dispatch(getProducts());
-            setLoadProduct(false);
+        if (loadOrder) {
+            dispatch(getOrders());
+            setLoadOrder(false);
         }
-    }, [loadProduct, dispatch, products]);
+    }, [loadOrder, dispatch, orders]);
     return (
         <div className="container">
-            <ProductModal toggle={toggle} modal={modal} />
-            <Header title="Administration - Boutique" />
+            <OrderModal toggle={toggle} modal={modal} />
+            <Header title="Administration - Commandes" />
             {notAdmin ? (
                 <Redirect to="/" />
             ) : (
@@ -42,15 +42,15 @@ const AdminShop = () => {
                         <ListGroupItem>
                             <div className="list-row">
                                 <Button color="success" onClick={toggle}>
-                                    Ajouter un produit !
+                                    Ajouter une commandes !
                                 </Button>
                             </div>
                         </ListGroupItem>
-                        {!isEmpty(products) &&
-                            products.map((product) => (
+                        {!isEmpty(orders) &&
+                            orders.map((order) => (
                                 <ListElement
-                                    product={product}
-                                    key={product._id}
+                                    product={order}
+                                    key={order._id}
                                 />
                             ))}
                     </ListGroup>
@@ -60,4 +60,4 @@ const AdminShop = () => {
     );
 };
 
-export default AdminShop;
+export default AdminOrders;

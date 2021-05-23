@@ -8,6 +8,7 @@ import rootReducer from "./reducers";
 import { createStore, applyMiddleware } from "redux";
 import { getUsers } from "./actions/users.actions";
 
+
 //Dev tools
 import { composeWithDevTools } from "redux-devtools-extension";
 import logger from "redux-logger";
