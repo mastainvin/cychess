@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import HeaderImg from "../components/headerImg";
+import Footer from "../components/Footer";
 import { UidContext } from "../components/Routes/AppContext";
 import NewPostForm from "../components/Forum/NewPostForm";
 import Thread from "../components/Forum/Thread";
@@ -25,6 +26,7 @@ const Forum = () => {
                     <Thread />
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
