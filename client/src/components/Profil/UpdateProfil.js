@@ -40,12 +40,7 @@ const Updateprofil = ({ userData }) => {
     return (
         <div className="profil-container">
             <h2> Profil de {userData.pseudonyme}</h2>
-            {userData.roleEventuel !== null && (
-                <div className="role">Role : {userData.roleEventuel}</div>
-            )}
-            {userData.roleEventuel === null && (
-                <div className="role">Role : admin</div>
-            )}
+            <div className="role">Role : {roleEventuel}</div>
             <div className="update-container">
                 <div className="left-part">
                     <h4>Photo de profil</h4>

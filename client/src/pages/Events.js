@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEvents } from "../actions/event.actions";
 import Eventcard from "../components/Event/Card";
 import { isEmpty } from "../components/Utils";
-import Header from "../components/header";
+import HeaderImg from "../components/headerImg";
+import Footer from "../components/Footer";
 import "./events.scss";
 
 const Events = () => {
@@ -28,41 +29,44 @@ const Events = () => {
     }, [loadEvent, dispatch]);
 
     return (
-        <div className="events container">
-            <Header title="Nos Evénements" />
+        <>
+            <HeaderImg title="Evénements" />
 
-            {notConnected ? (
-                <Alert color="warning" style={{ width: "100%" }}>
-                    Attention ! Vous ne pouvez pas vous inscrire à un événement
-                    si vous n'êtes pas connecté.
-                </Alert>
-            ) : (
-                <Alert
-                    color="success"
-                    style={{ width: "100%" }}
-                    isOpen={visible}
-                    toggle={onDismiss}
-                >
-                    <h4>Informations</h4>
-                    <ul>
-                        <li>
-                            Si la participation à un événement est payante, le
-                            paiement se fera en mains propres le jour de
-                            l'événement.
-                        </li>
-                        <li>
-                            On peut s'inscrire jusqu'a 00:00 de la date d'un
-                            événement.
-                        </li>
-                    </ul>
-                </Alert>
-            )}
+            <div className="events container">
+                {notConnected ? (
+                    <Alert color="warning" style={{ width: "100%" }}>
+                        Attention ! Vous ne pouvez pas vous inscrire à un
+                        événement si vous n'êtes pas connecté.
+                    </Alert>
+                ) : (
+                    <Alert
+                        color="success"
+                        style={{ width: "100%" }}
+                        isOpen={visible}
+                        toggle={onDismiss}
+                    >
+                        <h4>Informations</h4>
+                        <ul>
+                            <li>
+                                Si la participation à un événement est payante,
+                                le paiement se fera en mains propres le jour de
+                                l'événement.
+                            </li>
+                            <li>
+                                On peut s'inscrire jusqu'a 00:00 de la date d'un
+                                événement.
+                            </li>
+                        </ul>
+                    </Alert>
+                )}
 
-            {!isEmpty(events[0]) &&
-                events.map((event) => {
-                    return <Eventcard event={event} key={event._id} />;
-                })}
-        </div>
+                {!isEmpty(events[0]) &&
+                    events.map((event) => {
+                        return <Eventcard event={event} key={event._id} />;
+                    })}
+            </div>
+            <Footer />
+        </>
     );
 };
 
