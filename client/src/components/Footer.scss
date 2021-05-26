@@ -1,8 +1,9 @@
 footer {
     width: 100%;
     height: fit-content;
-    margin-top: 100px;
     background-color: rgba(136, 155, 98, 0.707);
+    position: absolute;
+    bottom: 0;
 }
 .footer-content {
     display: flex;

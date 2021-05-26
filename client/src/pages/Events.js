@@ -15,11 +15,19 @@ const Events = () => {
     const [loadEvent, setLoadEvent] = useState(true);
     const dispatch = useDispatch();
     const events = useSelector((state) => state.eventReducer);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [inSearch, setInSearch] = useState(true);
     const userData = useSelector((state) => state.userReducer);
     const notConnected = !uid;
     const [visible, setVisible] = useState(true);
 
     const onDismiss = () => setVisible(false);
+
+    const handleSearchTerm = (e) => {
+        let value = e.target.value;
+        setSearchTerm(value);
+        setInSearch(true);
+    };
 
     useEffect(() => {
         if (loadEvent) {
@@ -29,44 +37,64 @@ const Events = () => {
     }, [loadEvent, dispatch]);
 
     return (
-        <>
+        <div className="content">
             <HeaderImg title="Evénements" />
 
-            <div className="events container">
-                {notConnected ? (
-                    <Alert color="warning" style={{ width: "100%" }}>
-                        Attention ! Vous ne pouvez pas vous inscrire à un
-                        événement si vous n'êtes pas connecté.
-                    </Alert>
-                ) : (
-                    <Alert
-                        color="success"
-                        style={{ width: "100%" }}
-                        isOpen={visible}
-                        toggle={onDismiss}
-                    >
-                        <h4>Informations</h4>
-                        <ul>
-                            <li>
-                                Si la participation à un événement est payante,
-                                le paiement se fera en mains propres le jour de
-                                l'événement.
-                            </li>
-                            <li>
-                                On peut s'inscrire jusqu'a 00:00 de la date d'un
-                                événement.
-                            </li>
-                        </ul>
-                    </Alert>
-                )}
+            <div className="container">
+                <div className="searchBar-container">
+                    <input
+                        type="text"
+                        name="searchBar"
+                        id="searchBar"
+                        onChange={handleSearchTerm}
+                        placeholder="Rechercher"
+                    />
+                </div>
 
-                {!isEmpty(events[0]) &&
-                    events.map((event) => {
-                        return <Eventcard event={event} key={event._id} />;
-                    })}
+                <div className="events">
+                    {notConnected ? (
+                        <Alert color="warning" style={{ width: "100%" }}>
+                            Attention ! Vous ne pouvez pas vous inscrire à un
+                            événement si vous n'êtes pas connecté.
+                        </Alert>
+                    ) : (
+                        <Alert
+                            color="success"
+                            style={{ width: "100%" }}
+                            isOpen={visible}
+                            toggle={onDismiss}
+                        >
+                            <h4>Informations</h4>
+                            <ul>
+                                <li>
+                                    Si la participation à un événement est
+                                    payante, le paiement se fera en mains
+                                    propres le jour de l'événement.
+                                </li>
+                                <li>
+                                    On peut s'inscrire jusqu'a 00:00 de la date
+                                    d'un événement.
+                                </li>
+                            </ul>
+                        </Alert>
+                    )}
+
+                    {!isEmpty(events[0]) &&
+                        events
+                            .filter((val) => {
+                                return val.nom
+                                    .toLowerCase()
+                                    .includes(searchTerm.toLowerCase());
+                            })
+                            .map((event) => {
+                                return (
+                                    <Eventcard event={event} key={event._id} />
+                                );
+                            })}
+                </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 };
 

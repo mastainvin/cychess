@@ -15,8 +15,7 @@ import AdminEvents from "../../pages/AdminEvents";
 import AdminUsers from "../../pages/AdminUsers";
 import AdminOrders from "../../pages/AdminOrders";
 import Forum from "../../pages/Forum";
-
-
+import Search from "../../pages/search";
 const index = () => {
     return (
         <Router>
@@ -31,6 +30,7 @@ const index = () => {
                 <Route path="/events-admin" exact component={AdminEvents} />
                 <Route path="/users-admin" exact component={AdminUsers} />
                 <Route path="/forum" exact component={Forum} />
+                <Route path="/search" exact component={Search} />
                 <Redirect to="/" />
             </Switch>
         </Router>

@@ -2,16 +2,36 @@ $color-1: rgb(54, 192, 30);
 $color-2: rgb(109, 157, 64);
 $color-4: #efffe9;
 
-$font-1: "font-1",
-sans-serif;
-$font-2: "font-2",
-serif;
-$font-3: "font-3",
-serif;
+$font-1: "font-1", sans-serif;
+$font-2: "font-2", serif;
+$font-3: "font-3", serif;
 
 $black: rgb(40, 40, 40);
 $white: rgb(253, 253, 253);
 $shadow: rgb(219, 218, 218);
+
+
+#searchBar {
+    height: 35px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+    border: none;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.searchBar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.home {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 175px;
+}
 
 .card-container * {
 
@@ -48,8 +68,6 @@ $shadow: rgb(219, 218, 218);
             border-radius: 20px;
             box-shadow: 1px 1px 3px rgba(51, 51, 51, 0.192);
             object-fit: cover;
-
-
         }
 
         @media screen and(max-width: 590px) {
@@ -87,7 +105,6 @@ $shadow: rgb(219, 218, 218);
                 align-items: baseline;
                 display: flex;
 
-
                 @media screen and(max-width: 590px) {
                     margin-left: 52px;
                 }
@@ -121,7 +138,6 @@ $shadow: rgb(219, 218, 218);
 
             span {
                 font-style: italic;
-
 
                 @media screen and(max-width: 440px) {
                     transform: translate(52px, -20px);
@@ -236,7 +252,6 @@ $shadow: rgb(219, 218, 218);
                         margin-left: 15px;
                         font-size: 70%;
                     }
-
                 }
 
                 span {
@@ -250,7 +265,6 @@ $shadow: rgb(219, 218, 218);
             }
 
             .edit-comment {
-
                 img {
                     float: right;
                     margin-left: 10px;
@@ -296,7 +310,6 @@ $shadow: rgb(219, 218, 218);
                         cursor: pointer;
                         transition: 0.2s;
                         display: inline-block;
-
 
                         &:hover {
                             transform: scale(1.05);
@@ -488,9 +501,7 @@ $shadow: rgb(219, 218, 218);
             padding: 12px 15px;
             border-radius: 20px 20px 6px 20px;
             background: $color-4;
-
         }
-
 
         .card-container {
             background: $white;
