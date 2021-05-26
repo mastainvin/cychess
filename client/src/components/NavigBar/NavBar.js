@@ -98,17 +98,6 @@ const NavBar = () => {
                                     Evénements
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
-                                <NavLink
-                                    href="/search"
-                                    className="navlink"
-                                    activeClassName="active"
-                                    tag={RRNavLink}
-                                    to="/search"
-                                >
-                                    Rechercher
-                                </NavLink>
-                            </NavItem>
                             {userAdmin ? (
                                 <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle caret color="white">
