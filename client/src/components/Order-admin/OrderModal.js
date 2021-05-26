@@ -1,65 +1,49 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { addProduct, getProducts } from "../../actions/product.actions";
+import {  addOrder, getOrders } from "../../actions/order.actions";
 import "./modal.scss";
 
-const ProductModal = ({ modal, toggle }) => {
+const OrderModal = ({ modal, toggle }) => {
     const [nom, setNom] = useState("");
-    const [desc, setDesc] = useState("");
+    const [status, setstatus] = useState("");
     const [prix, setPrix] = useState(10);
-    const [nb_restant, setnb_restant] = useState(20);
-    const [image, setImage] = useState(null);
+    const [nb_taken, setnb_taken] = useState(20);
     
     const dispatch = useDispatch();
-    
-    
-    
-
 
     const handleNewEvent = async (event) => {
         event.preventDefault();
 
         const data = new FormData();
         data.append("nom", nom);
-        data.append("description", desc);
+        data.append("status", status);
         data.append("prix", prix);
-        data.append("nb_restant", nb_restant);
-        data.append("file", image);
-    
-        await dispatch(addProduct(data));
-        dispatch(getProducts());
-        clearForm();
+        data.append("nb_taken", nb_taken);
+        
+
+        await dispatch(addOrder(data));
+        dispatch(getOrders());
+        
         toggle();
     };
 
-    const handleImage = (e) => {
-        setImage(e.target.files[0]);
-    };
-
-    const clearForm = () => {
-        setNom("");
-        setDesc("");
-        setPrix(20);
-        setnb_restant(20);
-        setImage(null);
-    };
     return (
         <div>
             <Modal
                 isOpen={modal}
                 toggle={() => {
                     toggle();
-                    clearForm();
+                    
                 }}
             >
                 <ModalHeader
                     toggle={() => {
                         toggle();
-                        clearForm();
+                        
                     }}
                 >
-                    Nouveau produit
+                    Nouvelle Commande
                 </ModalHeader>
                 <form onSubmit={handleNewEvent}>
                     <ModalBody className="event-form">
@@ -73,13 +57,13 @@ const ProductModal = ({ modal, toggle }) => {
                             required
                         ></input>
                         <br />
-                        <label htmlFor="desc">Description</label>
+                        <label htmlFor="status">Status</label>
                         <textarea
                             type="text"
-                            name="desc"
-                            id="desc"
-                            onChange={(e) => setDesc(e.target.value)}
-                            value={desc}
+                            name="status"
+                            id="status"
+                            onChange={(e) => setstatus(e.target.value)}
+                            value={status}
                             required
                         ></textarea>
                         <br />
@@ -94,44 +78,28 @@ const ProductModal = ({ modal, toggle }) => {
                         ></input>
                         <br />
                         <label htmlFor="maxParticipants">
-                            Nombre de produits disponibles
+                            Nombre de produits pris
                         </label>
                         <input
                             type="number"
                             name="maxParticipants"
                             id="maxParticipants"
-                            onChange={(e) => setnb_restant(e.target.value)}
-                            value={nb_restant}
+                            onChange={(e) => setnb_taken(e.target.value)}
+                            value={nb_taken}
                             required
                         ></input>
                         <br />
-                        <label htmlFor="image">Image</label>
-                        <input
-                            id="image"
-                            type="file"
-                            accept=".jpg, .jpeg, .png"
-                            onChange={(e) => handleImage(e)}
-                            required
-                        />
+                       
                     </ModalBody>
-                    <ModalFooter>
-                        <Button color="success" type="submit">
-                            Ajouter
-                        </Button>{" "}
-                        <Button
-                            color="secondary"
-                            onClick={() => {
-                                toggle();
-                                clearForm();
-                            }}
-                        >
-                            Retour
-                        </Button>
-                    </ModalFooter>
+                    
                 </form>
             </Modal>
         </div>
     );
+    
+
+
+    
 };
 
-export default ProductModal;
+export default OrderModal;

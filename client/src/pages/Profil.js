@@ -22,9 +22,10 @@ const Profil = () => {
             {uid ? (
                 <>
                     {!userInLoad ? (
-                        <Updateprofil userData={userData}>
+                        <>
                             <Header title="Votre profil" />
-                        </Updateprofil>
+                            <Updateprofil userData={userData} />
+                        </>
                     ) : (
                         <Spinner size="lg" color="success" />
                     )}
