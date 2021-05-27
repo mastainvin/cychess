@@ -82,6 +82,13 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
+
+        userPanier: {
+            type: [String],
+            required: true
+
+
+        },
     },
     {
         timestamps: true,

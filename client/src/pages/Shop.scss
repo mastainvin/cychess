@@ -1,7 +1,4 @@
-.produits img{
-    width: 40%;
-    
-  }
+
   
   .produit{
     padding: 40px;
@@ -19,9 +16,37 @@
     padding-top: 20px;
     
   }
-  
-  .produits 
-  {
-      display : grid;
-      grid-template-columns: 1fr 1fr;
+
+  .produits {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+    height: max-content;
   }
+  
+  .produitcard {
+    max-width: 350px;
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    flex-basis: 70%;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.Card {
+    min-height: 100%;
+}
+.produitCardText {
+    margin-bottom: 50px;
+}
+.cardBody {
+    position: relative;
+}
+.produitButton {
+  position: absolute;
+  
+  margin-bottom: 20px;
+  bottom: 0;
+}
+  
