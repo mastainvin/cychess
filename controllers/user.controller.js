@@ -66,18 +66,47 @@ module.exports.AddProduitPanier = async (req, res) => {
             req.params.id,
             {
                 $push: {
-                    
-                    userPanier:   req.body.produitPanier , 
-                        
-                    
+                    userPanier: req.body.produitPanier,
                 },
             },
             { new: true },
             (err, docs) => {
-                res.header("Access-Control-Allow-Origin", "*");
-
                 if (!err) return res.send(docs);
                 else return res.status(400).send(err);
+            }
+        );
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+};
+
+module.exports.RemoveProductPanier = (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown : " + req.params.id);
+
+    const elementToDelete = `userPanier.${req.body.productKey}`;
+    try {
+        UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $unset: {
+                    [elementToDelete]: 1,
+                },
+            },
+            (err, docs) => {
+                if (err) return res.status(400).send(err);
+            }
+        );
+        UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull: {
+                    userPanier: null,
+                },
+            },
+            { multi: true },
+            (err, docs) => {
+                if (!err) return res.status(200).send(docs);
             }
         );
     } catch (err) {

@@ -4,7 +4,6 @@ import {
     GET_PRODUCTS,
     MODIFY_PRODUCT,
     MODIFY_IMG_PRODUCT,
-  
 } from "../actions/product.actions";
 
 const initialState = {};
@@ -19,7 +18,6 @@ export default function productReducer(state = initialState, action) {
             return state;
         case MODIFY_PRODUCT:
             return state;
-       
         case MODIFY_IMG_PRODUCT:
             return state;
         default:

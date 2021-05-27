@@ -2,8 +2,8 @@ import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
-export const PANIER_PRODUCT = "PANIER_PRODUCT"
-
+export const PANIER_PRODUCT = "PANIER_PRODUCT";
+export const PANIER_DELETE_PRODUCT = "PANIER_DELETE_PRODUCT";
 
 export const getUser = (uid) => {
     return (dispatch) => {
@@ -37,20 +37,33 @@ export const uploadPicture = (data, id) => {
     };
 };
 
-export const AjoutPanier = ( productId , userId ) => {
+export const AjoutPanier = (productId, userId) => {
     return (dispatch) => {
         return axios({
-            method : 'patch',
-            url : `${process.env.REACT_APP_API_URL}api/user/${userId}` ,
-            data : { produitPanier : productId}
-
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/user/${userId}`,
+            data: { produitPanier: productId },
         })
-         
-         .then((res) =>{
-             dispatch({type : PANIER_PRODUCT , payload : {productId}});
-         })
-         .catch ((err) => console.log(err));
-    }
-    
-}
+            .then((res) => {
+                dispatch({ type: PANIER_PRODUCT, payload: { productId } });
+            })
+            .catch((err) => console.log(err));
+    };
+};
 
+export const EnleverPanier = (productKey, userId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/user/deleteCartItem/${userId}`,
+            data: { productKey: productKey },
+        })
+            .then((res) => {
+                dispatch({
+                    type: PANIER_DELETE_PRODUCT,
+                    payload: { productKey },
+                });
+            })
+            .catch((err) => console.log(err));
+    };
+};

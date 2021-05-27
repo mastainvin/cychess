@@ -6,7 +6,6 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const MODIFY_PRODUCT = "MODIFY_PRODUCT";
 export const MODIFY_IMG_PRODUCT = "MODIFY_IMG_PRODUCT";
 
-
 export const getProducts = () => {
     return (dispatch) => {
         return axios
@@ -72,5 +71,3 @@ export const modifyImgProduct = (data) => {
             .catch((err) => console.log(err));
     };
 };
-
- 
