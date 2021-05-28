@@ -65,13 +65,14 @@ const NavBar = () => {
                                     Profil
                                 </NavLink>
                             </NavItem>
+
                             <NavItem>
                                 <NavLink
-                                    href=""
+                                    href="/shop"
                                     className="navlink"
                                     activeClassName="active"
                                     tag={RRNavLink}
-                                    to="/boutique"
+                                    to="/shop"
                                 >
                                     Boutique
                                 </NavLink>

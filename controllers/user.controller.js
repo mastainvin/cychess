@@ -61,7 +61,7 @@ module.exports.deleteUser = async (req, res) => {
     }
 };
 
-module.exports.addProductPanier = async (req, res) => {
+module.exports.AddProduitPanier = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id);
 
@@ -78,6 +78,40 @@ module.exports.addProductPanier = async (req, res) => {
 
                 if (!err) return res.send(docs);
                 else return res.status(400).send(err);
+            }
+        );
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+};
+
+module.exports.RemoveProductPanier = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown : " + req.params.id);
+
+    const elementToDelete = `userPanier.${req.body.productKey}`;
+    try {
+        await UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $unset: {
+                    [elementToDelete]: 1,
+                },
+            },
+            (err, docs) => {
+                if (err) return res.status(400).send(err);
+            }
+        );
+        await UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $pull: {
+                    userPanier: null,
+                },
+            },
+            { safe: true },
+            (err, docs) => {
+                if (!err) return res.status(200).send(docs);
             }
         );
     } catch (err) {
