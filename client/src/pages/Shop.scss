@@ -72,13 +72,13 @@
     bottom: 0;
 }
 
-.items {
+.itemsCart {
     display: flex;
     flex-wrap: wrap;
     flex-flow: row wrap;
     justify-content: center;
 }
-.item {
+.itemCart {
     width: 250px;
     border: none;
     margin: 10px;
@@ -86,11 +86,9 @@
     img {
         max-height: 150px;
     }
-    CardBody {
-        border: solid 1px black;
-    }
-    .content {
+    .contentItem {
         float: left;
+        max-height: 160px;
     }
     Button {
         float: right;

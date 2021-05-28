@@ -1,5 +1,4 @@
-.slider{
-    border : 1px solid red;
+.slider {
     position: relative;
     width: 100%;
     height: 100vh;
@@ -10,57 +9,41 @@
     align-items: center;
     overflow: hidden;
     background: black;
-  
-  
-  }
-  
-  
-  .slide{
+}
+
+.slide {
     position: relative;
     min-width: 100%;
     height: 80%;
     transition: 0.5s;
-  
-  }
-  
-  %btn-styles{
+}
+
+%btn-styles {
     position: absolute;
-    top : 50%;
-    
+    top: 50%;
+
     transform: translateY(-50%);
     width: 10%;
     height: 80%;
     background: none;
-    border : none;
+    border: none;
     outline: none;
     transition: 0.5s;
     &hover {
-      background: rgba(255,255,255,1);
+        background: rgba(255, 255, 255, 1);
     }
-  
-  }
-  
-  #goLeft{
-  
-    left:0;
+}
+
+#goLeft {
+    left: 0;
     @extend %btn-styles;
-    
-  
-  
-    
-  }
-  
-  #goRight{
-  
-    right: 0 ;
+}
+
+#goRight {
+    right: 0;
     @extend %btn-styles;
-  
-  
-  }
-   img{
-     width: 100%;
-     height: 100%;
-     
-   }
-  
-  
+}
+img {
+    width: 100%;
+    height: 100%;
+}

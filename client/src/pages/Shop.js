@@ -20,10 +20,10 @@ import {
     Button,
 } from "reactstrap";
 import Header from "./../components/header";
-
+import HeaderImg from "./../components/headerImg";
+import Footer from "./../components/Footer";
 import "./product-admin.scss";
-import axios from "axios";
-import { AjoutPanier, EnleverPanier, getUser } from "../actions/user.actions";
+import { AjoutPanier } from "../actions/user.actions";
 import Panier from "../components/Shop/Panier";
 
 const PAGE_PRODUITS = "produits";
@@ -40,7 +40,14 @@ function Shop() {
     const [loadProduct, setLoadProduct] = useState(true);
     const dispatch = useDispatch();
     const [page, setPage] = useState("produits");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [inSearch, setInSearch] = useState(true);
 
+    const handleSearchTerm = (e) => {
+        let value = e.target.value;
+        setSearchTerm(value);
+        setInSearch(true);
+    };
     const navigateTo = (nextPage) => {
         setPage(nextPage);
     };
@@ -51,43 +58,58 @@ function Shop() {
     const renderProduits = () => (
         <div className="container">
             <Header title="Nos produits" />
+            <div className="searchBar-container">
+                <input
+                    type="text"
+                    name="searchBar"
+                    id="searchBar"
+                    onChange={handleSearchTerm}
+                    placeholder="Rechercher"
+                />
+            </div>
             <div className="produits">
                 {!isEmpty(produits[0]) &&
-                    produits.map((produit, idx) => (
-                        <div className="produitcard">
-                            <Card className="Card">
-                                <CardImg
-                                    top
-                                    width="100%"
-                                    src={produit.productProfil}
-                                    alt="Card image cap"
-                                />
-                                <CardBody className="cardBody">
-                                    <CardTitle tag="h5">
-                                        {produit.nom}
-                                    </CardTitle>
-                                    <CardSubtitle
-                                        tag="h6"
-                                        className="mb-2 text-muted"
-                                    >
-                                        {produit.prix}
-                                    </CardSubtitle>
-                                    <CardText className="produitCardText">
-                                        {produit.description}
-                                    </CardText>
-                                    <Button
-                                        className="produitButton"
-                                        color="success"
-                                        onClick={() => {
-                                            ajoutDeCarte(produit);
-                                        }}
-                                    >
-                                        Ajouter au panier
-                                    </Button>
-                                </CardBody>
-                            </Card>
-                        </div>
-                    ))}
+                    produits
+                        .filter((val) => {
+                            return val.nom
+                                .toLowerCase()
+                                .includes(searchTerm.toLowerCase());
+                        })
+                        .map((produit, idx) => (
+                            <div className="produitcard">
+                                <Card className="Card">
+                                    <CardImg
+                                        top
+                                        width="100%"
+                                        src={produit.productProfil}
+                                        alt="Card image cap"
+                                    />
+                                    <CardBody className="cardBody">
+                                        <CardTitle tag="h5">
+                                            {produit.nom}
+                                        </CardTitle>
+                                        <CardSubtitle
+                                            tag="h6"
+                                            className="mb-2 text-muted"
+                                        >
+                                            {produit.prix}
+                                        </CardSubtitle>
+                                        <CardText className="produitCardText">
+                                            {produit.description}
+                                        </CardText>
+                                        <Button
+                                            className="produitButton"
+                                            color="success"
+                                            onClick={() => {
+                                                ajoutDeCarte(produit);
+                                            }}
+                                        >
+                                            Ajouter au panier
+                                        </Button>
+                                    </CardBody>
+                                </Card>
+                            </div>
+                        ))}
             </div>
         </div>
     );
@@ -100,7 +122,8 @@ function Shop() {
     }, [loadProduct, dispatch]);
 
     return (
-        <div>
+        <div className="content">
+            <HeaderImg title="Boutique" />
             <div className="shop-header container">
                 <div className="shop-btn">
                     <button
@@ -129,6 +152,7 @@ function Shop() {
             {page === PAGE_CARTE && (
                 <Panier userData={userData} products={produits} />
             )}
+            <Footer />
         </div>
     );
 }

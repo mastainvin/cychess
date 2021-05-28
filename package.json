@@ -13,15 +13,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "@chec/commerce.js": "^2.6.0",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "@reduxjs/toolkit": "^1.5.1",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.0",
-=======
-    "@reduxjs/toolkit": "^1.5.1",
->>>>>>> master
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
@@ -38,12 +35,12 @@
     "mongoose": "^5.12.5",
     "multer": "^2.0.0-rc.1",
     "nodemon": "^2.0.7",
-    "react-hook-form": "^7.6.5",
-    "react-router-dom": "^5.2.0",
-    "reactjs-popup": "^2.0.4",
     "react-alert": "^7.0.3",
+    "react-hook-form": "^7.6.5",
     "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-select": "^4.3.1",
+    "reactjs-popup": "^2.0.4",
     "redux": "^4.1.0",
     "redux-devtools": "^3.7.0",
     "validator": "^13.5.2"

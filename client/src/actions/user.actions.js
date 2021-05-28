@@ -9,7 +9,6 @@ export const UPDATE_USER = "UPDATE_USER";
 export const PARTICIPATE = "PARTICIPATE";
 export const UNPARTICIPATE = "UNPARTICIPATE";
 
-
 export const getUser = (uid) => {
     return (dispatch) => {
         return axios
@@ -48,10 +47,11 @@ export const AjoutPanier = (productId, userId) => {
             method: "patch",
             url: `${process.env.REACT_APP_API_URL}api/user/${userId}`,
             data: { produitPanier: productId },
-        })
-            .then((res) => {
-                dispatch({ type: PANIER_PRODUCT, payload: { productId } });
-
+        }).then((res) => {
+            dispatch({ type: PANIER_PRODUCT, payload: { productId } });
+        });
+    };
+};
 export const deleteUser = (id) => {
     return (dispatch) => {
         return axios
@@ -62,7 +62,6 @@ export const deleteUser = (id) => {
             .catch((err) => console.log(err));
     };
 };
-
 
 export const updateUser = (userId, data) => {
     return (dispatch) => {
@@ -95,20 +94,20 @@ export const participate = (userId, eventId) => {
     };
 };
 
-<<<<<<< HEAD
 export const EnleverPanier = (productKey, userId) => {
     return (dispatch) => {
         return axios({
             method: "patch",
             url: `${process.env.REACT_APP_API_URL}api/user/deleteCartItem/${userId}`,
             data: { productKey: productKey },
-        })
-            .then((res) => {
-                dispatch({
-                    type: PANIER_DELETE_PRODUCT,
-                    payload: { productKey },
-                });
-=======
+        }).then((res) => {
+            dispatch({
+                type: PANIER_DELETE_PRODUCT,
+                payload: { productKey },
+            });
+        });
+    };
+};
 export const unparticipate = (userId, eventId) => {
     return (dispatch) => {
         return axios({
@@ -118,12 +117,7 @@ export const unparticipate = (userId, eventId) => {
         })
             .then((res) => {
                 dispatch({ type: UNPARTICIPATE, payload: { eventId } });
->>>>>>> master
             })
             .catch((err) => console.log(err));
     };
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> master
