@@ -143,6 +143,14 @@ const NavBar = () => {
                                         >
                                             Utilisateurs
                                         </DropdownItem>
+                                        <DropdownItem
+                                            href="/Orders-admin"
+                                            tag={RRNavLink}
+                                            to="/Orders-admin"
+                                            className="admin-link"
+                                        >
+                                            Commandes
+                                        </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
                             ) : (

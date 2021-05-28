@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import "./index.css";
+import "./style.scss";
 import axios from "axios";
 import "./SignInForm";
+import loginImg from "../../images/login.svg";
 
 const SignUpForm = () => {
     const [formSubmit, setFormSubmit] = useState(false);
-    const [pseudo, setPseudo] = useState("");
+    const [pseudonyme, setPseudonyme] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [controlPassword, setControlPassword] = useState("");
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        const pseudoError = document.querySelector(".pesudo.error");
+        const pseudonymeError = document.querySelector(".pseudonyme.error");
         const emailError = document.querySelector(".email.error");
         const passwordError = document.querySelector(".password.error");
         const passwordConfirmError = document.querySelector(
@@ -25,16 +26,17 @@ const SignUpForm = () => {
         } else {
             await axios({
                 method: "post",
-                url: "${process.env.REACT_APP_API_URL}api/user/register",
+                url: `${process.env.REACT_APP_API_URL}api/user/register`,
                 data: {
-                    pseudo,
+                    pseudonyme,
                     email,
                     password,
                 },
             })
                 .then((res) => {
+                    console.log(res);
                     if (res.data.errors) {
-                        pseudoError.innerHTML = res.data.errors.pseudo;
+                        pseudonymeError.innerHTML = res.data.errors.pseudonyme;
                         emailError.innerHTML = res.data.errors.email;
                         passwordError.innerHTML = res.data.errors.password;
                     } else {
@@ -56,54 +58,86 @@ const SignUpForm = () => {
                     </h4>
                 </>
             ) : (
-                <form action="" onSubmit={handleRegister} id="sign-up-form">
-                    <label htmlFor="pseudo">Pseudo :</label>
-                    <br />
-                    <input
-                        type="text"
-                        name="peudo"
-                        id="pseudo"
-                        onChange={(e) => setPseudo(e.target.value)}
-                        value={pseudo}
-                    ></input>
-                    <div className="pseudo error"></div>
-                    <br />
-                    <label htmlFor="email">Email :</label>
-                    <br />
-                    <input
-                        type="text"
-                        name="email"
-                        id="email"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={email}
-                    ></input>
-                    <div className="email error"></div>
-                    <br />
-                    <label htmlFor="password">Mot de passe :</label>
-                    <br />
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                    ></input>
-                    <div className="password error"></div>
-                    <br />
-                    <label htmlFor="password-conf">
+                <div className="form-login">
+                    <div className="content">
+                        <div className="image">
+                            <img src={loginImg} />
+                        </div>
+                        <form
+                            action=""
+                            onSubmit={handleRegister}
+                            id="sign-up-form"
+                        >
+                            <div className="form-group">
+                                {/* <label htmlFor="pseudonyme">Pseudo :</label>
+                    <br /> */}
+                                <input
+                                    type="text"
+                                    name="peudo"
+                                    id="pseudonyme"
+                                    onChange={(e) =>
+                                        setPseudonyme(e.target.value)
+                                    }
+                                    value={pseudonyme}
+                                    placeholder="Pseudonyme"
+                                ></input>
+                            </div>
+                            <div className="pseudonyme error"></div>
+                            <div className="form-group">
+                                {/* <label htmlFor="email">Email :</label>
+                    <br /> */}
+                                <input
+                                    type="text"
+                                    name="email"
+                                    id="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                    placeholder="Email"
+                                ></input>
+                            </div>
+                            <div className="email error"></div>
+                            <div className="form-group">
+                                {/* <label htmlFor="password">Mot de passe :</label>
+                    <br /> */}
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    onChange={(e) =>
+                                        setPassword(e.target.value)
+                                    }
+                                    value={password}
+                                    placeholder="Mot de passe"
+                                ></input>
+                            </div>
+                            <div className="password error"></div>
+                            <div className="form-group">
+                                {/* <label htmlFor="password-conf">
                         Confirmer mot de passe :
                     </label>
-                    <br />
-                    <input
-                        type="password"
-                        name="password-conf"
-                        id="password-conf"
-                        onChange={(e) => setControlPassword(e.target.value)}
-                        value={controlPassword}
-                    ></input>
-                    <div className="password-confirm error"></div>
-                    <input type="submit" value="Valider inscription"></input>
-                </form>
+                    <br /> */}
+                                <input
+                                    type="password"
+                                    name="password-conf"
+                                    id="password-conf"
+                                    onChange={(e) =>
+                                        setControlPassword(e.target.value)
+                                    }
+                                    value={controlPassword}
+                                    placeholder="Répétez le mot de passe"
+                                ></input>
+                            </div>
+                            <div className="password-confirm error"></div>
+                            <div className="footer">
+                                <input
+                                    className="btn"
+                                    type="submit"
+                                    value="Valider inscription"
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </div>
             )}
         </>
     );

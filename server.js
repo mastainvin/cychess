@@ -14,23 +14,15 @@ const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 
 const app = express();
 
-let whitelist = ["http://localhost:3000", "http://localhost:5000"];
-let corsOptions = {
-    origin: (origin, callback) => {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
-        }
-    },
+var corsOptions = {
+    origin: "http://localhost:3000",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
     credentials: true,
+    optionsSuccessStatus: 200,
 };
-app.use(
-    cors({
-        origin: (origin, callback) => callback(null, true),
-        credentials: true,
-    })
-);
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -18,16 +18,8 @@ import AdminTreasury from "../../pages/AdminTreasury";
 import AdminShop from "../../pages/AdminShop";
 import AdminEvents from "../../pages/AdminEvents";
 import AdminUsers from "../../pages/AdminUsers";
-
-
-
-
-
-
-
-
-
-
+import AdminOrders from "../../pages/AdminOrders";
+import Forum from "../../pages/Forum";
 const index = () => {
     
        
@@ -44,10 +36,15 @@ const index = () => {
                 <Route path="/order" exact component={Order} />
 
                 <Route path="/treasury-admin" exact component={AdminTreasury} />
+                <Route path="/Orders-admin" exact component={AdminOrders} />
                 <Route path="/shop-admin" exact component={AdminShop} />
                 <Route path="/events-admin" exact component={AdminEvents} />
                 <Route path="/users-admin" exact component={AdminUsers} />
+<<<<<<< HEAD
 
+=======
+                <Route path="/forum" exact component={Forum} />
+>>>>>>> master
                 <Redirect to="/" />
             </Switch>
         </Router>

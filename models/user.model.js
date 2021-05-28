@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
 
         prenom: {
             type: String,
-            required: true,
+            required: false,
             minlength: 2,
             maxlength: 50,
             unique: false,
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
 
         nom: {
             type: String,
-            required: true,
+            required: false,
             minlength: 2,
             maxlength: 50,
             unique: false,
@@ -65,8 +65,9 @@ const userSchema = new mongoose.Schema(
             trim: true,
         },
 
-        roleEventuel: {
+        role: {
             type: String,
+            default: "Membre",
         },
 
         admin: {
@@ -88,6 +89,10 @@ const userSchema = new mongoose.Schema(
             required: true
 
 
+        },
+        events: {
+            type: [String],
+            required: true,
         },
     },
     {
