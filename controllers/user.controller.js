@@ -62,7 +62,7 @@ module.exports.AddProduitPanier = async (req, res) => {
         return res.status(400).send("ID unknown : " + req.params.id);
 
     try {
-        await UserModel.findByIdAndUpdate(
+        UserModel.findByIdAndUpdate(
             req.params.id,
             {
                 $push: {
@@ -80,13 +80,13 @@ module.exports.AddProduitPanier = async (req, res) => {
     }
 };
 
-module.exports.RemoveProductPanier = (req, res) => {
+module.exports.RemoveProductPanier = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id);
 
     const elementToDelete = `userPanier.${req.body.productKey}`;
     try {
-        UserModel.findByIdAndUpdate(
+        await UserModel.findByIdAndUpdate(
             req.params.id,
             {
                 $unset: {
@@ -97,14 +97,14 @@ module.exports.RemoveProductPanier = (req, res) => {
                 if (err) return res.status(400).send(err);
             }
         );
-        UserModel.findByIdAndUpdate(
+        await UserModel.findByIdAndUpdate(
             req.params.id,
             {
                 $pull: {
                     userPanier: null,
                 },
             },
-            { multi: true },
+            { safe: true },
             (err, docs) => {
                 if (!err) return res.status(200).send(docs);
             }

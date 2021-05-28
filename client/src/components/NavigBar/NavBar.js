@@ -68,18 +68,6 @@ const NavBar = () => {
 
                             <NavItem>
                                 <NavLink
-                                    href="/order"
-                                    className="navlink"
-                                    activeClassName="active"
-                                    tag={RRNavLink}
-                                    to="/order"
-                                >
-                                    Test
-                                </NavLink>
-                            </NavItem>
-
-                            <NavItem>
-                                <NavLink
                                     href="/shop"
                                     className="navlink"
                                     activeClassName="active"

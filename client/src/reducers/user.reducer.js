@@ -23,7 +23,12 @@ export default function userReducer(state = initialState, action) {
             };
 
         case PANIER_DELETE_PRODUCT:
-            return state;
+            return {
+                ...state,
+                userPanier: state.userPanier.filter(
+                    (val, index) => index !== action.payload.productKey
+                ),
+            };
         default:
             return state;
     }

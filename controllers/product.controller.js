@@ -16,8 +16,6 @@ module.exports.productInfo = (req, res) => {
         return res.status(400).send("product ID unknown : " + req.params.id);
 
     ProductModel.findById(req.params.id, (err, docs) => {
-        res.header("Access-Control-Allow-Origin", "*");
-
         if (!err) res.send(docs);
         else console.log("product ID unknown : " + err);
     });
