@@ -26,8 +26,15 @@ import "./product-admin.scss";
 import { AjoutPanier } from "../actions/user.actions";
 import Panier from "../components/Shop/Panier";
 
+
+import ProductModal from "../components/Product-admin/ProductModal";
+import ListElement from "../components/Product-admin/ListElement"
+import Valider from '../components/Valider';
+
+
 const PAGE_PRODUITS = "produits";
 const PAGE_CARTE = "carte";
+
 
 Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
@@ -121,6 +128,7 @@ function Shop() {
         }
     }, [loadProduct, dispatch]);
 
+
     return (
         <div className="content">
             <HeaderImg title="Boutique" />
@@ -153,6 +161,7 @@ function Shop() {
                 <Panier userData={userData} products={produits} />
             )}
             <Footer />
+
         </div>
     );
 }

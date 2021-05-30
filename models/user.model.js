@@ -90,9 +90,11 @@ const userSchema = new mongoose.Schema(
 
 
         },
+
         events: {
             type: [String],
             required: true,
+
         },
     },
     {

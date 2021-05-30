@@ -85,6 +85,7 @@ module.exports.AddProduitPanier = async (req, res) => {
     }
 };
 
+
 module.exports.RemoveProductPanier = async (req, res) => {
     if (!ObjectID.isValid(req.params.id))
         return res.status(400).send("ID unknown : " + req.params.id);
@@ -94,6 +95,21 @@ module.exports.RemoveProductPanier = async (req, res) => {
         await UserModel.findByIdAndUpdate(
             req.params.id,
             {
+
+                $push: {
+                    
+                    validPanier:   req.body.userPanier , 
+                        
+                    
+                },
+            },
+            { new: true },
+            (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
+                if (!err) return res.send(docs);
+                else return res.status(400).send(err);
+
                 $unset: {
                     [elementToDelete]: 1,
                 },
@@ -112,6 +128,7 @@ module.exports.RemoveProductPanier = async (req, res) => {
             { safe: true },
             (err, docs) => {
                 if (!err) return res.status(200).send(docs);
+
             }
         );
     } catch (err) {

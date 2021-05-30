@@ -3,6 +3,8 @@ import axios from "axios";
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const PANIER_PRODUCT = "PANIER_PRODUCT";
+
+export const VALID_PANIER = "VALID_PANIER";
 export const PANIER_DELETE_PRODUCT = "PANIER_DELETE_PRODUCT";
 export const DELETE_USER = "DELETE_USER";
 export const UPDATE_USER = "UPDATE_USER";
@@ -94,6 +96,25 @@ export const participate = (userId, eventId) => {
     };
 };
 
+
+export const ValiderPanier = ( userPanier , userId ) => {
+    return (dispatch) => {
+        return axios({
+            method : 'patch',
+            url : `${process.env.REACT_APP_API_URL}api/user/${userId}` ,
+            data : { validerPanier : userPanier}
+
+        })
+         
+         .then((res) =>{
+             dispatch({type : VALID_PANIER , payload : {userPanier}});
+         })
+         .catch ((err) => console.log(err));
+    }
+    
+}
+
+
 export const EnleverPanier = (productKey, userId) => {
     return (dispatch) => {
         return axios({
@@ -121,3 +142,4 @@ export const unparticipate = (userId, eventId) => {
             .catch((err) => console.log(err));
     };
 };
+

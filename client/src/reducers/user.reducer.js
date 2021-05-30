@@ -1,3 +1,4 @@
+
 import {
     GET_USER,
     UPLOAD_PICTURE,
@@ -7,7 +8,9 @@ import {
     UPDATE_USER,
     PARTICIPATE,
     UNPARTICIPATE,
+  VALID_PANIER,
 } from "../actions/user.actions";
+
 
 const initialState = {};
 
@@ -18,6 +21,17 @@ export default function userReducer(state = initialState, action) {
         case UPLOAD_PICTURE:
             return {
                 ...state,
+
+                picture: action.payload
+            }
+                        case VALID_PANIER:
+                
+                            return {
+                                ...state,
+                                validPanier : [action.payload.userPanier , ...state.validPanier]
+                            }      
+                    
+                
                 picture: action.payload,
             };
         case PANIER_PRODUCT:
