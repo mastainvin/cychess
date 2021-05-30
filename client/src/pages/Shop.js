@@ -23,18 +23,15 @@ import Header from "./../components/header";
 import HeaderImg from "./../components/headerImg";
 import Footer from "./../components/Footer";
 import "./product-admin.scss";
-import { AjoutPanier } from "../actions/user.actions";
+import { AjoutPanier, ValiderPanier } from "../actions/user.actions";
 import Panier from "../components/Shop/Panier";
 
-
 import ProductModal from "../components/Product-admin/ProductModal";
-import ListElement from "../components/Product-admin/ListElement"
-import Valider from '../components/Valider';
-
+import ListElement from "../components/Product-admin/ListElement";
+import Valider from "../components/Valider";
 
 const PAGE_PRODUITS = "produits";
 const PAGE_CARTE = "carte";
-
 
 Array.prototype.insert = function (index, item) {
     this.splice(index, 0, item);
@@ -50,6 +47,10 @@ function Shop() {
     const [searchTerm, setSearchTerm] = useState("");
     const [inSearch, setInSearch] = useState(true);
 
+    const [modal, setModal] = useState(false);
+
+    const toggle = () => setModal(!modal);
+
     const handleSearchTerm = (e) => {
         let value = e.target.value;
         setSearchTerm(value);
@@ -64,7 +65,7 @@ function Shop() {
 
     const renderProduits = () => (
         <div className="container">
-            <Header title="Nos produits" />
+            <h2>Nos produits</h2>
             <div className="searchBar-container">
                 <input
                     type="text"
@@ -128,7 +129,6 @@ function Shop() {
         }
     }, [loadProduct, dispatch]);
 
-
     return (
         <div className="content">
             <HeaderImg title="Boutique" />
@@ -153,15 +153,21 @@ function Shop() {
                     </button>
                 </div>
                 {!isEmpty(userData.userPanier) && page === PAGE_CARTE && (
-                    <button className="btn-valid">Valider la commande</button>
+                    <button className="btn-valid" onClick={toggle}>
+                        Valider la commande
+                    </button>
                 )}
             </div>
             {page === PAGE_PRODUITS && renderProduits(userData)}
             {page === PAGE_CARTE && (
-                <Panier userData={userData} products={produits} />
+                <Panier
+                    userData={userData}
+                    products={produits}
+                    modal={modal}
+                    toggle={toggle}
+                />
             )}
             <Footer />
-
         </div>
     );
 }
