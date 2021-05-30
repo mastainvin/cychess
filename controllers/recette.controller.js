@@ -1,4 +1,5 @@
 const RecetteModel = require("../models/recette.model");
+const UserModel = require("../models/user.model");
 
 module.exports.adherent = async (req, res) => {
     const { type, montant, userId } = req.body;
@@ -18,16 +19,21 @@ module.exports.adherent = async (req, res) => {
 };
 
 module.exports.achatBoutique = async (req, res) => {
-    const { type, montant, userId, productId } = req.body;
-
+    const { type, montant, userId, products } = req.body;
     try {
         const achat = await RecetteModel.create({
             type,
             montant,
             userId,
-            productId,
+            products,
         });
-        res.header("Access-Control-Allow-Origin", "*");
+
+        await UserModel.findByIdAndUpdate(
+            { _id: userId },
+            {
+                userPanier: [],
+            }
+        );
 
         res.status(201).json({ achat: achat._id });
     } catch (err) {

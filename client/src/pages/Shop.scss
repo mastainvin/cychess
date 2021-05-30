@@ -105,4 +105,20 @@
 .panier_vide {
     height: 75px;
     width: 75px;
+    margin-top: 50px;
+}
+
+.montant {
+    float: right;
+}
+.panier-title {
+    float: left;
+}
+.code-date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paiement-ligne {
+    margin-top: 10px;
 }

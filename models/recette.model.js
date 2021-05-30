@@ -2,15 +2,14 @@ const mongoose = require("mongoose");
 
 const recetteSchema = new mongoose.Schema(
     {
-        type : {type: String, required: true},
-        montant : {type: Number, default: '0', required: true},
-        userId :{type: String},
-        productId :{type: String, default: ''},
-        description:{type: String},
-        
+        type: { type: String, required: true },
+        montant: { type: Number, default: "0", required: true },
+        userId: { type: String },
+        products: { type: [String], required: true },
+        description: { type: String },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
 );
 

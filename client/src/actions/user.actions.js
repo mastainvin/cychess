@@ -96,24 +96,19 @@ export const participate = (userId, eventId) => {
     };
 };
 
-
-export const ValiderPanier = ( userPanier , userId ) => {
+export const ValiderPanier = (data) => {
     return (dispatch) => {
         return axios({
-            method : 'patch',
-            url : `${process.env.REACT_APP_API_URL}api/user/${userId}` ,
-            data : { validerPanier : userPanier}
-
+            method: "post",
+            url: `${process.env.REACT_APP_API_URL}api/recette/achat`,
+            data: data,
         })
-         
-         .then((res) =>{
-             dispatch({type : VALID_PANIER , payload : {userPanier}});
-         })
-         .catch ((err) => console.log(err));
-    }
-    
-}
-
+            .then((res) => {
+                dispatch({ type: VALID_PANIER });
+            })
+            .catch((err) => console.log(err));
+    };
+};
 
 export const EnleverPanier = (productKey, userId) => {
     return (dispatch) => {
@@ -142,4 +137,3 @@ export const unparticipate = (userId, eventId) => {
             .catch((err) => console.log(err));
     };
 };
-
