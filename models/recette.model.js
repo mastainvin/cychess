@@ -6,7 +6,8 @@ const recetteSchema = new mongoose.Schema(
         montant : {type: Number, default: '0', required: true},
         userId :{type: String},
         productId :{type: String, default: ''},
-        description:{type: String}
+        description:{type: String},
+        
     },
     {
         timestamps: true

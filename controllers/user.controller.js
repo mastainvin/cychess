@@ -84,3 +84,32 @@ module.exports.AddProduitPanier = async (req, res) => {
         return res.status(400).send(err);
     }
 };
+
+
+module.exports.ValidPanier = async (req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+        return res.status(400).send("ID unknown : " + req.params.id);
+
+    try {
+        await UserModel.findByIdAndUpdate(
+            req.params.id,
+            {
+                $push: {
+                    
+                    validPanier:   req.body.userPanier , 
+                        
+                    
+                },
+            },
+            { new: true },
+            (err, docs) => {
+                res.header("Access-Control-Allow-Origin", "*");
+
+                if (!err) return res.send(docs);
+                else return res.status(400).send(err);
+            }
+        );
+    } catch (err) {
+        return res.status(400).send(err);
+    }
+};

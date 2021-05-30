@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
-export const PANIER_PRODUCT = "PANIER_PRODUCT"
+export const PANIER_PRODUCT = "PANIER_PRODUCT";
+export const VALID_PANIER = "VALID_PANIER";
 
 
 export const getUser = (uid) => {
@@ -48,6 +49,23 @@ export const AjoutPanier = ( productId , userId ) => {
          
          .then((res) =>{
              dispatch({type : PANIER_PRODUCT , payload : {productId}});
+         })
+         .catch ((err) => console.log(err));
+    }
+    
+}
+
+export const ValiderPanier = ( userPanier , userId ) => {
+    return (dispatch) => {
+        return axios({
+            method : 'patch',
+            url : `${process.env.REACT_APP_API_URL}api/user/${userId}` ,
+            data : { validerPanier : userPanier}
+
+        })
+         
+         .then((res) =>{
+             dispatch({type : VALID_PANIER , payload : {userPanier}});
          })
          .catch ((err) => console.log(err));
     }

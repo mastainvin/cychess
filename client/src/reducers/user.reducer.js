@@ -1,4 +1,4 @@
-import { GET_USER, UPLOAD_PICTURE , PANIER_PRODUCT } from "../actions/user.actions";
+import { GET_USER, UPLOAD_PICTURE , PANIER_PRODUCT, VALID_PANIER } from "../actions/user.actions";
 
 
 const initialState = {};
@@ -18,7 +18,12 @@ export default function userReducer(state = initialState, action){
                             ...state,
                             userPanier : [action.payload.productId , ...state.userPanier]
                         }
-                    
+                        case VALID_PANIER:
+                
+                            return {
+                                ...state,
+                                validPanier : [action.payload.userPanier , ...state.validPanier]
+                            }      
                     
                 
 

@@ -25,6 +25,7 @@ import "./product-admin.scss";
 
 import ProductModal from "../components/Product-admin/ProductModal";
 import ListElement from "../components/Product-admin/ListElement"
+import Valider from '../components/Valider';
 
 
 
@@ -143,11 +144,18 @@ function Shop() {
   return (
 
     
-      <div >
+      <div className ="valider">
         <header>
           <button onClick = {() => navigateTo(PAGE_CARTE)}>Aller à l'achat ({carte.length})</button>
           <button onClick = {() => navigateTo(PAGE_PRODUITS)}>Voir les produits</button>
         </header>
+
+
+         <Valider  />
+
+        
+
+       
         {page === PAGE_PRODUITS && renderProduits()}
         {page ===  PAGE_CARTE && renderCarte()}
         </div>

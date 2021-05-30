@@ -16,7 +16,7 @@ router.get('/:id', userController.userInfo);
 router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 router.patch('/:id',userController.AddProduitPanier);
-
+router.patch('/:id',userController.ValidPanier);
 //upload img profil
 router.post('/upload', upload.single('file'), uploadController.uploadImgProfil);
 
