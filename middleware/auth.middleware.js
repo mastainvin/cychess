@@ -36,7 +36,7 @@ module.exports.requireAuth = (req, res, next) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(decodedToken.id);
+                    console.log("decoded id : ",decodedToken.id);
                     next();
                 }
             }

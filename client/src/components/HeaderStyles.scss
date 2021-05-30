@@ -1,0 +1,28 @@
+.header {
+    /* The image used */
+    background-image: url("./../images/fond.jpg");
+
+    /* Set a specific height */
+    max-height: 300px;
+    min-height: 150px;
+    height: 30vw;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    h2 {
+        color: white;
+        font-size: 12vw;
+        text-align: center;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.515);
+        width: min-content;
+        // border-bottom: 1px solid white;
+    }
+}

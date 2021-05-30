@@ -10,7 +10,12 @@ const ProductModal = ({ modal, toggle }) => {
     const [prix, setPrix] = useState(10);
     const [nb_restant, setnb_restant] = useState(20);
     const [image, setImage] = useState(null);
+    
     const dispatch = useDispatch();
+    
+    
+    
+
 
     const handleNewEvent = async (event) => {
         event.preventDefault();
@@ -21,7 +26,7 @@ const ProductModal = ({ modal, toggle }) => {
         data.append("prix", prix);
         data.append("nb_restant", nb_restant);
         data.append("file", image);
-
+    
         await dispatch(addProduct(data));
         dispatch(getProducts());
         clearForm();

@@ -7,6 +7,11 @@ const EventSchema = new mongoose.Schema(
             maxlength: 100,
             unique: true,
         },
+        lieu: {
+            type: String,
+            trim: true,
+            maxlength: 100,
+        },
         description: {
             type: String,
             trim: true,
@@ -23,6 +28,10 @@ const EventSchema = new mongoose.Schema(
         image: {
             type: String,
             required: false,
+        },
+        date: {
+            type: Date,
+            required: true,
         },
         participants: {
             type: [String],

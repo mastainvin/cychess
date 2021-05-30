@@ -3,8 +3,13 @@ import axios from "axios";
 export const GET_USER = "GET_USER";
 export const UPLOAD_PICTURE = "UPLOAD_PICTURE";
 export const PANIER_PRODUCT = "PANIER_PRODUCT";
-export const VALID_PANIER = "VALID_PANIER";
 
+export const VALID_PANIER = "VALID_PANIER";
+export const PANIER_DELETE_PRODUCT = "PANIER_DELETE_PRODUCT";
+export const DELETE_USER = "DELETE_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const PARTICIPATE = "PARTICIPATE";
+export const UNPARTICIPATE = "UNPARTICIPATE";
 
 export const getUser = (uid) => {
     return (dispatch) => {
@@ -38,22 +43,59 @@ export const uploadPicture = (data, id) => {
     };
 };
 
-export const AjoutPanier = ( productId , userId ) => {
+export const AjoutPanier = (productId, userId) => {
     return (dispatch) => {
         return axios({
-            method : 'patch',
-            url : `${process.env.REACT_APP_API_URL}api/user/${userId}` ,
-            data : { produitPanier : productId}
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/user/${userId}`,
+            data: { produitPanier: productId },
+        }).then((res) => {
+            dispatch({ type: PANIER_PRODUCT, payload: { productId } });
+        });
+    };
+};
+export const deleteUser = (id) => {
+    return (dispatch) => {
+        return axios
+            .delete(`${process.env.REACT_APP_API_URL}api/user/${id}`)
+            .then((res) => {
+                dispatch({ type: DELETE_USER, payload: res.data });
+            })
+            .catch((err) => console.log(err));
+    };
+};
 
+export const updateUser = (userId, data) => {
+    return (dispatch) => {
+        return axios({
+            method: "put",
+            url: `${process.env.REACT_APP_API_URL}api/user/` + userId,
+            data: data,
         })
-         
-         .then((res) =>{
-             dispatch({type : PANIER_PRODUCT , payload : {productId}});
-         })
-         .catch ((err) => console.log(err));
-    }
-    
-}
+            .then((res) => {
+                dispatch({
+                    type: UPDATE_USER,
+                    payload: data,
+                });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
+export const participate = (userId, eventId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/event/participate/${eventId}`,
+            data: { id: userId },
+        })
+            .then((res) => {
+                dispatch({ type: PARTICIPATE, payload: { eventId } });
+            })
+            .catch((err) => console.log(err));
+    };
+};
+
 
 export const ValiderPanier = ( userPanier , userId ) => {
     return (dispatch) => {
@@ -71,4 +113,33 @@ export const ValiderPanier = ( userPanier , userId ) => {
     }
     
 }
+
+
+export const EnleverPanier = (productKey, userId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/user/deleteCartItem/${userId}`,
+            data: { productKey: productKey },
+        }).then((res) => {
+            dispatch({
+                type: PANIER_DELETE_PRODUCT,
+                payload: { productKey },
+            });
+        });
+    };
+};
+export const unparticipate = (userId, eventId) => {
+    return (dispatch) => {
+        return axios({
+            method: "patch",
+            url: `${process.env.REACT_APP_API_URL}api/event/unparticipate/${eventId}`,
+            data: { id: userId },
+        })
+            .then((res) => {
+                dispatch({ type: UNPARTICIPATE, payload: { eventId } });
+            })
+            .catch((err) => console.log(err));
+    };
+};
 

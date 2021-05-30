@@ -14,6 +14,7 @@ const AdminShop = () => {
     const userData = useSelector((state) => state.userReducer);
     const notAdmin = !isAdmin(userData);
     const products = useSelector((state) => state.productReducer);
+    
     const [loadProduct, setLoadProduct] = useState(true);
     const dispatch = useDispatch();
 

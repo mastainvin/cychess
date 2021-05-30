@@ -99,6 +99,7 @@ module.exports.uploadImgEvent = async (req, res) => {
 
         if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
+        console.log(err);
         const errors = uploadErrors(err);
         return res.status(201).json(errors);
     }
@@ -118,8 +119,6 @@ module.exports.uploadImgEvent = async (req, res) => {
             { $set: { image: "./uploads/event/" + fileName } },
             { new: true, upsert: true, setDefaultsOnInsert: true },
             (err, docs) => {
-                res.header("Access-Control-Allow-Origin", "*");
-
                 if (!err) return res.send(docs);
                 else return res.status(500).send({ message: err });
             }
