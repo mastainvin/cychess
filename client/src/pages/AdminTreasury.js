@@ -2,12 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import  { Fragment, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { isAdmin } from "../components/Utils";
+import { isAdmin, isEmpty } from "../components/Utils";
 import { Redirect } from "react-router";
 import Header from "../components/header";
 import { NavLink } from "react-router-dom";
 
 import { getProducts } from "../actions/product.actions";
+import { getUsers } from "../actions/users.actions";
 
 
 
@@ -23,11 +24,14 @@ const AdminTreasury =  () => {
     const notAdmin = !isAdmin(userData);
     const products = useSelector((state) => state.productReducer);
     const [loadProduct, setLoadProduct] = useState(true);
+    const users = useSelector((state) => state.usersReducer);
+    const [loadUser, setLoadUser] = useState(true);
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
     /*const [outOfStock, setoutOfStock] = useState(0);
     const [nb_total, setnb_total] = useState(0);*/
     
+
    const outOfStock = useRef(0) ;
    const nb_total = useRef(0) ; 
 
@@ -42,38 +46,29 @@ const AdminTreasury =  () => {
     
     useEffect(() => {
          
+        
 
     
         
-        if (loadProduct) {
+        if (loadProduct && loadUser) {
             dispatch(getProducts());
             setLoadProduct(false);
-            
-        }
-        else{
-            
+            dispatch(getUsers());
+            setLoadUser(false);
+            if(!isEmpty(products)){
             products.map(produit => {
-                
-               
-            
-               
                 if(produit.nb_restant == 0 ){
                     outOfStock.current = outOfStock.current + 1;
                     return(outOfStock.current);
                        
                 }
 
-                nb_total.current = nb_total.current + Number(   produit.nb_restant );
-                
-                console.log(nb_total.current);
-
-                return(nb_total.current,outOfStock.current);
-                
             } )
-            
         }
-        console.log(outOfStock.current);
-    }, [loadProduct, dispatch, products]);
+        }
+        
+        
+    }, [loadProduct, dispatch, products,loadUser,users]);
 
     console.log(outOfStock.current);
     
@@ -108,7 +103,7 @@ const AdminTreasury =  () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-success o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size ">Produits<br/><b>{nb_total.current}</b> </div>
+                                            <div className="text-center card-font-size ">Produits<br/><b>{products && products.length}</b> </div>
                         
                                         </div>
                                         <NavLink className="card-footer text-white clearfix small z-1" exact to="/shop-admin" >
@@ -139,7 +134,7 @@ const AdminTreasury =  () => {
                                 <div className="col-xl-3 col-sm-6 mb-3">
                                     <div className="card text-white bg-info o-hidden h-100">
                                         <div className="card-body">
-                                            <div className="text-center card-font-size">Utilisateurs<br /> </div>
+                                            <div className="text-center card-font-size">Utilisateurs<br /> <b>{users && users.length}</b></div>
                                         </div>
                                         <NavLink className="card-footer text-white clearfix small z-1" to="/users-admin">
                                             <span className="float-left">Plus de détails</span>
