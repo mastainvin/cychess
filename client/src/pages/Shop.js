@@ -111,6 +111,7 @@ function Shop() {
                                             onClick={() => {
                                                 ajoutDeCarte(produit);
                                             }}
+                                            disabled={produit.nb_restant <= 0}
                                         >
                                             Ajouter au panier
                                         </Button>

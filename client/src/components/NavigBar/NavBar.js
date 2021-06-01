@@ -116,8 +116,9 @@ const NavBar = () => {
                                             to="/treasury-admin"
                                             className="admin-link"
                                         >
-                                            Trésorerie
+                                            Dashboard
                                         </DropdownItem>
+                                        <DropdownItem divider />
 
                                         <DropdownItem
                                             href="/shop-admin"
@@ -149,7 +150,7 @@ const NavBar = () => {
                                             to="/Orders-admin"
                                             className="admin-link"
                                         >
-                                            Commandes
+                                            Trésorerie
                                         </DropdownItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
