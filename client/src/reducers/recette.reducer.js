@@ -1,4 +1,4 @@
-import { GET_RECETTE } from "../actions/recette.actions";
+import { ADD_DEPENSE, GET_RECETTE } from "../actions/recette.actions";
 
 const initialState = {};
 

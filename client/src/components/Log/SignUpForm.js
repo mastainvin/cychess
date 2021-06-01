@@ -59,7 +59,7 @@ const SignUpForm = () => {
                 </>
             ) : (
                 <div className="form-login">
-                    <div className="content">
+                    <div className="log-content">
                         <div className="image">
                             <img src={loginImg} />
                         </div>

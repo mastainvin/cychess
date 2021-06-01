@@ -18,6 +18,7 @@ import {
     FormGroup,
     Label,
     Input,
+    Alert,
 } from "reactstrap";
 
 import Header from "./../header";
@@ -28,6 +29,9 @@ import {
     getUser,
 } from "../../actions/user.actions";
 import panier_vide from "./../../images/panier-vide.png";
+import { DeleteOutline, ExitToApp } from "@material-ui/icons";
+import { modifyProduct } from "../../actions/product.actions";
+import { get } from "react-hook-form";
 const Panier = ({ userData, products, modal, toggle }) => {
     const dispatch = useDispatch();
     const [carte, setCarte] = useState([]);
@@ -35,6 +39,7 @@ const Panier = ({ userData, products, modal, toggle }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [inSearch, setInSearch] = useState(true);
     const [montant, setMontant] = useState(0);
+    const [error, setError] = useState(false);
 
     const [factVisible, setFactVisible] = useState(true);
     const handleSearchTerm = (e) => {
@@ -50,15 +55,36 @@ const Panier = ({ userData, products, modal, toggle }) => {
     };
 
     const handleValid = () => {
-        const data = {
-            type: "ACHAT",
-            montant: montant,
-            userId: userData._id,
-            products: userData.userPanier,
+        const removeOneProduct = (product, nbr) => {
+            product.nb_restant -= nbr;
+            dispatch(modifyProduct(product, product._id));
         };
-        dispatch(ValiderPanier(data));
-        setCarte([]);
-        setMontant(0);
+        if (!isEmpty(products)) {
+            if (!error) {
+                products.map((product) => {
+                    let acc = 0;
+                    userData.userPanier.filter((item) => {
+                        if (item == product._id) acc += 1;
+                        if (product.np_restant <= 0) {
+                            setError(true);
+                            return;
+                        }
+                    });
+                    removeOneProduct(product, acc);
+                });
+            }
+        }
+        if (!error) {
+            const data = {
+                type: "ACHAT",
+                montant: montant,
+                userId: userData._id,
+                products: userData.userPanier,
+            };
+            dispatch(ValiderPanier(data));
+            setCarte([]);
+            setMontant(0);
+        }
     };
 
     useEffect(() => {
@@ -78,6 +104,13 @@ const Panier = ({ userData, products, modal, toggle }) => {
         };
 
         if (loadCart && !isEmpty(userData.userPanier) && !isEmpty(products)) {
+            products.map((product) => {
+                if (
+                    product.nb_restant <= 0 &&
+                    userData.userPanier.includes(product._id)
+                )
+                    return setError(true);
+            });
             getUserCart();
             setLoadCart(false);
         }
@@ -86,6 +119,12 @@ const Panier = ({ userData, products, modal, toggle }) => {
     return (
         <>
             <div className="container">
+                {error && (
+                    <Alert color="danger">
+                        Attention ! Un produit de votre panier n'est plus
+                        disponible !
+                    </Alert>
+                )}
                 <h2 className="panier-title ">Votre panier</h2>
                 <h2 className="montant ">{montant} €</h2>
                 <div className="searchBar-container">
