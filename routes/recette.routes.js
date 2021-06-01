@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const recetteController = require("../controllers/recette.controller");
 
+
+router.get('/', recetteController.recette);
+
 //devient adherent
 router.post('/adherent', recetteController.adherent);
 //produit acheté

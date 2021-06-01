@@ -1,6 +1,14 @@
 const RecetteModel = require("../models/recette.model");
 const UserModel = require("../models/user.model");
 
+
+
+module.exports.recette = async (req, res) => {
+    const recette = await RecetteModel.find();
+    res.status(200).json(recette);
+};
+
+
 module.exports.adherent = async (req, res) => {
     const { type, montant, userId } = req.body;
 

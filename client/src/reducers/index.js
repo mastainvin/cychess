@@ -4,6 +4,7 @@ import usersReducer from "./users.reducer";
 import eventReducer from "./event.reducer";
 import productReducer from "./product.reducer";
 import postReducer from './post.reducer';
+import recetteReducer from './recette.reducer';
 
 
 
@@ -13,4 +14,5 @@ export default combineReducers({
     eventReducer,
     productReducer,
     postReducer,
+    recetteReducer,
 });
