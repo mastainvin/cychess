@@ -1,63 +1,53 @@
-import React from 'react';
-
-import './Home.scss';
-
-import "../images/test.jpg";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import { slide } from 'react-slideshow-image';
-
-import { useEffect, useState } from 'react';
-
-
-import im1 from '../images/im1.jpeg';
-import im2 from '../images/im2.jpeg';
-
-
+import React from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import "./Home.scss";
+import image_test from "./../images/fond.jpg";
+import image_test2 from "./../images/im1.jpeg";
 
 const Home = () => {
-  let sliderArr = [<img src={im1} />,<img src={im2}/>];
+    const datas = [
+        {
+            id: 1,
+            image: image_test,
+            title: "Bienvenue sur notre site !",
+            text: "Inscrivez-vous à des tournois, achetez votre matériel et discutez sur notre forum ! Bonne visite !",
+        },
+        {
+            id: 2,
+            image: image_test2,
+            title: "Bienvenue sur notre site !",
+            text: "Inscrivez-vous à des tournois, achetez votre matériel et discutez sur notre forum ! Bonne visite !",
+        },
+    ];
 
-  const [x,setX] = useState(0);
-
-  const goLeft = () => {
-
-    x === 0 ? setX(-100*(sliderArr.length-1)) : setX(x+100);
-
-  };
-
-  const goRight = () => {
-
-    console.log(x);
-
-    x === -100*(sliderArr.length-1) ? setX(0) : setX(x-100);
-
-  };
     return (
+        <Carousel
+            className="carousel-wrapper"
+            showThumbs={true}
+            autoPlay
+            interval={2000}
+            infiniteLoop
+            thumbWidth={400}
+            showIndicators={false}
+            showStatus={false}
+        >
+            {datas.map((slide) => (
+                <div
+                    className="image-container"
+                    style={{
+                        backgroundImage: `url(${slide.image})`,
+                    }}
+                >
+                    <div className="overlay">
+                        <h2 className="overlay__title">{slide.title}</h2>
 
-        <div className ="slider">
-
-      {
-
-       sliderArr.map((item , index) => {
-         return (
-           <div key={index} className = "slide" style = {{transform : `translateX(${x}%)`}}>
-             {item}
-           </div>
-         );
-       })}
-
-      <button id="goLeft" onClick={goLeft}> .</button>
-      <button id ="goRight" onClick={goRight}> .. </button>
-
-      
-        
-    </div>
-       
+                        <p className="overlay__text">{slide.text}</p>
+                    </div>
+                </div>
+            ))}
+        </Carousel>
     );
 };
 
-
-
 export default Home;
-
