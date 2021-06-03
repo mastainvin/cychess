@@ -4,7 +4,7 @@ import { isAdmin, isEmpty } from "../components/Utils";
 import { Redirect } from "react-router";
 import Header from "../components/header";
 import { getProducts } from "../actions/product.actions";
-import { Button, ListGroup, ListGroupItem } from "reactstrap";
+import { Button, ListGroup, ListGroupItem, Spinner } from "reactstrap";
 import "./product-admin.scss";
 
 import ProductModal from "../components/Product-admin/ProductModal";
@@ -14,7 +14,8 @@ const AdminShop = () => {
     const userData = useSelector((state) => state.userReducer);
     const notAdmin = !isAdmin(userData);
     const products = useSelector((state) => state.productReducer);
-    
+    const [isUserAdmin, setIsUserAdmin] = useState(userData.admin);
+    const [inLoad, setInLoad] = useState(true);
     const [loadProduct, setLoadProduct] = useState(true);
     const dispatch = useDispatch();
 
@@ -29,32 +30,45 @@ const AdminShop = () => {
             dispatch(getProducts());
             setLoadProduct(false);
         }
-    }, [loadProduct, dispatch, products]);
+        if (inLoad && !isEmpty(userData)) {
+            setIsUserAdmin(userData.admin);
+            setInLoad(false);
+        }
+    }, [userData, loadProduct, dispatch, products, inLoad]);
     return (
         <div className="container">
             <ProductModal toggle={toggle} modal={modal} />
             <Header title="Administration - Boutique" />
-            {notAdmin ? (
-                <Redirect to="/" />
+            {inLoad ? (
+                <Spinner color="success" />
             ) : (
-                <div>
-                    <ListGroup className="event-list">
-                        <ListGroupItem>
-                            <div className="list-row">
-                                <Button color="success" onClick={toggle}>
-                                    Ajouter un produit !
-                                </Button>
-                            </div>
-                        </ListGroupItem>
-                        {!isEmpty(products) &&
-                            products.map((product) => (
-                                <ListElement
-                                    product={product}
-                                    key={product._id}
-                                />
-                            ))}
-                    </ListGroup>
-                </div>
+                <>
+                    {!isUserAdmin ? (
+                        <Redirect to="/" />
+                    ) : (
+                        <div>
+                            <ListGroup className="event-list">
+                                <ListGroupItem>
+                                    <div className="list-row">
+                                        <Button
+                                            color="success"
+                                            onClick={toggle}
+                                        >
+                                            Ajouter un produit !
+                                        </Button>
+                                    </div>
+                                </ListGroupItem>
+                                {!isEmpty(products) &&
+                                    products.map((product) => (
+                                        <ListElement
+                                            product={product}
+                                            key={product._id}
+                                        />
+                                    ))}
+                            </ListGroup>
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

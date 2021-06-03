@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "./Footer.scss";
-import pion from "./../images/pion_blanc.png";
+import pion from "./../images/icon.png";
 import facebook from "./../images/facebook.png";
 import instagram from "./../images/instagram.png";
 import twitter from "./../images/twitter.png";
@@ -15,6 +15,7 @@ const Header = ({ title }) => {
                 </div>
                 <div className="middle-footer">
                     <p>Nos réseaux </p>
+                    <hr />
                     <div className="medias">
                         <img className="media" src={facebook} />
                         <img className="media" src={instagram} />

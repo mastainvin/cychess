@@ -95,6 +95,7 @@ const Updateprofil = ({ userData }) => {
                                 type="text"
                                 defaultValue={userData.bio}
                                 onChange={(e) => setBio(e.target.value)}
+                                placeholder="Bio"
                             ></textarea>
                             <input
                                 type="date"
@@ -103,26 +104,32 @@ const Updateprofil = ({ userData }) => {
                                 onChange={(e) =>
                                     setDateDeNaissance(e.target.value)
                                 }
+                                className="born-date"
+                                placeholder="Date de naissance"
                             />
                             <textarea
                                 type="text"
                                 defaultValue={userData.sexe}
                                 onChange={(e) => setSexe(e.target.value)}
+                                placeholder="Genre"
                             ></textarea>
                             <textarea
                                 type="text"
                                 defaultValue={userData.prenom}
                                 onChange={(e) => setPrenom(e.target.value)}
+                                placeholder="Prénom"
                             ></textarea>
                             <textarea
                                 type="text"
                                 defaultValue={userData.nom}
                                 onChange={(e) => setNom(e.target.value)}
+                                placeholder="Nom"
                             ></textarea>
                             <textarea
                                 type="text"
                                 defaultValue={userData.residence}
                                 onChange={(e) => setResidence(e.target.value)}
+                                placeholder="Adresse"
                             ></textarea>
                             <Button
                                 className="custom-btn"

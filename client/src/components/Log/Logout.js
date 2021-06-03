@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import cookie from "js-cookie";
+import { NavLink } from "reactstrap";
 import logout_icon from "../../images/logout.png";
 import "./log.scss";
 const Logout = () => {
@@ -23,13 +24,9 @@ const Logout = () => {
     };
 
     return (
-        <div onClick={logout} className="log_icon">
-            <img
-                src={logout_icon}
-                alt="logout_icon"
-                style={{ width: "30px", margin: "5px 20px " }}
-            />
-        </div>
+        <NavLink onClick={logout} className="welcome">
+            <h5>Déconnexion</h5>
+        </NavLink>
     );
 };
 

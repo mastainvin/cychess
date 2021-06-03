@@ -32,7 +32,7 @@ const AdminEvent = () => {
             setIsUserAdmin(userData.admin);
             setInLoad(false);
         }
-    }, [userData, loadEvent, dispatch, events]);
+    }, [userData, loadEvent, dispatch, events, inLoad]);
 
     return (
         <div className="container">

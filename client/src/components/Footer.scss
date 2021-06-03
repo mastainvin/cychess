@@ -1,7 +1,9 @@
 footer {
     width: 100%;
     height: fit-content;
-    background-color: rgba(136, 155, 98, 0.707);
+    background-color: white;
+    // background-color: rgba(136, 155, 98, 0.707);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: absolute;
     bottom: 0;
 }
@@ -21,11 +23,11 @@ footer {
 }
 
 .pion_blanc {
-    height: 100px;
+    height: 60px;
 }
 
 .footer p {
-    color: white;
+    color: rgb(136, 155, 98);
     font-size: 30px;
 }
 
@@ -40,6 +42,7 @@ footer {
 .middle-footer {
     display: flex;
     text-align: center;
+    justify-content: center;
     flex-direction: column;
     width: 30%;
 }
@@ -71,10 +74,10 @@ footer {
 }
 .lien {
     font-size: 20px;
-    color: white;
+    color: rgb(136, 155, 98);
 
     &:hover {
-        color: white;
+        color: rgb(136, 155, 98);
     }
 }
 .media {

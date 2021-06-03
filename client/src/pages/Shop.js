@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./Shop.scss";
 
@@ -18,6 +18,7 @@ import {
     CardTitle,
     CardSubtitle,
     Button,
+    Alert,
 } from "reactstrap";
 import Header from "./../components/header";
 import HeaderImg from "./../components/headerImg";
@@ -29,6 +30,7 @@ import Panier from "../components/Shop/Panier";
 import ProductModal from "../components/Product-admin/ProductModal";
 import ListElement from "../components/Product-admin/ListElement";
 import Valider from "../components/Valider";
+import { UidContext } from "../components/Routes/AppContext";
 
 const PAGE_PRODUITS = "produits";
 const PAGE_CARTE = "carte";
@@ -39,7 +41,7 @@ Array.prototype.insert = function (index, item) {
 
 function Shop() {
     const userData = useSelector((state) => state.userReducer);
-
+    const uid = useContext(UidContext);
     const produits = useSelector((state) => state.productReducer);
     const [loadProduct, setLoadProduct] = useState(true);
     const dispatch = useDispatch();
@@ -105,16 +107,29 @@ function Shop() {
                                         <CardText className="produitCardText">
                                             {produit.description}
                                         </CardText>
-                                        <Button
-                                            className="produitButton"
-                                            color="success"
-                                            onClick={() => {
-                                                ajoutDeCarte(produit);
-                                            }}
-                                            disabled={produit.nb_restant <= 0}
-                                        >
-                                            Ajouter au panier
-                                        </Button>
+                                        {produit.nb_restant > 0 ? (
+                                            <Button
+                                                className="produitButton"
+                                                color="success"
+                                                onClick={() => {
+                                                    ajoutDeCarte(produit);
+                                                }}
+                                                disabled={
+                                                    produit.nb_restant <= 0 ||
+                                                    !uid
+                                                }
+                                            >
+                                                Ajouter au panier
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                className="produitButton"
+                                                color="warning"
+                                                disabled
+                                            >
+                                                En rupture de stock
+                                            </Button>
+                                        )}
                                     </CardBody>
                                 </Card>
                             </div>
@@ -134,6 +149,12 @@ function Shop() {
         <div className="content">
             <HeaderImg title="Boutique" />
             <div className="shop-header container">
+                {!uid && (
+                    <Alert color="warning" style={{ width: "100%" }}>
+                        Attention ! Vous ne pouvez pas commander un produit
+                        événement si vous n'êtes pas connecté.
+                    </Alert>
+                )}
                 <div className="shop-btn">
                     <button
                         activeClass="active"

@@ -42,16 +42,10 @@ const NavBar = () => {
                     <Collapse isOpen={isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             {uid ? (
-                                <div className="welcome">
-                                    <NavLink href="/profil">
-                                        <h5>
-                                            Bienvenue {userData.pseudonyme} !
-                                        </h5>
-                                    </NavLink>
-                                </div>
+                                <Logout />
                             ) : (
                                 <NavLink href="/profil">
-                                    <h5>Cliquez ici pour vous connecter !</h5>
+                                    <h5>Connexion</h5>
                                 </NavLink>
                             )}
                             <NavItem>
@@ -157,25 +151,6 @@ const NavBar = () => {
                             ) : (
                                 <NavItem></NavItem>
                             )}
-                            <NavItem>
-                                {uid ? (
-                                    <Logout />
-                                ) : (
-                                    <div className="log_icon">
-                                        <a href="/profil">
-                                            <img
-                                                src={login_icon}
-                                                alt="login_icon"
-                                                style={{
-                                                    width: "30px",
-                                                    height: "30px",
-                                                    margin: "5px 20px ",
-                                                }}
-                                            />
-                                        </a>
-                                    </div>
-                                )}
-                            </NavItem>
                         </Nav>
                     </Collapse>
                 </div>
