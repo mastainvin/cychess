@@ -18,6 +18,7 @@ const Card = ({ post }) => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const [viewProfil, setViewProfil] = useState(false);
 
     const updateItem = () => {
         if (textUpdate) {
@@ -33,6 +34,7 @@ const Card = ({ post }) => {
         <li className="card-container" key={post._id}>
             <div className="card-left">
                 <img
+                    onClick={ () => setViewProfil(!viewProfil) }
                     src={
                         !isEmpty(usersData[0]) &&
                         usersData
@@ -116,6 +118,23 @@ const Card = ({ post }) => {
                 <Collapse isOpen={isOpen}>
                     <CardComments post={post} />
                 </Collapse>
+                {viewProfil && 
+                    usersData
+                    .map((user) => {
+                        if (user._id === post.posterId)
+                            return(
+                                <div className="visitProfil">
+                                    <ul>
+                                        <li><img className="visitImage" src={user.userProfil} /></li>
+                                        <td>
+                                        <li className="inf">{user.pseudonyme} </li>
+                                        <li className="inf">{user.bio}</li>
+                                        </td>
+                                    </ul>
+                                </div>
+                            );
+                    })
+                }
             </div>
         </li>
     );

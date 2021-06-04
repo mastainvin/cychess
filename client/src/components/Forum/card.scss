@@ -642,4 +642,44 @@ $shadow: rgb(219, 218, 218);
             }
         }
     }
+
 }
+
+.visitProfil{
+    border-radius: 20px;
+    text-align: center;
+    margin-left:35%;
+    margin-top: 10%;
+    position: fixed;
+    z-index: 1;
+    width: 30%;
+    height: 60%;
+    top: 0;
+    left: 0;
+    background:  whitesmoke;
+    box-shadow: 0 0 20px rgba(51, 51, 51, 0.363);
+    .visitImage {
+        height: 100px;
+        width: 100px;
+        border-radius: 46px;
+        object-fit: cover;
+        margin-bottom: 30px;
+        box-shadow: 0 0 6px rgba(100, 100, 100, 0.8);
+    }
+    .inf {
+        // position: relative;
+        margin-top: 6%;
+        background: #d0f7b1;
+        min-height: 80px;
+        width:100%; 
+        min-width:100%;
+        border: 1px solid /*$color-1 */;
+        border-radius: 20px 20px 6px 20px;
+        padding: 5px 40px;
+        font-size: 1.1rem;
+        font-size: 1.2rem;
+      }
+}
+
+
+
