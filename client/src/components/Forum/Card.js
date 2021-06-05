@@ -127,13 +127,13 @@ const Card = ({ post }) => {
                                     <ul>
                                         <li><img className="visitImage" src={user.userProfil} /></li>
                                         <td>
-                                        <li className="inf">{user.pseudonyme} </li>
-                                        <li className="inf">{user.nom} </li>
-                                        <li className="inf">{user.prenom} </li>
-                                        <li className="inf">{user.sexe} </li>
-                                        <li className="inf">{user.dateDeNaissance} </li>
-                                        <li className="inf">{user.residence} </li>
-                                        <li className="inf">{user.bio}</li>
+                                        <li className="inf"> Pseudo : <br/> {user.pseudonyme} </li>
+                                        <li className="inf"> Nom : <br/> {user.nom} </li>
+                                        <li className="inf"> Prenom : <br/> {user.prenom} </li>
+                                        <li className="inf"> Genre : <br/> {user.sexe} </li>
+                                        <li className="inf"> Date de naissance : <br/> {user.dateDeNaissance} </li>
+                                        <li className="inf"> Adresse : <br/> {user.residence} </li>
+                                        <li className="inf"> Bio : <br/> {user.bio}</li>
                                         </td>
                                     </ul>
                                 </div>
@@ -145,7 +145,7 @@ const Card = ({ post }) => {
                                         <li><img className="visitImage" src={user.userProfil} /></li>
                                         <td>
                                         <p className="inf">{user.pseudonyme} </p>
-                                        <p className="inf">{user.bio}</p>
+                                        <p className="inf"> Bio : <br/> {user.bio}</p>
                                         </td>
                                     </ul>
                                 </div>
