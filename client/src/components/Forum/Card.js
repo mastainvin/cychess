@@ -144,7 +144,7 @@ const Card = ({ post }) => {
                                     <ul>
                                         <li><img className="visitImage" src={user.userProfil} /></li>
                                         <td>
-                                        <p className="inf">{user.pseudonyme} </p>
+                                        <p className="inf"> Pseudo : <br/> {user.pseudonyme} </p>
                                         <p className="inf"> Bio : <br/> {user.bio}</p>
                                         </td>
                                     </ul>
