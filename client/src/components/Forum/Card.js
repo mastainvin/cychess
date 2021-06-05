@@ -121,14 +121,31 @@ const Card = ({ post }) => {
                 {viewProfil && 
                     usersData
                     .map((user) => {
-                        if (user._id === post.posterId)
+                        if (user._id === post.posterId && userData.admin === true)
                             return(
                                 <div className="visitProfil">
                                     <ul>
                                         <li><img className="visitImage" src={user.userProfil} /></li>
                                         <td>
                                         <li className="inf">{user.pseudonyme} </li>
+                                        <li className="inf">{user.nom} </li>
+                                        <li className="inf">{user.prenom} </li>
+                                        <li className="inf">{user.sexe} </li>
+                                        <li className="inf">{user.dateDeNaissance} </li>
+                                        <li className="inf">{user.residence} </li>
                                         <li className="inf">{user.bio}</li>
+                                        </td>
+                                    </ul>
+                                </div>
+                            );
+                        else if (user._id === post.posterId)
+                            return(
+                                <div className="visitProfil">
+                                    <ul>
+                                        <li><img className="visitImage" src={user.userProfil} /></li>
+                                        <td>
+                                        <p className="inf">{user.pseudonyme} </p>
+                                        <p className="inf">{user.bio}</p>
                                         </td>
                                     </ul>
                                 </div>
