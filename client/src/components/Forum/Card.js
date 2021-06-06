@@ -18,6 +18,7 @@ const Card = ({ post }) => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
+    const [viewProfil, setViewProfil] = useState(false);
 
     const updateItem = () => {
         if (textUpdate) {
@@ -33,6 +34,7 @@ const Card = ({ post }) => {
         <li className="card-container" key={post._id}>
             <div className="card-left">
                 <img
+                    onClick={ () => setViewProfil(!viewProfil) }
                     src={
                         !isEmpty(usersData[0]) &&
                         usersData
@@ -116,6 +118,40 @@ const Card = ({ post }) => {
                 <Collapse isOpen={isOpen}>
                     <CardComments post={post} />
                 </Collapse>
+                {viewProfil && 
+                    usersData
+                    .map((user) => {
+                        if (user._id === post.posterId && userData.admin === true)
+                            return(
+                                <div className="visitProfil">
+                                    <ul>
+                                        <li><img className="visitImage" src={user.userProfil} /></li>
+                                        <td>
+                                        <li className="inf"> Pseudo : <br/> {user.pseudonyme} </li>
+                                        <li className="inf"> Nom : <br/> {user.nom} </li>
+                                        <li className="inf"> Prenom : <br/> {user.prenom} </li>
+                                        <li className="inf"> Genre : <br/> {user.sexe} </li>
+                                        <li className="inf"> Date de naissance : <br/> {user.dateDeNaissance} </li>
+                                        <li className="inf"> Adresse : <br/> {user.residence} </li>
+                                        <li className="inf"> Bio : <br/> {user.bio}</li>
+                                        </td>
+                                    </ul>
+                                </div>
+                            );
+                        else if (user._id === post.posterId)
+                            return(
+                                <div className="visitProfil">
+                                    <ul>
+                                        <li><img className="visitImage" src={user.userProfil} /></li>
+                                        <td>
+                                        <p className="inf"> Pseudo : <br/> {user.pseudonyme} </p>
+                                        <p className="inf"> Bio : <br/> {user.bio}</p>
+                                        </td>
+                                    </ul>
+                                </div>
+                            );
+                    })
+                }
             </div>
         </li>
     );
