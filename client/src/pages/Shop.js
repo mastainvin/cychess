@@ -102,7 +102,7 @@ function Shop() {
                                             tag="h6"
                                             className="mb-2 text-muted"
                                         >
-                                            {produit.prix}
+                                            {produit.prix} €
                                         </CardSubtitle>
                                         <CardText className="produitCardText">
                                             {produit.description}

@@ -642,22 +642,23 @@ $shadow: rgb(219, 218, 218);
             }
         }
     }
-
 }
 
-.visitProfil{
+.visitProfil {
     border-radius: 20px;
     text-align: center;
-    margin-left:35%;
+    margin-left: 35%;
     // margin-top: 10%;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     width: 30%;
-    height: 100%;
-    top: 0;
+    height: 95%;
+    top: 50%;
+    transform: translate(0, -50%);
     left: 0;
-    background:  whitesmoke;
+    background: whitesmoke;
     box-shadow: 0 0 20px rgba(51, 51, 51, 0.363);
+    padding: 10px;
     .visitImage {
         height: 80px;
         width: 80px;
@@ -667,20 +668,27 @@ $shadow: rgb(219, 218, 218);
         box-shadow: 0 0 6px rgba(100, 100, 100, 0.8);
     }
     .inf {
-        // position: relative;
         margin-top: 1%;
-        background: #d0f7b1;
+        background: #fff;
         min-height: 80px;
-        width:100%; 
-        // right: 0;
-        min-width:100%;
-        border: 1px solid /*$color-1 */;
-        border-radius: 20px 20px 6px 20px;
+        width: 100%;
+        min-width: 100%;
+        box-shadow: 0 0 6px rgba(100, 100, 100, 0.8);
+        border-radius: 20px 20px 20px 20px;
         padding: 5px 20px;
         font-size: 1.1rem;
         font-size: 1.2rem;
-      }
+    }
+    .label {
+        font-style: italic;
+        color: grey;
+    }
+    .croix {
+        position: absolute;
+        left: 20px;
+        font-size: 25px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
-
-
-

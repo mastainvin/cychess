@@ -41,20 +41,19 @@ const AdminTreasury = () => {
     };
 
     useEffect(() => {
-        if (loadProduct ) {
+        if (loadProduct) {
             dispatch(getProducts());
             setLoadProduct(false);
             /*dispatch(getUsers());
             setLoadUser(false);
             dispatch(getRecette());
             setLoadRecette(false);*/
-        }else {
+        } else {
             let outOfStock_temp = 0;
             if (!isEmpty(products)) {
                 products.map((produit) => {
                     if (produit.nb_restant == 0) {
                         outOfStock_temp = outOfStock_temp + 1;
-                        
                     }
                 });
             }
@@ -78,10 +77,6 @@ const AdminTreasury = () => {
             setIsUserAdmin(userData.admin);
             setInLoad(false);
         }
-
-
-
-
     }, [
         loadProduct,
         dispatch,
@@ -103,18 +98,17 @@ const AdminTreasury = () => {
             {notAdmin ? (
                 <Redirect to="/" />
             ) : (
-                <div>
+                <div className="d-flex justify-content-center">
                     {
                         <div className="col-12 col-md-10">
                             <Fragment>
                                 <div className="row pr-4">
                                     <div className=" col-xl-12 col-sm-12 mb-3">
-                                        <div className="card text-white bg-primary o-hidden h-100">
+                                        <div className="card text-white bg-success o-hidden h-100">
                                             <div className="card-body">
                                                 <div className="text-center card-font-size">
-                                                    Totale
-                                                    <br />{" "}
-                                                    <b>{total} €</b>
+                                                    Total
+                                                    <br /> <b>{total} €</b>
                                                 </div>
                                             </div>
                                         </div>
@@ -123,7 +117,7 @@ const AdminTreasury = () => {
 
                                 <div className="row pr-4">
                                     <div className="col-xl-3 col-sm-6 mb-3">
-                                        <div className="card text-white bg-success o-hidden h-100">
+                                        <div className="card text-white bg-secondary o-hidden h-100">
                                             <div className="card-body">
                                                 <div className="text-center card-font-size ">
                                                     Produits
@@ -150,13 +144,14 @@ const AdminTreasury = () => {
                                     </div>
 
                                     <div className="col-xl-3 col-sm-6 mb-3">
-                                        <div className="card text-white bg-danger o-hidden h-100">
+                                        <div className="card text-white bg-secondary o-hidden h-100">
                                             <div className="card-body">
                                                 <div className="text-center card-font-size">
                                                     Commandes
                                                     <br />
                                                     <b>
-                                                    {recettes.length} </b>{" "}
+                                                        {recettes.length}{" "}
+                                                    </b>{" "}
                                                 </div>
                                             </div>
                                             <NavLink
@@ -175,7 +170,7 @@ const AdminTreasury = () => {
                                     </div>
 
                                     <div className="col-xl-3 col-sm-6 mb-3">
-                                        <div className="card text-white bg-info o-hidden h-100">
+                                        <div className="card text-white bg-secondary o-hidden h-100">
                                             <div className="card-body">
                                                 <div className="text-center card-font-size">
                                                     Utilisateurs
@@ -200,14 +195,12 @@ const AdminTreasury = () => {
                                     </div>
 
                                     <div className="col-xl-3 col-sm-6 mb-3">
-                                        <div className="card text-white bg-warning o-hidden h-100">
+                                        <div className="card text-white bg-secondary o-hidden h-100">
                                             <div className="card-body">
                                                 <div className="text-center card-font-size">
-                                                    fin du Stock
+                                                    Plus en stock
                                                     <br />
-                                                    <b>
-                                                    {outOfStock}
-                                                    </b>{" "}
+                                                    <b>{outOfStock}</b>{" "}
                                                 </div>
                                             </div>
                                         </div>

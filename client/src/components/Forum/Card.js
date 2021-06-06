@@ -34,7 +34,7 @@ const Card = ({ post }) => {
         <li className="card-container" key={post._id}>
             <div className="card-left">
                 <img
-                    onClick={ () => setViewProfil(!viewProfil) }
+                    onClick={() => setViewProfil(!viewProfil)}
                     src={
                         !isEmpty(usersData[0]) &&
                         usersData
@@ -118,40 +118,120 @@ const Card = ({ post }) => {
                 <Collapse isOpen={isOpen}>
                     <CardComments post={post} />
                 </Collapse>
-                {viewProfil && 
-                    usersData
-                    .map((user) => {
-                        if (user._id === post.posterId && userData.admin === true)
-                            return(
+                {viewProfil &&
+                    usersData.map((user) => {
+                        if (
+                            user._id === post.posterId &&
+                            userData.admin === true
+                        )
+                            return (
                                 <div className="visitProfil">
+                                    <span
+                                        className="croix"
+                                        onClick={() =>
+                                            setViewProfil(!viewProfil)
+                                        }
+                                    >
+                                        X
+                                    </span>
                                     <ul>
-                                        <li><img className="visitImage" src={user.userProfil} /></li>
-                                        <td>
-                                        <li className="inf"> Pseudo : <br/> {user.pseudonyme} </li>
-                                        <li className="inf"> Nom : <br/> {user.nom} </li>
-                                        <li className="inf"> Prenom : <br/> {user.prenom} </li>
-                                        <li className="inf"> Genre : <br/> {user.sexe} </li>
-                                        <li className="inf"> Date de naissance : <br/> {user.dateDeNaissance} </li>
-                                        <li className="inf"> Adresse : <br/> {user.residence} </li>
-                                        <li className="inf"> Bio : <br/> {user.bio}</li>
-                                        </td>
+                                        <li>
+                                            <img
+                                                className="visitImage"
+                                                src={user.userProfil}
+                                            />
+                                        </li>
+
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Pseudo
+                                            </span>{" "}
+                                            <br /> {user.pseudonyme}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Nom
+                                            </span>{" "}
+                                            <br /> {user.nom}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Prénom
+                                            </span>{" "}
+                                            <br /> {user.prenom}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Genre
+                                            </span>{" "}
+                                            <br /> {user.sexe}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Date de naissance
+                                            </span>{" "}
+                                            <br />{" "}
+                                            {dateParser(user.dateDeNaissance)}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Adresse
+                                            </span>{" "}
+                                            <br /> {user.residence}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Bio
+                                            </span>{" "}
+                                            <br /> {user.bio}
+                                        </li>
                                     </ul>
                                 </div>
                             );
                         else if (user._id === post.posterId)
-                            return(
+                            return (
                                 <div className="visitProfil">
+                                    <span
+                                        className="croix"
+                                        onClick={() =>
+                                            setViewProfil(!viewProfil)
+                                        }
+                                    >
+                                        X
+                                    </span>
                                     <ul>
-                                        <li><img className="visitImage" src={user.userProfil} /></li>
-                                        <td>
-                                        <p className="inf"> Pseudo : <br/> {user.pseudonyme} </p>
-                                        <p className="inf"> Bio : <br/> {user.bio}</p>
-                                        </td>
+                                        <li>
+                                            <img
+                                                className="visitImage"
+                                                src={user.userProfil}
+                                            />
+                                        </li>
+
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Pseudo
+                                            </span>{" "}
+                                            <br /> {user.pseudonyme}{" "}
+                                        </li>
+                                        <li className="inf">
+                                            {" "}
+                                            <span className="label">
+                                                Bio
+                                            </span>{" "}
+                                            <br /> {user.bio}
+                                        </li>
                                     </ul>
                                 </div>
                             );
-                    })
-                }
+                    })}
             </div>
         </li>
     );
