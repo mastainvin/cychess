@@ -24,59 +24,68 @@ const AdminTreasury = () => {
     const [loadUser, setLoadUser] = useState(true);
     const dispatch = useDispatch();
     const [modal, setModal] = useState(false);
-    /*const [outOfStock, setoutOfStock] = useState(0);
-    const [nb_total, setnb_total] = useState(0);*/
-
-    const outOfStock = useRef(0);
+    const [outOfStock, setoutOfStock] = useState(0);
+    /*const [nb_total, setnb_total] = useState(0);*/
+    const [inLoad, setInLoad] = useState(true);
+    const [isUserAdmin, setIsUserAdmin] = useState(userData.admin);
+    /*const outOfStock = useRef(0);*/
     const Totale = useRef(0);
     const nb_total = useRef(0);
     const achats = useRef(0);
     const depenses = useRef(0);
     const test = 25;
+    const [total, setTotal] = useState(0);
 
     const toggle = () => {
         setModal(!modal);
     };
 
     useEffect(() => {
-        if (loadProduct && loadUser && loadRecette) {
+        if (loadProduct ) {
             dispatch(getProducts());
             setLoadProduct(false);
-            dispatch(getUsers());
+            /*dispatch(getUsers());
             setLoadUser(false);
             dispatch(getRecette());
-            setLoadRecette(false);
+            setLoadRecette(false);*/
+        }else {
+            let outOfStock_temp = 0;
             if (!isEmpty(products)) {
                 products.map((produit) => {
                     if (produit.nb_restant == 0) {
-                        outOfStock.current = outOfStock.current + 1;
-                        return outOfStock.current;
+                        outOfStock_temp = outOfStock_temp + 1;
+                        
                     }
                 });
             }
+            setoutOfStock(outOfStock_temp);
+        }
+
+        if (loadRecette) {
+            dispatch(getRecette());
+            setLoadRecette(false);
+        } else {
+            let total_temp = 0;
             if (!isEmpty(recettes)) {
                 recettes.map((recette) => {
-                    if (recette.type === "ACHAT") {
-                        //Totale.current = achats.current + recette.montant;
-                        achats.current = achats.current + recette.montant;
-                        return achats.current;
-                    }
-                    if (recette.type === "DEPENSE") {
-                        //Totale.current = depenses.current + recette.montant;
-                        depenses.current = depenses.current + recette.montant;
-                        console.log(depenses.current);
-
-                        return depenses.current;
-                    }
-                    Totale.current = achats.current - depenses.current;
-
-                    return Totale.current;
+                    if (recette.type == "ACHAT") total_temp += recette.montant;
+                    else total_temp -= recette.montant;
                 });
             }
+            setTotal(total_temp);
         }
+        if (inLoad && !isEmpty(userData)) {
+            setIsUserAdmin(userData.admin);
+            setInLoad(false);
+        }
+
+
+
+
     }, [
         loadProduct,
         dispatch,
+        userData,
         products,
         loadUser,
         users,
@@ -105,7 +114,7 @@ const AdminTreasury = () => {
                                                 <div className="text-center card-font-size">
                                                     Totale
                                                     <br />{" "}
-                                                    <b>{Totale.current}€</b>
+                                                    <b>{total} €</b>
                                                 </div>
                                             </div>
                                         </div>
@@ -145,7 +154,9 @@ const AdminTreasury = () => {
                                             <div className="card-body">
                                                 <div className="text-center card-font-size">
                                                     Commandes
-                                                    <br />{" "}
+                                                    <br />
+                                                    <b>
+                                                    {recettes.length} </b>{" "}
                                                 </div>
                                             </div>
                                             <NavLink
@@ -195,7 +206,7 @@ const AdminTreasury = () => {
                                                     fin du Stock
                                                     <br />
                                                     <b>
-                                                        {outOfStock.current}
+                                                    {outOfStock}
                                                     </b>{" "}
                                                 </div>
                                             </div>
