@@ -25,8 +25,8 @@ const AdminHandler = ({ user }) => {
     };
 
     return (
-        <Form>
-            <div>
+        <Form className="admin_handler">
+            <div className="admin_handler_input">
                 <input
                     id={"admin" + user._id}
                     type="radio"
@@ -36,10 +36,10 @@ const AdminHandler = ({ user }) => {
                     onChange={() => {
                         changeStatus();
                     }}
-                />{" "}
+                />
                 <label htmlFor={"admin" + user._id}>Admin</label>
             </div>
-            <div>
+            <div className="admin_handler_input">
                 <input
                     id={"member" + user._id}
                     type="radio"
@@ -49,7 +49,7 @@ const AdminHandler = ({ user }) => {
                     onChange={() => {
                         changeStatus();
                     }}
-                />{" "}
+                />
                 <label htmlFor={"member" + user._id}>Membre</label>
             </div>
         </Form>

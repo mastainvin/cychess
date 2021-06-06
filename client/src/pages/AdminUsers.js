@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isAdmin, isEmpty } from "../components/Utils";
-import { ListGroup } from "reactstrap";
+import { ListGroup, Table } from "reactstrap";
 import { Redirect } from "react-router";
 import Header from "../components/header";
 import { getUsers } from "../actions/users.actions";
@@ -33,17 +33,29 @@ const AdminUsers = () => {
                         <i className="fas fa-spinner fa-spin"></i>
                     ) : (
                         <div>
-                            <ListGroup>
-                                {!isEmpty(usersData) &&
-                                    usersData.map((user) => {
-                                        return (
-                                            <ListElement
-                                                user={user}
-                                                key={user._id}
-                                            />
-                                        );
-                                    })}
-                            </ListGroup>
+                            <Table>
+                                <thead>
+                                    <tr className="user-row">
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Email</th>
+                                        <th>Rôle</th>
+                                        <th>Statut</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {!isEmpty(usersData) &&
+                                        usersData.map((user) => {
+                                            return (
+                                                <ListElement
+                                                    user={user}
+                                                    key={user._id}
+                                                />
+                                            );
+                                        })}
+                                </tbody>
+                            </Table>
                         </div>
                     )}
                 </div>

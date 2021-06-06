@@ -29,23 +29,31 @@ const ParticipateHandler = ({ idToParticipate, canParticipate }) => {
         }
     }, [userData, idToParticipate]);
 
-    return participated ? (
-        <Button
-            color="secondary"
-            onClick={handleUnPartipation}
-            className="eventButton"
-            disabled={!canParticipate}
-        >
-            Se désinscrire
-        </Button>
+    return canParticipate ? (
+        <>
+            {participated ? (
+                <Button
+                    color="secondary"
+                    onClick={handleUnPartipation}
+                    className="eventButton"
+                    disabled={!canParticipate}
+                >
+                    Se désinscrire
+                </Button>
+            ) : (
+                <Button
+                    color="success"
+                    onClick={handlePartipation}
+                    className="eventButton"
+                    disabled={!canParticipate}
+                >
+                    S'inscrire
+                </Button>
+            )}
+        </>
     ) : (
-        <Button
-            color="success"
-            onClick={handlePartipation}
-            className="eventButton"
-            disabled={!canParticipate}
-        >
-            S'inscrire
+        <Button color="warning" className="eventButton" disabled>
+            Date passée
         </Button>
     );
 };

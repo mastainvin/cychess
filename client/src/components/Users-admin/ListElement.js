@@ -12,8 +12,46 @@ const ListElement = ({ user }) => {
     const toggle = () => setModal(!modal);
 
     return (
-        <ListGroupItem>
-            <div className="user-row">
+        <>
+            <tr className="user-row">
+                <td>
+                    {user.nom ? (
+                        <>{user.nom}</>
+                    ) : (
+                        <span className="italic">Pas de nom</span>
+                    )}
+                </td>
+                <td>
+                    {user.prenom ? (
+                        <>{user.prenom}</>
+                    ) : (
+                        <span className="italic">Pas de prénom</span>
+                    )}
+                </td>
+                <td>
+                    {user.email ? (
+                        <>{user.email}</>
+                    ) : (
+                        <span className="italic">Pas d'email</span>
+                    )}
+                </td>
+                <td>
+                    <RoleHandler user={user} />
+                </td>
+                <td>
+                    <AdminHandler user={user} />
+                </td>
+                <td>
+                    <Button
+                        color="danger"
+                        onClick={toggle}
+                        style={{ marginLeft: "20px" }}
+                    >
+                        Supprimer
+                    </Button>
+                </td>
+
+                {/* <div className="user-row">
                 <div className="user-infos">
                     <div className="user-info">
                         <label>Nom</label>
@@ -46,8 +84,10 @@ const ListElement = ({ user }) => {
                     </Button>
                 </div>
             </div>
+            <DeleteModal modal={modal} toggle={toggle} user={user} /> */}
+            </tr>
             <DeleteModal modal={modal} toggle={toggle} user={user} />
-        </ListGroupItem>
+        </>
     );
 };
 
