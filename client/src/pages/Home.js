@@ -38,6 +38,7 @@ const Home = () => {
             thumbWidth={400}
             showIndicators={false}
             showStatus={false}
+            stopOnHover={false}
         >
             {datas.map((slide) => (
                 <div

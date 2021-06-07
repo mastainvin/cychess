@@ -6,7 +6,7 @@ const postRoutes = require("./routes/post.routes");
 const recetteRoutes = require("./routes/recette.routes");
 const eventRoutes = require("./routes/event.routes");
 const cors = require("cors");
-
+const path = require("path");
 require("dotenv").config({ path: "./config/.env" });
 require("./config/db");
 
@@ -40,6 +40,16 @@ app.use("/api/post", postRoutes);
 app.use("/api/recette", recetteRoutes);
 app.use("/api/event", eventRoutes);
 
+
+// Serve static assets if in production
+if(process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'))
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 //server
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`);
