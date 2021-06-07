@@ -21,10 +21,10 @@ const Eventcard = ({ event }) => {
     const dataActuelle = new Date();
 
     const userData = useSelector((state) => state.userReducer);
-    const canParticipate =
-        uid &&
-        dataActuelle.setHours(0, 0, 0, 0) <
-            toDate(event.date).setHours(0, 0, 0, 0);
+    const canParticipate = uid;
+    const datePassed =
+        dataActuelle.setHours(0, 0, 0, 0) >=
+        toDate(event.date).setHours(0, 0, 0, 0);
 
     return (
         <div className="eventCard">
@@ -61,6 +61,7 @@ const Eventcard = ({ event }) => {
                     <ParticipateHandler
                         idToParticipate={event._id}
                         canParticipate={canParticipate}
+                        datePassed={datePassed}
                     />
                 </CardBody>
             </Card>

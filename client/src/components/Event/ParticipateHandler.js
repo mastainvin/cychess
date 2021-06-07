@@ -6,7 +6,11 @@ import { unparticipate, participate } from "./../../actions/user.actions";
 
 import "./card.scss";
 
-const ParticipateHandler = ({ idToParticipate, canParticipate }) => {
+const ParticipateHandler = ({
+    idToParticipate,
+    canParticipate,
+    datePassed,
+}) => {
     const userData = useSelector((state) => state.userReducer);
     const [participated, setParticipated] = useState(false);
     const dispatch = useDispatch();
@@ -29,32 +33,36 @@ const ParticipateHandler = ({ idToParticipate, canParticipate }) => {
         }
     }, [userData, idToParticipate]);
 
-    return canParticipate ? (
+    return (
         <>
-            {participated ? (
-                <Button
-                    color="secondary"
-                    onClick={handleUnPartipation}
-                    className="eventButton"
-                    disabled={!canParticipate}
-                >
-                    Se désinscrire
+            {datePassed ? (
+                <Button color="warning" className="eventButton" disabled>
+                    Date passée
                 </Button>
             ) : (
-                <Button
-                    color="success"
-                    onClick={handlePartipation}
-                    className="eventButton"
-                    disabled={!canParticipate}
-                >
-                    S'inscrire
-                </Button>
+                <>
+                    {participated ? (
+                        <Button
+                            color="secondary"
+                            onClick={handleUnPartipation}
+                            className="eventButton"
+                            disabled={!canParticipate}
+                        >
+                            Se désinscrire
+                        </Button>
+                    ) : (
+                        <Button
+                            color="success"
+                            onClick={handlePartipation}
+                            className="eventButton"
+                            disabled={!canParticipate}
+                        >
+                            S'inscrire
+                        </Button>
+                    )}
+                </>
             )}
         </>
-    ) : (
-        <Button color="warning" className="eventButton" disabled>
-            Date passée
-        </Button>
     );
 };
 
