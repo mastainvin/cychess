@@ -9,7 +9,7 @@ export const MODIFY_IMG_PRODUCT = "MODIFY_IMG_PRODUCT";
 export const getProducts = () => {
     return (dispatch) => {
         return axios
-            .get(`${process.env.REACT_APP_API_URL}api/product/`)
+            .get(`/api/product/`)
             .then((res) => {
                 dispatch({ type: GET_PRODUCTS, payload: res.data });
             })
