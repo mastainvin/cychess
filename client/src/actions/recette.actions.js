@@ -5,7 +5,7 @@ export const ADD_DEPENSE = "ADD_DEPENSE";
 export const getRecette = () => {
     return (dispatch) => {
         return axios
-            .get(`${process.env.REACT_APP_API_URL}api/recette`)
+            .get(`/api/recette`)
             .then((res) => {
                 dispatch({ type: GET_RECETTE, payload: res.data });
             })
@@ -17,7 +17,7 @@ export const addDepense = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/recette/depense`,
+            url: `/api/recette/depense`,
             data: data,
         })
             .then((res) => {

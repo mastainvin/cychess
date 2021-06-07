@@ -21,7 +21,7 @@ export const addProduct = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/product/`,
+            url: `/api/product/`,
             data: data,
         })
             .then((res) => {
@@ -35,7 +35,7 @@ export const deleteProduct = (id) => {
     return (dispatch) => {
         return axios({
             method: "delete",
-            url: `${process.env.REACT_APP_API_URL}api/product/${id}`,
+            url: `/api/product/${id}`,
         })
             .then((res) => {
                 dispatch({ type: DELETE_PRODUCT, payload: res.data });
@@ -48,7 +48,7 @@ export const modifyProduct = (data, id) => {
     return (dispatch) => {
         return axios({
             method: "put",
-            url: `${process.env.REACT_APP_API_URL}api/product/${id}`,
+            url: `/api/product/${id}`,
             data: data,
         })
             .then((res) => {
@@ -62,7 +62,7 @@ export const modifyImgProduct = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/product/upload/`,
+            url: `/api/product/upload/`,
             data: data,
         })
             .then((res) => {
