@@ -7,9 +7,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
 
-
 function App() {
-    
     const [uid, setUid] = useState(null);
     const dispatch = useDispatch("");
 
@@ -17,7 +15,7 @@ function App() {
         const fetchToken = async () => {
             await axios({
                 method: "get",
-                url: `${process.env.REACT_APP_API_URL}jwtid`,
+                url: `/jwtid`,
                 withCredentials: true,
             })
                 .then((res) => {
@@ -30,14 +28,13 @@ function App() {
         if (uid) {
             dispatch(getUser(uid));
         }
-    }, [uid , dispatch]);
+    }, [uid, dispatch]);
 
     return (
         <UidContext.Provider value={uid}>
             <Routes />
         </UidContext.Provider>
     );
-   
 }
 
 export default App;

@@ -26,7 +26,7 @@ const ListElement = ({ event }) => {
         const response = [];
         const fetchUser = (id) => {
             axios
-                .get(`${process.env.REACT_APP_API_URL}api/user/${id}`)
+                .get(`/api/user/${id}`)
                 .then((res) => {
                     response.push(res.data);
                 })
