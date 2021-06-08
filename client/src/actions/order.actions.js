@@ -7,7 +7,7 @@ export const DELETE_ORDER = "DELETE_ORDER";
 export const getOrders = () => {
     return (dispatch) => {
         return axios
-            .get(`/api/order/`)
+            .get(`${process.env.REACT_APP_API_URL}api/order/`)
             .then((res) => {
                 dispatch({ type: GET_ORDERS, payload: res.data });
             })
@@ -19,7 +19,7 @@ export const addOrder = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `/api/order/`,
+            url: `${process.env.REACT_APP_API_URL}api/order/`,
             data: data,
         })
             .then((res) => {
@@ -33,7 +33,7 @@ export const deleteOrder = (id) => {
     return (dispatch) => {
         return axios({
             method: "delete",
-            url: `/api/order/${id}`,
+            url: `${process.env.REACT_APP_API_URL}api/order/${id}`,
         })
             .then((res) => {
                 dispatch({ type: DELETE_ORDER, payload: res.data });
@@ -41,3 +41,4 @@ export const deleteOrder = (id) => {
             .catch((err) => console.log(err));
     };
 };
+

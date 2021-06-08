@@ -14,7 +14,7 @@ export const UNPARTICIPATE = "UNPARTICIPATE";
 export const getUser = (uid) => {
     return (dispatch) => {
         return axios
-            .get(`/api/user/${uid}`)
+            .get(`${process.env.REACT_APP_API_URL}api/user/${uid}`)
             .then((res) => {
                 dispatch({
                     type: GET_USER,
@@ -28,14 +28,16 @@ export const getUser = (uid) => {
 export const uploadPicture = (data, id) => {
     return (dispatch) => {
         return axios
-            .post(`/api/user/upload`, data)
+            .post(`${process.env.REACT_APP_API_URL}api/user/upload`, data)
             .then((res) => {
-                return axios.get(`/api/user/${id}`).then((res) => {
-                    dispatch({
-                        type: UPLOAD_PICTURE,
-                        payload: res.data.picture,
+                return axios
+                    .get(`${process.env.REACT_APP_API_URL}api/user/${id}`)
+                    .then((res) => {
+                        dispatch({
+                            type: UPLOAD_PICTURE,
+                            payload: res.data.picture,
+                        });
                     });
-                });
             })
             .catch((err) => console.log(err));
     };
@@ -45,7 +47,7 @@ export const AjoutPanier = (productId, userId) => {
     return (dispatch) => {
         return axios({
             method: "patch",
-            url: `/api/user/${userId}`,
+            url: `${process.env.REACT_APP_API_URL}api/user/${userId}`,
             data: { produitPanier: productId },
         }).then((res) => {
             dispatch({ type: PANIER_PRODUCT, payload: { productId } });
@@ -55,7 +57,7 @@ export const AjoutPanier = (productId, userId) => {
 export const deleteUser = (id) => {
     return (dispatch) => {
         return axios
-            .delete(`/api/user/${id}`)
+            .delete(`${process.env.REACT_APP_API_URL}api/user/${id}`)
             .then((res) => {
                 dispatch({ type: DELETE_USER, payload: res.data });
             })
@@ -67,7 +69,7 @@ export const updateUser = (userId, data) => {
     return (dispatch) => {
         return axios({
             method: "put",
-            url: `/api/user/` + userId,
+            url: `${process.env.REACT_APP_API_URL}api/user/` + userId,
             data: data,
         })
             .then((res) => {
@@ -84,7 +86,7 @@ export const participate = (userId, eventId) => {
     return (dispatch) => {
         return axios({
             method: "patch",
-            url: `/api/event/participate/${eventId}`,
+            url: `${process.env.REACT_APP_API_URL}api/event/participate/${eventId}`,
             data: { id: userId },
         })
             .then((res) => {
@@ -98,7 +100,7 @@ export const ValiderPanier = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `/api/recette/achat`,
+            url: `${process.env.REACT_APP_API_URL}api/recette/achat`,
             data: data,
         })
             .then((res) => {
@@ -112,7 +114,7 @@ export const EnleverPanier = (productKey, userId) => {
     return (dispatch) => {
         return axios({
             method: "patch",
-            url: `/api/user/deleteCartItem/${userId}`,
+            url: `${process.env.REACT_APP_API_URL}api/user/deleteCartItem/${userId}`,
             data: { productKey: productKey },
         }).then((res) => {
             dispatch({
@@ -126,7 +128,7 @@ export const unparticipate = (userId, eventId) => {
     return (dispatch) => {
         return axios({
             method: "patch",
-            url: `/api/event/unparticipate/${eventId}`,
+            url: `${process.env.REACT_APP_API_URL}api/event/unparticipate/${eventId}`,
             data: { id: userId },
         })
             .then((res) => {

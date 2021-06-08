@@ -9,7 +9,7 @@ export const MODIFY_IMG_PRODUCT = "MODIFY_IMG_PRODUCT";
 export const getProducts = () => {
     return (dispatch) => {
         return axios
-            .get(`/api/product/`)
+            .get(`${process.env.REACT_APP_API_URL}api/product/`)
             .then((res) => {
                 dispatch({ type: GET_PRODUCTS, payload: res.data });
             })
@@ -21,7 +21,7 @@ export const addProduct = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `/api/product/`,
+            url: `${process.env.REACT_APP_API_URL}api/product/`,
             data: data,
         })
             .then((res) => {
@@ -35,7 +35,7 @@ export const deleteProduct = (id) => {
     return (dispatch) => {
         return axios({
             method: "delete",
-            url: `/api/product/${id}`,
+            url: `${process.env.REACT_APP_API_URL}api/product/${id}`,
         })
             .then((res) => {
                 dispatch({ type: DELETE_PRODUCT, payload: res.data });
@@ -48,7 +48,7 @@ export const modifyProduct = (data, id) => {
     return (dispatch) => {
         return axios({
             method: "put",
-            url: `/api/product/${id}`,
+            url: `${process.env.REACT_APP_API_URL}api/product/${id}`,
             data: data,
         })
             .then((res) => {
@@ -62,7 +62,7 @@ export const modifyImgProduct = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `/api/product/upload/`,
+            url: `${process.env.REACT_APP_API_URL}api/product/upload/`,
             data: data,
         })
             .then((res) => {

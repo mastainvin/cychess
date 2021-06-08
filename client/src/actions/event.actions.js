@@ -9,7 +9,7 @@ export const MODIFY_IMG_EVENT = "MODIFY_IMG_EVENT";
 export const getEvents = () => {
     return (dispatch) => {
         return axios
-            .get(`/api/event/`)
+            .get(`${process.env.REACT_APP_API_URL}api/event/`)
             .then((res) => {
                 dispatch({ type: GET_EVENTS, payload: res.data });
             })
@@ -21,7 +21,7 @@ export const addEvent = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `/api/event/`,
+            url: `${process.env.REACT_APP_API_URL}api/event/`,
             data: data,
         })
             .then((res) => {
@@ -35,7 +35,7 @@ export const deleteEvent = (id) => {
     return (dispatch) => {
         return axios({
             method: "delete",
-            url: `/api/event/${id}`,
+            url: `${process.env.REACT_APP_API_URL}api/event/${id}`,
         })
             .then((res) => {
                 dispatch({ type: DELETE_EVENT, payload: res.data });
@@ -48,7 +48,7 @@ export const modifyEvent = (data, id) => {
     return (dispatch) => {
         return axios({
             method: "put",
-            url: `/api/event/${id}`,
+            url: `${process.env.REACT_APP_API_URL}api/event/${id}`,
             data: data,
         })
             .then((res) => {
@@ -62,7 +62,7 @@ export const modifyImgEvent = (data) => {
     return (dispatch) => {
         return axios({
             method: "post",
-            url: `/api/event/upload/`,
+            url: `${process.env.REACT_APP_API_URL}api/event/upload/`,
             data: data,
         })
             .then((res) => {
