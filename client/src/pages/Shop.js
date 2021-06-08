@@ -91,7 +91,6 @@ function Shop() {
                                     <CardImg
                                         top
                                         width="100%"
-                                        height="50%"
                                         src={produit.productProfil}
                                         alt="Card image cap"
                                     />
