@@ -1,6 +1,7 @@
 # cychess
 
-Il vous faut d'abord installer les dépendances.
+
+Il vous faut d'abord installer nodejs (https://nodejs.org/en/) puis les dépendances.
 
 A la base du projet effectuer la commande :
     npm i -f
